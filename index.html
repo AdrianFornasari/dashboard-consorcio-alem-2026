@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Expensas Alem 2026</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Consorcio Alem 1268/74/80/82</p>
+      <h1>Dashboard de expensas 2026</h1>
+      <p class="hero-text">Resumen financiero, morosidad por unidad, composición de gastos y detalle por proveedor. Uso privado para consorcistas.</p>
+    </div>
+    <div class="hero-card">
+      <label for="monthSelect">Mes de análisis</label>
+      <select id="monthSelect"></select>
+      <p id="lastUpdate" class="muted small"></p>
+    </div>
+  </header>
+
+  <main>
+    <section class="notice">
+      <strong>Privacidad:</strong> este MVP no muestra nombres de propietarios en morosidad; sólo unidades funcionales. Sin contraseña, la privacidad depende de no difundir el enlace fuera del consorcio.
+    </section>
+
+    <nav class="tabs" aria-label="Secciones del dashboard">
+      <button class="tab active" data-tab="overview">Resumen</button>
+      <button class="tab" data-tab="compare">Comparativa</button>
+      <button class="tab" data-tab="composition">Composición del gasto</button>
+      <button class="tab" data-tab="providers">Gasto por proveedor</button>
+      <button class="tab" data-tab="debtors">Morosidad</button>
+      <button class="tab" data-tab="docs">Documentos</button>
+    </nav>
+
+    <section id="overview" class="tab-panel active">
+      <div id="kpiGrid" class="kpi-grid"></div>
+      <div class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Evolución 2026</h2>
+            <p class="muted">Caja neta, deuda y gastos mensuales.</p>
+          </div>
+          <canvas id="trendChart" height="260"></canvas>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Lectura del mes</h2>
+            <p id="monthNote" class="note-text"></p>
+          </div>
+          <div id="monthRatios" class="ratio-list"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="compare" class="tab-panel">
+      <article class="panel">
+        <div class="panel-head horizontal">
+          <div>
+            <h2>Comparativa por períodos</h2>
+            <p class="muted">Elegí desde/hasta para calcular variaciones y acumulados.</p>
+          </div>
+          <div class="controls-inline">
+            <label>Desde <select id="fromSelect"></select></label>
+            <label>Hasta <select id="toSelect"></select></label>
+          </div>
+        </div>
+        <div id="compareGrid" class="kpi-grid compact"></div>
+        <div class="table-wrap">
+          <table id="compareTable"></table>
+        </div>
+      </article>
+    </section>
+
+    <section id="composition" class="tab-panel">
+      <div class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Composición del gasto mensual</h2>
+            <p class="muted">Importe por rubro para el mes seleccionado.</p>
+          </div>
+          <canvas id="compositionChart" height="320"></canvas>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Detalle por rubro</h2>
+            <p class="muted">Incluye ordinarios, extraordinarios y particulares cuando correspondan.</p>
+          </div>
+          <div class="table-wrap">
+            <table id="compositionTable"></table>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="providers" class="tab-panel">
+      <article class="panel">
+        <div class="panel-head horizontal">
+          <div>
+            <h2>Detalle del gasto por proveedor</h2>
+            <p class="muted">Filtrable por período, proveedor, rubro y tipo de gasto.</p>
+          </div>
+          <div class="controls-inline wrap">
+            <label>Desde <select id="providerFrom"></select></label>
+            <label>Hasta <select id="providerTo"></select></label>
+            <label>Tipo <select id="providerType"><option value="">Todos</option><option>Ordinario</option><option>Extraordinario</option><option>Particular</option></select></label>
+            <label>Buscar <input id="providerSearch" type="search" placeholder="Proveedor o rubro"></label>
+          </div>
+        </div>
+        <div id="providerSummary" class="summary-line"></div>
+        <canvas id="providerChart" height="300"></canvas>
+        <div class="table-wrap tall">
+          <table id="providerTable"></table>
+        </div>
+      </article>
+    </section>
+
+    <section id="debtors" class="tab-panel">
+      <div class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Morosidad por unidad</h2>
+            <p class="muted">Sólo se muestran unidades funcionales. No se muestran nombres de propietarios.</p>
+          </div>
+          <canvas id="debtorsChart" height="320"></canvas>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Detalle de deuda</h2>
+            <p class="muted">Capital histórico sin intereses, según liquidación.</p>
+          </div>
+          <div id="debtConcentration" class="summary-line"></div>
+          <div class="table-wrap">
+            <table id="debtorsTable"></table>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="docs" class="tab-panel">
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Documentos e informes</h2>
+          <p class="muted">Colocá nuevos PDFs en la carpeta <code>pdfs/</code> y los informes en <code>informes/</code>. Después actualizá <code>data/expensas-2026.json</code>.</p>
+        </div>
+        <div class="table-wrap">
+          <table id="docsTable"></table>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>Dashboard estático MVP · HTML/CSS/JavaScript · Datos 2026. Validar contra PDF mensual antes de publicar.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

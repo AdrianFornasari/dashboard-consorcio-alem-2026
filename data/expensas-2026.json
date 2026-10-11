@@ -1,0 +1,2012 @@
+{
+  "meta": {
+    "title": "Dashboard Expensas Alem 2026",
+    "building": "Consorcio Alem 1268/74/80/82",
+    "privacy": "Uso privado para consorcistas. No contiene nombres de propietarios en la sección de morosidad; sólo unidades funcionales.",
+    "lastLoadedMonth": "2026-09",
+    "currency": "ARS",
+    "dataPolicy": "Datos extraídos de liquidaciones mensuales de expensas e informes mensuales preparados para reunión de consorcio. Validar cada actualización contra el PDF mensual antes de publicar."
+  },
+  "months": [
+    {
+      "id": "2026-01",
+      "label": "Enero 2026",
+      "monthShort": "Ene",
+      "pdf": null,
+      "report": null,
+      "cashStart": 1600321.55,
+      "cashFinal": 3110252.55,
+      "accountsPayable": 0,
+      "netCash": 3110252.55,
+      "ordinaryExpenses": 3382502.32,
+      "extraordinaryExpenses": 0,
+      "particularExpenses": 0,
+      "totalExpenses": 3382502.32,
+      "paidCurrent": 3192683.27,
+      "lateFeesCollected": 0,
+      "debtRecovered": 1671509.22,
+      "interestCollected": 28240.83,
+      "otherIncome": 0,
+      "debtCapital": 4890911.29,
+      "interestReceivable": 489091.13,
+      "currentReceivables": null,
+      "unidentifiedCollections": 0,
+      "notes": "Mes de transición con formato previo. La caja final sube por recupero de expensas de otros períodos, pero la mora total sigue elevada.",
+      "composition": [
+        {
+          "category": "Administración",
+          "amount": 354145.52,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Limpieza",
+          "amount": 1407436.0,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguridad",
+          "amount": 497341.63,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ascensores",
+          "amount": 140000.0,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Servicios públicos",
+          "amount": 288405.06,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Gastos bancarios",
+          "amount": 189927.72,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguros",
+          "amount": 170246.39,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Mantenimiento ordinario",
+          "amount": 335000.0,
+          "type": "Ordinario"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "María Belén Giacosa",
+          "category": "Administración",
+          "detail": "Honorarios administración",
+          "amount": 354145.52,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "SURLIMP",
+          "category": "Limpieza",
+          "detail": "Limpieza general, techos y balcones",
+          "amount": 1407436.0,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Centitower",
+          "category": "Seguridad",
+          "detail": "Monitoreo puerta de ingreso",
+          "amount": 497341.63,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Opción Ascensores",
+          "category": "Ascensores",
+          "detail": "Service mensual ascensor",
+          "amount": 140000.0,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "EPE Santa Fe",
+          "category": "Servicios públicos",
+          "detail": "Energía eléctrica",
+          "amount": 288405.06,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Roela Siro",
+          "category": "Gastos bancarios",
+          "detail": "Comisión por cobranza",
+          "amount": 189927.72,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Berkley Seguros",
+          "category": "Seguros",
+          "detail": "Seguro integral",
+          "amount": 170246.39,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Mantenimiento ordinario",
+          "detail": "Service mensual bombas",
+          "amount": 60000.0,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "GPS Automatización",
+          "category": "Mantenimiento ordinario",
+          "detail": "Service mensual portón cocheras",
+          "amount": 135000.0,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Landini Desinfección",
+          "category": "Mantenimiento ordinario",
+          "detail": "Desinfección",
+          "amount": 25000.0,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Adrian Castro Electricista",
+          "category": "Mantenimiento ordinario",
+          "detail": "Reparaciones eléctricas",
+          "amount": 74000.0,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "GEAD / ROMA",
+          "category": "Mantenimiento ordinario",
+          "detail": "Vinculación código de barras e impresión",
+          "amount": 41000.0,
+          "type": "Ordinario"
+        }
+      ],
+      "debtors": [
+        {
+          "unit": "04-01",
+          "amount": 1368244.69
+        },
+        {
+          "unit": "A2",
+          "amount": 1275311.49
+        },
+        {
+          "unit": "00-17",
+          "amount": 1014447.33
+        },
+        {
+          "unit": "08-01",
+          "amount": 498111.19
+        },
+        {
+          "unit": "00-14",
+          "amount": 175919.67
+        },
+        {
+          "unit": "05-02",
+          "amount": 168376.1
+        },
+        {
+          "unit": "05-04",
+          "amount": 168376.1
+        },
+        {
+          "unit": "04-04",
+          "amount": 87190.9
+        },
+        {
+          "unit": "02-02",
+          "amount": 84206.42
+        },
+        {
+          "unit": "A13",
+          "amount": 33993.82
+        }
+      ]
+    },
+    {
+      "id": "2026-02",
+      "label": "Febrero 2026",
+      "monthShort": "Feb",
+      "pdf": null,
+      "report": null,
+      "cashStart": 3110252.55,
+      "cashFinal": 2041337.55,
+      "accountsPayable": 300000,
+      "netCash": 1741337.55,
+      "ordinaryExpenses": 3752990,
+      "extraordinaryExpenses": 300000,
+      "particularExpenses": 0,
+      "totalExpenses": 4052990,
+      "paidCurrent": 2583135,
+      "lateFeesCollected": 0,
+      "debtRecovered": 100940,
+      "interestCollected": 0,
+      "otherIncome": 0,
+      "debtCapital": 5918642,
+      "interestReceivable": 591864.2,
+      "currentReceivables": 4025193.8,
+      "unidentifiedCollections": 0,
+      "notes": "La deuda alcanza uno de los picos del año. La caja baja y quedan cuentas por pagar, por lo que la caja neta se reduce.",
+      "composition": [
+        {
+          "category": "Servicios públicos",
+          "amount": 349289,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Abonos de servicios",
+          "amount": 85000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Mantenimiento ordinario",
+          "amount": 135000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Gastos bancarios",
+          "amount": 144869,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Limpieza",
+          "amount": 1576329,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Administración",
+          "amount": 436061,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguros",
+          "amount": 170246,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ascensores",
+          "amount": 140000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguridad",
+          "amount": 497342,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ordinarios no habituales",
+          "amount": 218854,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Extraordinarios",
+          "amount": 300000,
+          "type": "Extraordinario"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "EPE Santa Fe",
+          "category": "Servicios públicos",
+          "detail": "Energía eléctrica",
+          "amount": 349289,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Abonos de servicios",
+          "detail": "Bombas de agua",
+          "amount": 60000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Landini Desinfección",
+          "category": "Abonos de servicios",
+          "detail": "Desinfección",
+          "amount": 25000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "GPS Automatización",
+          "category": "Mantenimiento ordinario",
+          "detail": "Portones",
+          "amount": 135000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Roela Siro",
+          "category": "Gastos bancarios",
+          "detail": "Sistema de recaudación",
+          "amount": 144869,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "SURLIMP",
+          "category": "Limpieza",
+          "detail": "Servicio de limpieza",
+          "amount": 1576329,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "CA Cupones / Barras",
+          "category": "Administración",
+          "detail": "Vinculación de cupón/código de barras",
+          "amount": 72000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "María Belén Giacosa",
+          "category": "Administración",
+          "detail": "Honorarios administración",
+          "amount": 364061,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Berkley Seguros",
+          "category": "Seguros",
+          "detail": "Seguro integral",
+          "amount": 170246,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Opción Ascensores",
+          "category": "Ascensores",
+          "detail": "Mantenimiento ascensores",
+          "amount": 140000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Centitower",
+          "category": "Seguridad",
+          "detail": "Monitoreo puerta de ingreso",
+          "amount": 497342,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Dra. Bernardini",
+          "category": "Ordinarios no habituales",
+          "detail": "Gestiones juicio SUTERYH",
+          "amount": 218854,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Gastos varios",
+          "category": "Extraordinarios",
+          "detail": "Acopio extraordinario",
+          "amount": 300000,
+          "type": "Extraordinario"
+        }
+      ],
+      "debtors": [
+        {
+          "unit": "04-01",
+          "amount": 1445017
+        },
+        {
+          "unit": "A2",
+          "amount": 1291217
+        },
+        {
+          "unit": "00-17",
+          "amount": 1030353
+        },
+        {
+          "unit": "08-01",
+          "amount": 574883
+        },
+        {
+          "unit": "05-02",
+          "amount": 245148
+        },
+        {
+          "unit": "05-04",
+          "amount": 245148
+        },
+        {
+          "unit": "00-14",
+          "amount": 191826
+        },
+        {
+          "unit": "04-04",
+          "amount": 163963
+        }
+      ]
+    },
+    {
+      "id": "2026-03",
+      "label": "Marzo 2026",
+      "monthShort": "Mar",
+      "pdf": null,
+      "report": null,
+      "cashStart": 2041337.55,
+      "cashFinal": 2645406.55,
+      "accountsPayable": 700000,
+      "netCash": 1945406.55,
+      "ordinaryExpenses": 4004517,
+      "extraordinaryExpenses": 400000,
+      "particularExpenses": 0,
+      "totalExpenses": 4404517,
+      "paidCurrent": 3158791.8,
+      "lateFeesCollected": 14300,
+      "debtRecovered": 1188343.9,
+      "interestCollected": 162240.3,
+      "otherIncome": 84910,
+      "debtCapital": 5546376.1,
+      "interestReceivable": 984261.51,
+      "currentReceivables": 4408462.39,
+      "unidentifiedCollections": -84910,
+      "notes": "Mejora de caja respecto de febrero por mayor cobranza, aunque la deuda de capital continúa por encima de cinco millones.",
+      "composition": [
+        {
+          "category": "Servicios públicos",
+          "amount": 349289,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Abonos de servicios",
+          "amount": 89000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Mantenimiento ordinario",
+          "amount": 216000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Gastos bancarios",
+          "amount": 161144,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Limpieza",
+          "amount": 1797375,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Administración",
+          "amount": 435161,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguros",
+          "amount": 111806,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ascensores",
+          "amount": 140000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Matafuegos",
+          "amount": 194400,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguridad",
+          "amount": 497342,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Cumplimiento legal",
+          "amount": 13000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Extraordinarios",
+          "amount": 400000,
+          "type": "Extraordinario"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "EPE Santa Fe",
+          "category": "Servicios públicos",
+          "detail": "Energía eléctrica",
+          "amount": 349289,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Abonos de servicios",
+          "detail": "Bombas de agua",
+          "amount": 60000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Landini Desinfección",
+          "category": "Abonos de servicios",
+          "detail": "Desinfección",
+          "amount": 29000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Adrian Castro Electricista",
+          "category": "Mantenimiento ordinario",
+          "detail": "Colocación de lámparas",
+          "amount": 81000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "GPS Automatización",
+          "category": "Mantenimiento ordinario",
+          "detail": "Portones",
+          "amount": 135000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Roela Siro",
+          "category": "Gastos bancarios",
+          "detail": "Sistema de recaudación",
+          "amount": 161144,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "SURLIMP",
+          "category": "Limpieza",
+          "detail": "Servicio de limpieza",
+          "amount": 1797375,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "CA Cupones / Barras",
+          "category": "Administración",
+          "detail": "Vinculación de cupón/código de barras",
+          "amount": 34000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Librería ABC",
+          "category": "Administración",
+          "detail": "Fotocopias",
+          "amount": 37100,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "María Belén Giacosa",
+          "category": "Administración",
+          "detail": "Honorarios administración",
+          "amount": 364061,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Sancor Seguros",
+          "category": "Seguros",
+          "detail": "Seguro integral",
+          "amount": 111806,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Opción Ascensores",
+          "category": "Ascensores",
+          "detail": "Mantenimiento ascensores",
+          "amount": 140000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Pagnutti Extintores",
+          "category": "Matafuegos",
+          "detail": "Recarga extintores",
+          "amount": 194400,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Centitower",
+          "category": "Seguridad",
+          "detail": "Monitoreo puerta de ingreso",
+          "amount": 497342,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Gastos varios",
+          "category": "Cumplimiento legal",
+          "detail": "Legalización / timbrados judiciales",
+          "amount": 13000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Gastos varios",
+          "category": "Extraordinarios",
+          "detail": "Acopio extraordinario",
+          "amount": 400000,
+          "type": "Extraordinario"
+        }
+      ],
+      "debtors": [
+        {
+          "unit": "04-01",
+          "amount": 1529998.3
+        },
+        {
+          "unit": "A2",
+          "amount": 1308178.3
+        },
+        {
+          "unit": "00-17",
+          "amount": 1047264.7
+        },
+        {
+          "unit": "08-01",
+          "amount": 579722.8
+        },
+        {
+          "unit": "05-02",
+          "amount": 330185.2
+        },
+        {
+          "unit": "00-14",
+          "amount": 208717.4
+        }
+      ]
+    },
+    {
+      "id": "2026-04",
+      "label": "Abril 2026",
+      "monthShort": "Abr",
+      "pdf": null,
+      "report": null,
+      "cashStart": 2645406.55,
+      "cashFinal": 1575018.55,
+      "accountsPayable": 0,
+      "netCash": 1575018.55,
+      "ordinaryExpenses": 3933488,
+      "extraordinaryExpenses": 1630000,
+      "particularExpenses": 0,
+      "totalExpenses": 5563488,
+      "paidCurrent": 3709739.06,
+      "lateFeesCollected": 7000,
+      "debtRecovered": 754105.99,
+      "interestCollected": 722254.95,
+      "otherIncome": 0,
+      "debtCapital": 5490993.44,
+      "interestReceivable": 811105.91,
+      "currentReceivables": 5236100.65,
+      "unidentifiedCollections": -84910,
+      "notes": "Mes de fuerte presión por extraordinarios. La caja cae pese a la cobranza de intereses y expensas adeudadas.",
+      "composition": [
+        {
+          "category": "Servicios públicos",
+          "amount": 282388,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Abonos de servicios",
+          "amount": 101000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Mantenimiento ordinario",
+          "amount": 250000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Gastos bancarios",
+          "amount": 197748,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Limpieza",
+          "amount": 1851297,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Administración",
+          "amount": 453280,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguros",
+          "amount": 111806,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ascensores",
+          "amount": 140000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguridad",
+          "amount": 541469,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Jardinería",
+          "amount": 4500,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Extraordinarios",
+          "amount": 1630000,
+          "type": "Extraordinario"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "EPE Santa Fe",
+          "category": "Servicios públicos",
+          "detail": "Energía eléctrica",
+          "amount": 282388,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Abonos de servicios",
+          "detail": "Bombas de agua",
+          "amount": 72000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Landini Desinfección",
+          "category": "Abonos de servicios",
+          "detail": "Desinfección",
+          "amount": 29000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Adrian Castro Electricista",
+          "category": "Mantenimiento ordinario",
+          "detail": "Reparaciones eléctricas",
+          "amount": 115000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "GPS Automatización",
+          "category": "Mantenimiento ordinario",
+          "detail": "Portones",
+          "amount": 135000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Roela Siro",
+          "category": "Gastos bancarios",
+          "detail": "Sistema de recaudación",
+          "amount": 197748,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "SURLIMP",
+          "category": "Limpieza",
+          "detail": "Servicio de limpieza",
+          "amount": 1851297,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "CA Cupones / Barras",
+          "category": "Administración",
+          "detail": "Vinculación de cupón/código de barras",
+          "amount": 42000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Federico Giorgi",
+          "category": "Administración",
+          "detail": "Honorarios administración",
+          "amount": 385000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Librería ABC",
+          "category": "Administración",
+          "detail": "Fotocopias",
+          "amount": 26280,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Sancor Seguros",
+          "category": "Seguros",
+          "detail": "Seguro integral",
+          "amount": 111806,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Opción Ascensores",
+          "category": "Ascensores",
+          "detail": "Mantenimiento ascensores",
+          "amount": 140000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Centitower",
+          "category": "Seguridad",
+          "detail": "Monitoreo puerta de ingreso",
+          "amount": 541469,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Gastos varios",
+          "category": "Jardinería",
+          "detail": "Compra planta",
+          "amount": 4500,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Gastos varios",
+          "category": "Extraordinarios",
+          "detail": "Acopio para cambio de tramo de caño de bajada",
+          "amount": 1300000,
+          "type": "Extraordinario"
+        },
+        {
+          "provider": "Proveedor albañilería",
+          "category": "Extraordinarios",
+          "detail": "Boca de inspección",
+          "amount": 330000,
+          "type": "Extraordinario"
+        }
+      ],
+      "debtors": [
+        {
+          "unit": "04-01",
+          "amount": 1403447.47
+        },
+        {
+          "unit": "A2",
+          "amount": 1181022.67
+        },
+        {
+          "unit": "00-17",
+          "amount": 1065038.23
+        },
+        {
+          "unit": "08-01",
+          "amount": 604242.73
+        },
+        {
+          "unit": "05-02",
+          "amount": 422966.68
+        },
+        {
+          "unit": "00-14",
+          "amount": 226445.66
+        },
+        {
+          "unit": "02-02",
+          "amount": 177800
+        },
+        {
+          "unit": "07-02",
+          "amount": 177800
+        }
+      ]
+    },
+    {
+      "id": "2026-05",
+      "label": "Mayo 2026",
+      "monthShort": "May",
+      "pdf": null,
+      "report": null,
+      "cashStart": 1575018.55,
+      "cashFinal": 1659457.55,
+      "accountsPayable": 0,
+      "netCash": 1659457.55,
+      "ordinaryExpenses": 4036812,
+      "extraordinaryExpenses": 1660000,
+      "particularExpenses": 210000,
+      "totalExpenses": 5906812,
+      "paidCurrent": 4511858,
+      "lateFeesCollected": 9800,
+      "debtRecovered": 1067744.28,
+      "interestCollected": 397348.72,
+      "otherIncome": 4500,
+      "debtCapital": 5147491.81,
+      "interestReceivable": 928506.37,
+      "currentReceivables": 5909601.82,
+      "unidentifiedCollections": -84910,
+      "notes": "La deuda baja contra febrero, pero sigue concentrada. La caja queda justa frente al gasto mensual y los extraordinarios.",
+      "composition": [
+        {
+          "category": "Servicios públicos",
+          "amount": 282388,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Abonos de servicios",
+          "amount": 101000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Mantenimiento ordinario",
+          "amount": 135000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Gastos bancarios",
+          "amount": 224706,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Limpieza",
+          "amount": 1906836,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Administración",
+          "amount": 453600,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguros",
+          "amount": 111813,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ascensores",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguridad",
+          "amount": 541469,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ordinarios no habituales",
+          "amount": 120000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Extraordinarios",
+          "amount": 1660000,
+          "type": "Extraordinario"
+        },
+        {
+          "category": "Particulares",
+          "amount": 210000,
+          "type": "Particular"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "EPE Santa Fe",
+          "category": "Servicios públicos",
+          "detail": "Energía eléctrica",
+          "amount": 282388,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Abonos de servicios",
+          "detail": "Bombas de agua",
+          "amount": 72000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Landini Desinfección",
+          "category": "Abonos de servicios",
+          "detail": "Desinfección",
+          "amount": 29000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "GPS Automatización",
+          "category": "Mantenimiento ordinario",
+          "detail": "Portones",
+          "amount": 135000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Roela Siro",
+          "category": "Gastos bancarios",
+          "detail": "Sistema de recaudación",
+          "amount": 224706,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "SURLIMP",
+          "category": "Limpieza",
+          "detail": "Servicio de limpieza",
+          "amount": 1906836,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "CA Cupones / Barras",
+          "category": "Administración",
+          "detail": "Vinculación de cupón/código de barras",
+          "amount": 42000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Federico Giorgi",
+          "category": "Administración",
+          "detail": "Honorarios administración",
+          "amount": 385000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Librería ABC",
+          "category": "Administración",
+          "detail": "Fotocopias",
+          "amount": 26600,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Sancor Seguros",
+          "category": "Seguros",
+          "detail": "Seguro integral",
+          "amount": 111813,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Opción Ascensores",
+          "category": "Ascensores",
+          "detail": "Mantenimiento ascensores",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Centitower",
+          "category": "Seguridad",
+          "detail": "Monitoreo puerta de ingreso",
+          "amount": 541469,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "By Pass",
+          "category": "Ordinarios no habituales",
+          "detail": "Reparación pérdida de agua",
+          "amount": 120000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Brix Colors Pintores",
+          "category": "Extraordinarios",
+          "detail": "Reparación medianera",
+          "amount": 510000,
+          "type": "Extraordinario"
+        },
+        {
+          "provider": "Gastos varios",
+          "category": "Extraordinarios",
+          "detail": "Acopio para caño de bajada",
+          "amount": 1150000,
+          "type": "Extraordinario"
+        },
+        {
+          "provider": "Federico Romero",
+          "category": "Particulares",
+          "detail": "Trabajo albañilería unidad",
+          "amount": 210000,
+          "type": "Particular"
+        }
+      ],
+      "debtors": [
+        {
+          "unit": "04-01",
+          "amount": 1110541.12
+        },
+        {
+          "unit": "00-17",
+          "amount": 1082834.41
+        },
+        {
+          "unit": "A2",
+          "amount": 911857.72
+        },
+        {
+          "unit": "08-01",
+          "amount": 716618.46
+        },
+        {
+          "unit": "05-02",
+          "amount": 535370.01
+        },
+        {
+          "unit": "02-02",
+          "amount": 290220
+        },
+        {
+          "unit": "00-14",
+          "amount": 244201.09
+        }
+      ]
+    },
+    {
+      "id": "2026-06",
+      "label": "Junio 2026",
+      "monthShort": "Jun",
+      "pdf": null,
+      "report": null,
+      "cashStart": 1659457.55,
+      "cashFinal": 865066.19,
+      "accountsPayable": 553563,
+      "netCash": 311503.19,
+      "ordinaryExpenses": 4177091.36,
+      "extraordinaryExpenses": 3752763,
+      "particularExpenses": 0,
+      "totalExpenses": 7929854.36,
+      "paidCurrent": 4769700,
+      "lateFeesCollected": 12200,
+      "debtRecovered": 1101362.85,
+      "interestCollected": 348637.15,
+      "otherIncome": 350000,
+      "debtCapital": 5186030.78,
+      "interestReceivable": 1098472.31,
+      "currentReceivables": 7932496.91,
+      "unidentifiedCollections": -84910,
+      "notes": "Mes más tensionado por extraordinarios. La caja neta queda en nivel crítico al descontar cuentas por pagar.",
+      "composition": [
+        {
+          "category": "Servicios públicos",
+          "amount": 337975.36,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Abonos de servicios",
+          "amount": 101000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Mantenimiento ordinario",
+          "amount": 195000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Gastos bancarios",
+          "amount": 232423,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Limpieza",
+          "amount": 1906836,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Administración",
+          "amount": 460575,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguros",
+          "amount": 111813,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ascensores",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguridad",
+          "amount": 541469,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Mantenimiento no habitual",
+          "amount": 130000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Extraordinarios",
+          "amount": 3752763,
+          "type": "Extraordinario"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "EPE Santa Fe",
+          "category": "Servicios públicos",
+          "detail": "Energía eléctrica",
+          "amount": 337975.36,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Abonos de servicios",
+          "detail": "Bombas de agua",
+          "amount": 72000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Landini Desinfección",
+          "category": "Abonos de servicios",
+          "detail": "Desinfección",
+          "amount": 29000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Adrian Castro Electricista",
+          "category": "Mantenimiento ordinario",
+          "detail": "Electricidad en cocheras",
+          "amount": 60000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "GPS Automatización",
+          "category": "Mantenimiento ordinario",
+          "detail": "Portones",
+          "amount": 135000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Roela Siro",
+          "category": "Gastos bancarios",
+          "detail": "Sistema de recaudación",
+          "amount": 232423,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "SURLIMP",
+          "category": "Limpieza",
+          "detail": "Servicio de limpieza",
+          "amount": 1906836,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "CA Cupones / Barras",
+          "category": "Administración",
+          "detail": "Vinculación de cupón/código de barras",
+          "amount": 42000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Federico Giorgi",
+          "category": "Administración",
+          "detail": "Honorarios administración",
+          "amount": 385000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Librería ABC",
+          "category": "Administración",
+          "detail": "Fotocopias",
+          "amount": 33575,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Sancor Seguros",
+          "category": "Seguros",
+          "detail": "Seguro integral",
+          "amount": 111813,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Opción Ascensores",
+          "category": "Ascensores",
+          "detail": "Mantenimiento ascensores",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Centitower",
+          "category": "Seguridad",
+          "detail": "Monitoreo puerta de ingreso",
+          "amount": 541469,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Brian Oliva Desagotes",
+          "category": "Mantenimiento no habitual",
+          "detail": "Destape y limpieza cloacal",
+          "amount": 130000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Brix Colors Pintores",
+          "category": "Extraordinarios",
+          "detail": "Saldo reparación medianera",
+          "amount": 600000,
+          "type": "Extraordinario"
+        },
+        {
+          "provider": "By Pass",
+          "category": "Extraordinarios",
+          "detail": "Filtración/desagüe y acopios",
+          "amount": 1028563,
+          "type": "Extraordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Extraordinarios",
+          "detail": "Reparación bombas y desagote",
+          "amount": 974200,
+          "type": "Extraordinario"
+        },
+        {
+          "provider": "Gastos varios",
+          "category": "Extraordinarios",
+          "detail": "Saldo acopio extraordinario",
+          "amount": 1150000,
+          "type": "Extraordinario"
+        }
+      ],
+      "debtors": [
+        {
+          "unit": "00-17",
+          "amount": 1102150.97
+        },
+        {
+          "unit": "04-01",
+          "amount": 777291.24
+        },
+        {
+          "unit": "05-02",
+          "amount": 657733.01
+        },
+        {
+          "unit": "A2",
+          "amount": 615513.0
+        },
+        {
+          "unit": "08-01",
+          "amount": 508899.48
+        },
+        {
+          "unit": "05-01",
+          "amount": 444760.0
+        },
+        {
+          "unit": "02-02",
+          "amount": 412598.0
+        },
+        {
+          "unit": "00-14",
+          "amount": 263580.98
+        }
+      ]
+    },
+    {
+      "id": "2026-07",
+      "label": "Julio 2026",
+      "monthShort": "Jul",
+      "pdf": "pdfs/202607Expensas.pdf",
+      "report": null,
+      "cashStart": 865066.19,
+      "cashFinal": 4244829.83,
+      "accountsPayable": 807500,
+      "netCash": 3437329.83,
+      "ordinaryExpenses": 4425873.36,
+      "extraordinaryExpenses": 927500,
+      "particularExpenses": 0,
+      "totalExpenses": 5353373.36,
+      "paidCurrent": 6555695.05,
+      "lateFeesCollected": 23500,
+      "debtRecovered": 1442267.18,
+      "interestCollected": 457737.77,
+      "otherIncome": 0,
+      "debtCapital": 5120565.46,
+      "interestReceivable": 1152791.1,
+      "currentReceivables": 5356143.44,
+      "unidentifiedCollections": -84910,
+      "notes": "Recuperación fuerte de caja, aunque permanecen cuentas por pagar y la deuda se mantiene en torno de cinco millones.",
+      "composition": [
+        {
+          "category": "Servicios públicos",
+          "amount": 337975.36,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Abonos de servicios",
+          "amount": 101000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Mantenimiento ordinario",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Gastos bancarios",
+          "amount": 282715,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Limpieza",
+          "amount": 2002175,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Administración",
+          "amount": 474100,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguros",
+          "amount": 126320,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ascensores",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguridad",
+          "amount": 586588,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ordinarios no habituales",
+          "amount": 195000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Extraordinarios",
+          "amount": 927500,
+          "type": "Extraordinario"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "EPE Santa Fe",
+          "category": "Servicios públicos",
+          "detail": "Energía eléctrica",
+          "amount": 337975.36,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Abonos de servicios",
+          "detail": "Bombas de agua",
+          "amount": 72000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Landini Desinfección",
+          "category": "Abonos de servicios",
+          "detail": "Desinfección",
+          "amount": 29000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "GPS Automatización",
+          "category": "Mantenimiento ordinario",
+          "detail": "Portones",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Roela Siro",
+          "category": "Gastos bancarios",
+          "detail": "Sistema de recaudación",
+          "amount": 282715,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "SURLIMP",
+          "category": "Limpieza",
+          "detail": "Servicio de limpieza",
+          "amount": 2002175,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "CA Cupones / Barras",
+          "category": "Administración",
+          "detail": "Vinculación de cupón/código de barras",
+          "amount": 48000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Federico Giorgi",
+          "category": "Administración",
+          "detail": "Honorarios administración",
+          "amount": 385000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Librería ABC",
+          "category": "Administración",
+          "detail": "Fotocopias",
+          "amount": 41100,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Sancor Seguros",
+          "category": "Seguros",
+          "detail": "Seguro integral",
+          "amount": 126320,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Opción Ascensores",
+          "category": "Ascensores",
+          "detail": "Mantenimiento ascensores",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Centitower",
+          "category": "Seguridad",
+          "detail": "Monitoreo puerta de ingreso",
+          "amount": 586588,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Alem Cerrajería",
+          "category": "Ordinarios no habituales",
+          "detail": "Cierrapuertas hidráulico",
+          "amount": 195000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "By Pass",
+          "category": "Extraordinarios",
+          "detail": "Albañilería y acopios",
+          "amount": 600500,
+          "type": "Extraordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Extraordinarios",
+          "detail": "Bomba de desagote",
+          "amount": 327000,
+          "type": "Extraordinario"
+        }
+      ],
+      "debtors": [
+        {
+          "unit": "00-17",
+          "amount": 1127435.87
+        },
+        {
+          "unit": "05-02",
+          "amount": 829059.71
+        },
+        {
+          "unit": "05-01",
+          "amount": 616084.0
+        },
+        {
+          "unit": "02-02",
+          "amount": 583938.2
+        },
+        {
+          "unit": "04-01",
+          "amount": 497569.25
+        },
+        {
+          "unit": "04-04",
+          "amount": 293660.0
+        },
+        {
+          "unit": "A2",
+          "amount": 293636.86
+        },
+        {
+          "unit": "00-14",
+          "amount": 288922.88
+        }
+      ]
+    },
+    {
+      "id": "2026-08",
+      "label": "Agosto 2026",
+      "monthShort": "Ago",
+      "pdf": "pdfs/202608Expensas.pdf",
+      "report": null,
+      "cashStart": 4244829.83,
+      "cashFinal": 4171392.83,
+      "accountsPayable": 1705500,
+      "netCash": 2465892.83,
+      "ordinaryExpenses": 4407637,
+      "extraordinaryExpenses": 1890000,
+      "particularExpenses": 0,
+      "totalExpenses": 6297637,
+      "paidCurrent": 4228309.2,
+      "lateFeesCollected": 17300,
+      "debtRecovered": 822714.31,
+      "interestCollected": 257876.49,
+      "otherIncome": 0,
+      "debtCapital": 5425685.39,
+      "interestReceivable": 1437483.14,
+      "currentReceivables": 6302831.47,
+      "unidentifiedCollections": -84910,
+      "notes": "La deuda vuelve a subir y aumentan las cuentas por pagar. La caja bruta parece alta, pero la caja neta baja al descontar compromisos.",
+      "composition": [
+        {
+          "category": "Servicios públicos",
+          "amount": 377865,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Abonos de servicios",
+          "amount": 116000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Mantenimiento ordinario",
+          "amount": 250000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Gastos bancarios",
+          "amount": 204574,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Limpieza",
+          "amount": 2058810,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Administración",
+          "amount": 506950,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguros",
+          "amount": 126320,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ascensores",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguridad",
+          "amount": 607118,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Extraordinarios",
+          "amount": 1890000,
+          "type": "Extraordinario"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "EPE Santa Fe",
+          "category": "Servicios públicos",
+          "detail": "Energía eléctrica",
+          "amount": 377865,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Abonos de servicios",
+          "detail": "Bombas de agua",
+          "amount": 82000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Landini Desinfección",
+          "category": "Abonos de servicios",
+          "detail": "Desinfección",
+          "amount": 34000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Adrian Castro Electricista",
+          "category": "Mantenimiento ordinario",
+          "detail": "Trabajos varios electricidad",
+          "amount": 90000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "GPS Automatización",
+          "category": "Mantenimiento ordinario",
+          "detail": "Portones",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Roela Siro",
+          "category": "Gastos bancarios",
+          "detail": "Sistema de recaudación",
+          "amount": 204574,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "SURLIMP",
+          "category": "Limpieza",
+          "detail": "Servicio de limpieza",
+          "amount": 2058810,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "CA Cupones / Barras",
+          "category": "Administración",
+          "detail": "Vinculación de cupón/código de barras",
+          "amount": 48000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Federico Giorgi",
+          "category": "Administración",
+          "detail": "Honorarios administración",
+          "amount": 425000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Librería ABC",
+          "category": "Administración",
+          "detail": "Fotocopias",
+          "amount": 33950,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Sancor Seguros",
+          "category": "Seguros",
+          "detail": "Seguro integral",
+          "amount": 126320,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Opción Ascensores",
+          "category": "Ascensores",
+          "detail": "Mantenimiento ascensores",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Centitower",
+          "category": "Seguridad",
+          "detail": "Monitoreo puerta de ingreso",
+          "amount": 607118,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Brian Oliva Desagotes",
+          "category": "Extraordinarios",
+          "detail": "Destape e inspección desagües",
+          "amount": 340000,
+          "type": "Extraordinario"
+        },
+        {
+          "provider": "Federico Romero",
+          "category": "Extraordinarios",
+          "detail": "Trabajos albañilería",
+          "amount": 50000,
+          "type": "Extraordinario"
+        },
+        {
+          "provider": "Gastos varios",
+          "category": "Extraordinarios",
+          "detail": "Acopio para trabajo cámara",
+          "amount": 1500000,
+          "type": "Extraordinario"
+        }
+      ],
+      "debtors": [
+        {
+          "unit": "00-17",
+          "amount": 1148092.28
+        },
+        {
+          "unit": "05-02",
+          "amount": 942653.74
+        },
+        {
+          "unit": "05-01",
+          "amount": 729675.6
+        },
+        {
+          "unit": "02-02",
+          "amount": 697544.38
+        },
+        {
+          "unit": "A2",
+          "amount": 314373.18
+        },
+        {
+          "unit": "00-14",
+          "amount": 309630.59
+        },
+        {
+          "unit": "01-02",
+          "amount": 284870.0
+        },
+        {
+          "unit": "08-01",
+          "amount": 284870.0
+        }
+      ]
+    },
+    {
+      "id": "2026-09",
+      "label": "Septiembre 2026",
+      "monthShort": "Sep",
+      "pdf": "pdfs/202609Expensas.pdf",
+      "report": "informes/202609-informe.pdf",
+      "cashStart": 4171392.83,
+      "cashFinal": 6817910.83,
+      "accountsPayable": 1555500,
+      "netCash": 5262410.83,
+      "ordinaryExpenses": 4516282,
+      "extraordinaryExpenses": 1443000,
+      "particularExpenses": 0,
+      "totalExpenses": 5959282,
+      "paidCurrent": 5669593.32,
+      "lateFeesCollected": 20400,
+      "debtRecovered": 2371554.02,
+      "interestCollected": 694252.66,
+      "otherIncome": 0,
+      "debtCapital": 3687369.52,
+      "interestReceivable": 1111967.44,
+      "currentReceivables": 5963063.04,
+      "unidentifiedCollections": -84910,
+      "notes": "Mejora muy relevante: la deuda de capital baja fuerte y la caja neta sube. La morosidad queda más concentrada en pocas unidades.",
+      "composition": [
+        {
+          "category": "Servicios públicos",
+          "amount": 377865,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Abonos de servicios",
+          "amount": 82000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Mantenimiento ordinario",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Gastos bancarios",
+          "amount": 271500,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Limpieza",
+          "amount": 2058810,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Administración",
+          "amount": 513200,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguros",
+          "amount": 126320,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ascensores",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguridad",
+          "amount": 586587,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ordinarios no habituales",
+          "amount": 180000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Extraordinarios",
+          "amount": 1443000,
+          "type": "Extraordinario"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "EPE Santa Fe",
+          "category": "Servicios públicos",
+          "detail": "Energía eléctrica",
+          "amount": 377865,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Abonos de servicios",
+          "detail": "Bombas de agua",
+          "amount": 82000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "GPS Automatización",
+          "category": "Mantenimiento ordinario",
+          "detail": "Portones",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Roela Siro",
+          "category": "Gastos bancarios",
+          "detail": "Sistema de recaudación",
+          "amount": 271500,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "SURLIMP",
+          "category": "Limpieza",
+          "detail": "Servicio de limpieza",
+          "amount": 2058810,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "CA Cupones / Barras",
+          "category": "Administración",
+          "detail": "Vinculación de cupón/código de barras",
+          "amount": 48000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Federico Giorgi",
+          "category": "Administración",
+          "detail": "Honorarios administración",
+          "amount": 425000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Librería ABC",
+          "category": "Administración",
+          "detail": "Fotocopias",
+          "amount": 40200,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Sancor Seguros",
+          "category": "Seguros",
+          "detail": "Seguro integral",
+          "amount": 126320,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Opción Ascensores",
+          "category": "Ascensores",
+          "detail": "Mantenimiento ascensores",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Centitower",
+          "category": "Seguridad",
+          "detail": "Monitoreo puerta de ingreso",
+          "amount": 586587,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Brian Oliva Desagotes",
+          "category": "Ordinarios no habituales",
+          "detail": "Destape cloacal y limpieza de rejillas",
+          "amount": 180000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Extraordinarios",
+          "detail": "Compra e instalación bomba desagote",
+          "amount": 293000,
+          "type": "Extraordinario"
+        },
+        {
+          "provider": "Gastos varios",
+          "category": "Extraordinarios",
+          "detail": "Acopio para trabajo cámara",
+          "amount": 1150000,
+          "type": "Extraordinario"
+        }
+      ],
+      "debtors": [
+        {
+          "unit": "05-01",
+          "amount": 861508.04
+        },
+        {
+          "unit": "00-17",
+          "amount": 845795.95
+        },
+        {
+          "unit": "02-02",
+          "amount": 829389.94
+        },
+        {
+          "unit": "08-01",
+          "amount": 416683.0
+        },
+        {
+          "unit": "00-14",
+          "amount": 336067.53
+        },
+        {
+          "unit": "04-04",
+          "amount": 144200.0
+        },
+        {
+          "unit": "00-07",
+          "amount": 144164.58
+        },
+        {
+          "unit": "00-16",
+          "amount": 109560.48
+        }
+      ]
+    }
+  ]
+}
