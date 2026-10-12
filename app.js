@@ -1,6 +1,6 @@
-const APP_VERSION = '0.5.1-print-tortas';
+const APP_VERSION = '0.6.0-codespaces-5-mejoras';
 let DATA = null;
-let state = { selected: null, from: null, to: null, providerFrom: null, providerTo: null, globalSearch: '', decisions: [], highlight: { composition: null, providers: null, debtors: null } };
+let state = { selected: null, from: null, to: null, monthA: null, monthB: null, providerFrom: null, providerTo: null, globalSearch: '', decisions: [], highlight: { composition: null, providers: null, debtors: null } };
 
 const $ = (id) => document.getElementById(id);
 const money = (v) => v == null ? "—" : new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(v);
@@ -24,6 +24,8 @@ async function init() {
   state.selected = months[months.length - 1].id;
   state.from = months[0].id;
   state.to = months[months.length - 1].id;
+  state.monthA = months.length > 1 ? months[months.length - 2].id : months[0].id;
+  state.monthB = months[months.length - 1].id;
   state.providerFrom = months[0].id;
   state.providerTo = months[months.length - 1].id;
 
@@ -34,7 +36,7 @@ async function init() {
 }
 
 function populateSelects() {
-  const ids = ['monthSelect', 'fromSelect', 'toSelect', 'providerFrom', 'providerTo'];
+  const ids = ['monthSelect', 'fromSelect', 'toSelect', 'monthASelect', 'monthBSelect', 'providerFrom', 'providerTo'];
   for (const id of ids) {
     const sel = $(id);
     sel.innerHTML = DATA.months.map(m => `<option value="${m.id}">${m.label}</option>`).join('');
@@ -42,6 +44,8 @@ function populateSelects() {
   $('monthSelect').value = state.selected;
   $('fromSelect').value = state.from;
   $('toSelect').value = state.to;
+  $('monthASelect').value = state.monthA;
+  $('monthBSelect').value = state.monthB;
   $('providerFrom').value = state.providerFrom;
   $('providerTo').value = state.providerTo;
   $('lastUpdate').textContent = `Datos cargados hasta ${getMonth(state.selected).label}.`;
@@ -51,6 +55,8 @@ function bindEvents() {
   $('monthSelect').addEventListener('change', e => { state.selected = e.target.value; clearPieHighlights(); renderAll(); });
   $('fromSelect').addEventListener('change', e => { state.from = e.target.value; renderCompare(); });
   $('toSelect').addEventListener('change', e => { state.to = e.target.value; renderCompare(); });
+  $('monthASelect').addEventListener('change', e => { state.monthA = e.target.value; renderMonthPair(); });
+  $('monthBSelect').addEventListener('change', e => { state.monthB = e.target.value; renderMonthPair(); });
   $('providerFrom').addEventListener('change', e => { state.providerFrom = e.target.value; state.highlight.providers = null; renderProviders(); });
   $('providerTo').addEventListener('change', e => { state.providerTo = e.target.value; state.highlight.providers = null; renderProviders(); });
   $('providerType').addEventListener('change', () => { state.highlight.providers = null; renderProviders(); });
@@ -58,7 +64,17 @@ function bindEvents() {
   $('globalSearch').addEventListener('input', e => { state.globalSearch = e.target.value.trim(); renderGlobalSearch(); });
   $('clearSearchButton').addEventListener('click', () => { state.globalSearch = ''; $('globalSearch').value = ''; renderGlobalSearch(); });
   $('printButton').addEventListener('click', preparePrintAndOpenDialog);
+  $('printMonthFileButton').addEventListener('click', () => { showTab('monthlyFile'); preparePrintAndOpenDialog(); });
   $('addDecisionButton').addEventListener('click', addDecisionFromForm);
+  $('providerRankingTable').addEventListener('click', e => {
+    const row = e.target.closest('[data-provider-row]');
+    if (!row) return;
+    state.highlight.providers = [row.dataset.providerRow];
+    $('providerSearch').value = '';
+    $('providerType').value = '';
+    showTab('providers');
+    renderProviders();
+  });
   $('decisionsTable').addEventListener('click', e => {
     const button = e.target.closest('[data-delete-decision]');
     if (!button) return;
@@ -77,6 +93,16 @@ function bindEvents() {
 
   window.addEventListener('beforeprint', preparePrintLayout);
   window.addEventListener('afterprint', restoreScreenLayoutAfterPrint);
+}
+
+function showTab(tabId) {
+  const button = document.querySelector(`.tab[data-tab="${tabId}"]`);
+  const panel = $(tabId);
+  if (!button || !panel) return;
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  button.classList.add('active');
+  panel.classList.add('active');
 }
 
 function preparePrintAndOpenDialog() {
@@ -110,14 +136,18 @@ function clearPieHighlights() {
 function renderAll() {
   $('lastUpdate').textContent = `Datos cargados hasta ${getMonth(DATA.meta.lastLoadedMonth).label}.`;
   renderOverview();
+  renderMonthlyFile();
   renderCompare();
+  renderMonthPair();
   renderComposition();
   renderProviders();
+  renderProviderRanking();
   renderDebtors();
   renderMeeting();
   renderDecisions();
   renderQuality();
   renderDocs();
+  renderDocsStatus();
   renderGlobalSearch();
 }
 
@@ -160,6 +190,78 @@ function renderOverview() {
     { key: 'deuda', label: 'Deuda' },
     { key: 'gastos', label: 'Gastos' }
   ]);
+}
+
+
+function renderMonthlyFile() {
+  const m = getMonth(state.selected);
+  const prev = previousMonth(m.id);
+  if (!$('monthlyFileHeader')) return;
+  const debtDelta = prev ? m.debtCapital - prev.debtCapital : null;
+  const cashDelta = prev ? m.netCash - prev.netCash : null;
+  const extraShare = m.totalExpenses ? m.extraordinaryExpenses / m.totalExpenses * 100 : 0;
+  const debtRows = [...(m.debtors || [])].sort((a,b) => b.amount - a.amount);
+  const topDebtors = debtRows.slice(0,5);
+  const topProviders = [...(m.providers || [])].sort((a,b) => b.amount - a.amount).slice(0,5);
+  const positives = [];
+  const warnings = [];
+  if (debtDelta != null && debtDelta < 0) positives.push(`Bajó la deuda de capital ${money2(Math.abs(debtDelta))}.`);
+  if (cashDelta != null && cashDelta > 0) positives.push(`Subió la caja neta ${money2(cashDelta)}.`);
+  if ((m.debtRecovered || 0) > 0) positives.push(`Se recuperaron ${money2(m.debtRecovered)} de expensas adeudadas.`);
+  if (debtDelta != null && debtDelta > 0) warnings.push(`Subió la deuda de capital ${money2(debtDelta)}.`);
+  if (extraShare > 25) warnings.push(`Extraordinarios elevados: ${pct(extraShare)} del gasto mensual.`);
+  if (m.accountsPayable > 0) warnings.push(`Cuentas por pagar al cierre: ${money2(m.accountsPayable)}.`);
+  if (!positives.length) positives.push('Sin mejora automática destacada con las reglas actuales.');
+  if (!warnings.length) warnings.push('Sin alertas automáticas relevantes.');
+  $('monthlyFileHeader').innerHTML = `
+    <div>
+      <span class="eyebrow-light">Mes seleccionado</span>
+      <h3>${escapeHtml(m.label)}</h3>
+      <p>${escapeHtml(m.notes || 'Sin comentario mensual cargado.')}</p>
+    </div>
+    <div class="monthly-file-actions">
+      ${m.pdf ? `<a href="${m.pdf}" target="_blank">Abrir PDF de expensas</a>` : '<span class="muted">PDF no enlazado</span>'}
+      ${m.report ? `<a href="${m.report}" target="_blank">Abrir informe mensual</a>` : '<span class="muted">Informe pendiente</span>'}
+    </div>
+  `;
+  const cards = [
+    ['Qué pasó', `Gasto total ${money2(m.totalExpenses)}, caja neta ${money2(m.netCash)} y deuda capital ${money2(m.debtCapital)}.`],
+    ['Qué mejoró', positives.join(' ')],
+    ['Qué empeoró / alerta', warnings.join(' ')],
+    ['Gastos principales', topProviders.map(p => `${p.provider}: ${money2(p.amount)}`).join(' · ') || 'Sin proveedores cargados.'],
+    ['Situación de deuda', `Top 5 unidades: ${money2(topDebtors.reduce((a,b)=>a+b.amount,0))}. Cantidad de unidades deudoras: ${debtRows.length}.`],
+    ['Documentos asociados', `${m.pdf ? 'PDF disponible' : 'PDF pendiente'} · ${m.report ? 'Informe disponible' : 'Informe pendiente'}.`]
+  ];
+  $('monthlyFileGrid').innerHTML = cards.map(([title, text]) => `<div class="monthly-file-card"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></div>`).join('');
+  $('monthlyFileExpensesTable').innerHTML = `<thead><tr><th>Proveedor / rubro</th><th>Tipo</th><th class="num">Importe</th></tr></thead><tbody>${topProviders.map(p => `<tr><td><strong>${escapeHtml(p.provider)}</strong><br><span class="muted">${escapeHtml(p.category)} · ${escapeHtml(p.detail || '')}</span></td><td>${escapeHtml(p.type)}</td><td class="num">${money2(p.amount)}</td></tr>`).join('')}</tbody>`;
+  $('monthlyFileDebtorsTable').innerHTML = `<thead><tr><th>Unidad</th><th class="num">Capital adeudado</th><th class="num">%</th></tr></thead><tbody>${topDebtors.map(d => `<tr><td>Unidad ${escapeHtml(d.unit)}</td><td class="num">${money2(d.amount)}</td><td class="num">${pct(d.amount / m.debtCapital * 100)}</td></tr>`).join('')}</tbody>`;
+}
+
+function renderMonthPair() {
+  const a = getMonth(state.monthA);
+  const b = getMonth(state.monthB);
+  if (!a || !b || !$('monthPairGrid')) return;
+  const metrics = [
+    ['Caja final', 'cashFinal', true],
+    ['Caja neta', 'netCash', true],
+    ['Deuda capital', 'debtCapital', false],
+    ['Gastos totales', 'totalExpenses', false],
+    ['Gastos ordinarios', 'ordinaryExpenses', false],
+    ['Extraordinarios', 'extraordinaryExpenses', false],
+    ['Cuentas por pagar', 'accountsPayable', false],
+    ['Recupero deuda', 'debtRecovered', true],
+    ['Intereses cobrados', 'interestCollected', true]
+  ];
+  const cards = metrics.slice(0,5).map(([label, key, higherIsGood]) => {
+    const delta = (b[key] || 0) - (a[key] || 0);
+    const good = higherIsGood ? delta >= 0 : delta <= 0;
+    return { label, value: signedMoney(delta), sub: `${a.label} → ${b.label} · ${signedPct(percentChange(b[key], a[key]) || 0)}`, cls: good ? 'ok' : 'warn' };
+  });
+  $('monthPairGrid').innerHTML = cards.map(c => `<div class="kpi ${c.cls}"><div class="label">${c.label}</div><div class="value">${c.value}</div><div class="sub">${c.sub}</div></div>`).join('');
+  $('monthPairTable').innerHTML = `<thead><tr><th>Indicador</th><th class="num">${a.label}</th><th class="num">${b.label}</th><th class="num">Diferencia</th><th class="num">Variación</th></tr></thead><tbody>${metrics.map(([label,key]) => {
+    const delta = (b[key] || 0) - (a[key] || 0);
+    return `<tr><td>${label}</td><td class="num">${money2(a[key])}</td><td class="num">${money2(b[key])}</td><td class="num">${signedMoney(delta)}</td><td class="num">${percentChange(b[key], a[key]) == null ? '—' : signedPct(percentChange(b[key], a[key]))}</td></tr>`;
+  }).join('')}</tbody>`;
 }
 
 function renderCompare() {
@@ -250,6 +352,75 @@ function renderProviders() {
   $('providerTable').innerHTML = `<thead><tr><th>Mes</th><th>Proveedor</th><th>Rubro</th><th>Detalle</th><th>Tipo</th><th class="num">Importe</th></tr></thead><tbody>${tableRows.sort((a,b) => a.monthId.localeCompare(b.monthId) || b.amount - a.amount).map(r => `<tr data-pie-key="${escapeHtml(r.provider)}"><td>${r.month}</td><td>${r.provider}</td><td>${r.category}</td><td>${r.detail}</td><td>${r.type}</td><td class="num">${money2(r.amount)}</td></tr>`).join('')}</tbody>`;
   highlightTableRows('providerTable', selectedKeys);
   renderProviderEvolution(selectedKeys, providerPieRows);
+  renderProviderProfile(selectedKeys, providerPieRows);
+}
+
+
+
+function getProviderRankingRows() {
+  const map = new Map();
+  DATA.months.forEach(m => (m.providers || []).forEach(p => {
+    if (!map.has(p.provider)) map.set(p.provider, { provider: p.provider, total: 0, months: new Set(), movements: 0, maxAmount: 0, maxMonth: '', categories: {}, types: {} });
+    const row = map.get(p.provider);
+    row.total += p.amount;
+    row.months.add(m.id);
+    row.movements += 1;
+    if (p.amount > row.maxAmount) { row.maxAmount = p.amount; row.maxMonth = m.label; }
+    row.categories[p.category] = (row.categories[p.category] || 0) + p.amount;
+    row.types[p.type] = (row.types[p.type] || 0) + p.amount;
+  }));
+  return [...map.values()].map(r => {
+    const mainCategory = Object.entries(r.categories).sort((a,b)=>b[1]-a[1])[0]?.[0] || '—';
+    const mainType = Object.entries(r.types).sort((a,b)=>b[1]-a[1])[0]?.[0] || '—';
+    return { ...r, monthCount: r.months.size, average: r.months.size ? r.total / r.months.size : 0, mainCategory, mainType };
+  }).sort((a,b) => b.total - a.total);
+}
+
+function renderProviderRanking() {
+  const table = $('providerRankingTable');
+  if (!table) return;
+  const rows = getProviderRankingRows();
+  table.innerHTML = `<thead><tr><th>Proveedor</th><th class="num">Total anual</th><th class="num">Meses</th><th class="num">Promedio mensual</th><th class="num">Mayor gasto</th><th>Rubro principal</th></tr></thead><tbody>${rows.map(r => `<tr class="clickable-row" data-provider-row="${escapeHtml(r.provider)}"><td><strong>${escapeHtml(r.provider)}</strong><br><span class="muted">${escapeHtml(r.mainType)}</span></td><td class="num">${money2(r.total)}</td><td class="num">${r.monthCount}</td><td class="num">${money2(r.average)}</td><td class="num">${money2(r.maxAmount)}<br><span class="muted">${escapeHtml(r.maxMonth)}</span></td><td>${escapeHtml(r.mainCategory)}</td></tr>`).join('')}</tbody>`;
+}
+
+function renderProviderProfile(selectedKeys = null, pieRows = null) {
+  const el = $('providerProfile');
+  if (!el) return;
+  const keys = selectedKeys && selectedKeys.length ? selectedKeys : null;
+  const ranking = getProviderRankingRows();
+  const targetProviders = keys || (ranking[0] ? [ranking[0].provider] : []);
+  if (!targetProviders.length) {
+    el.innerHTML = '<p class="muted">No hay proveedores cargados.</p>';
+    return;
+  }
+  const selectedSet = new Set(targetProviders);
+  const rows = [];
+  DATA.months.forEach(m => (m.providers || []).filter(p => selectedSet.has(p.provider)).forEach(p => rows.push({ ...p, month: m.label, monthId: m.id })));
+  const total = rows.reduce((a,b)=>a+b.amount,0);
+  const monthIds = new Set(rows.map(r=>r.monthId));
+  const max = rows.reduce((a,b)=>a.amount>b.amount?a:b, rows[0]);
+  const byCategory = Object.entries(rows.reduce((acc,r)=>{acc[r.category]=(acc[r.category]||0)+r.amount; return acc;},{})).sort((a,b)=>b[1]-a[1]);
+  const label = keys ? providerFilterLabel(keys, pieRows || []) : targetProviders[0];
+  const monthRows = DATA.months.map(m => {
+    const amount = rows.filter(r => r.monthId === m.id).reduce((a,b)=>a+b.amount,0);
+    return { month: m.label, amount };
+  }).filter(r => r.amount > 0);
+  el.innerHTML = `
+    <div class="provider-profile-head">
+      <h3>${escapeHtml(label)}</h3>
+      <p class="muted">${keys ? 'Proveedor seleccionado' : 'Proveedor principal por gasto anual'}</p>
+    </div>
+    <div class="profile-metrics">
+      <div><span>Total 2026</span><strong>${money2(total)}</strong></div>
+      <div><span>Meses con gasto</span><strong>${monthIds.size}</strong></div>
+      <div><span>Movimientos</span><strong>${rows.length}</strong></div>
+      <div><span>Mayor gasto</span><strong>${money2(max?.amount || 0)}</strong><small>${escapeHtml(max?.month || '')}</small></div>
+    </div>
+    <h4>Rubros principales</h4>
+    <ul class="compact-list">${byCategory.slice(0,5).map(([cat,amount]) => `<li><span>${escapeHtml(cat)}</span><strong>${money2(amount)}</strong></li>`).join('')}</ul>
+    <h4>Evolución mensual</h4>
+    <ul class="compact-list">${monthRows.map(r => `<li><span>${escapeHtml(r.month)}</span><strong>${money2(r.amount)}</strong></li>`).join('') || '<li><span>Sin movimientos</span></li>'}</ul>
+  `;
 }
 
 function renderDebtors() {
@@ -269,7 +440,18 @@ function renderDebtors() {
 }
 
 function renderDocs() {
-  $('docsTable').innerHTML = `<thead><tr><th>Mes</th><th>PDF expensas</th><th>Informe mensual</th><th>Comentario</th></tr></thead><tbody>${DATA.months.map(m => `<tr><td>${m.label}</td><td>${m.pdf ? `<a href="${m.pdf}" target="_blank">Abrir PDF</a>` : '<span class="muted">Pendiente de copiar</span>'}</td><td>${m.report ? `<a href="${m.report}" target="_blank">Abrir informe</a>` : '<span class="muted">Pendiente</span>'}</td><td>${m.notes}</td></tr>`).join('')}</tbody>`;
+  $('docsTable').innerHTML = `<thead><tr><th>Mes</th><th>PDF expensas</th><th>Informe mensual</th><th>Comentario</th></tr></thead><tbody>${DATA.months.map(m => `<tr><td>${m.label}</td><td>${m.pdf ? `<a href="${m.pdf}" target="_blank">Abrir PDF</a>` : '<span class="muted">Pendiente de copiar</span>'}</td><td>${m.report ? `<a href="${m.report}" target="_blank">Abrir informe</a>` : '<span class="muted">Pendiente</span>'}</td><td>${escapeHtml(m.notes || '')}</td></tr>`).join('')}</tbody>`;
+}
+
+function renderDocsStatus() {
+  const table = $('docsStatusTable');
+  if (!table) return;
+  table.innerHTML = `<thead><tr><th>Mes</th><th>PDF</th><th>Informe</th><th>Datos</th><th>Validación</th><th>Observación</th></tr></thead><tbody>${DATA.months.map(m => {
+    const hasData = !!(m.totalExpenses && m.composition?.length && m.providers?.length);
+    const ready = hasData && m.pdf && m.report;
+    const status = ready ? 'Completo' : (hasData ? 'Datos cargados, documentos incompletos' : 'Revisar carga');
+    return `<tr><td>${m.label}</td><td>${m.pdf ? 'Disponible' : 'Pendiente'}</td><td>${m.report ? 'Disponible' : 'Pendiente'}</td><td>${hasData ? 'Cargados' : 'Incompletos'}</td><td><span class="status-pill ${ready ? 'ok' : 'warn'}">${status}</span></td><td>${escapeHtml(m.notes || '')}</td></tr>`;
+  }).join('')}</tbody>`;
 }
 
 

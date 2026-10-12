@@ -1,83 +1,68 @@
-# Dashboard Consorcio Alem 2026
+# Dashboard Consorcio Alem 2026 — actualización v0.6 viaje / Codespaces
 
-MVP estático en HTML/CSS/JavaScript puro para publicar con GitHub Pages.
+Esta actualización agrega las 5 mejoras propuestas para continuar el desarrollo desde GitHub Codespaces o desde la PC local.
 
-## Versión 0.5
+## Archivos incluidos
 
-Esta actualización agrega las 10 mejoras funcionales pedidas:
+- `index.html`
+- `styles.css`
+- `app.js`
+- `README.md`
+- `aplicar_update.sh`
 
-1. **Semáforo financiero mensual** en la pestaña Resumen.
-2. **Comparativa automática mes actual vs mes anterior**.
-3. **Modo reunión** con lectura simplificada para asamblea o consejo.
-4. **Buscador global** por proveedor, rubro, unidad, mes y documentos.
-5. **Evolución por proveedor** al seleccionar una porción o leyenda de la torta.
-6. **Detalle ordinario / extraordinario / particulares / cuentas por pagar**.
-7. **Lectura del mes** con puntos favorables, alertas y recomendación.
-8. **Botón imprimir / guardar PDF**.
-9. **Historial local de decisiones** en el navegador.
-10. **Control de calidad de datos** con cobertura de PDFs, informes y advertencias.
+## Mejoras incluidas
 
-## Privacidad
+1. **Ficha mensual completa**
+   - Nueva pestaña `Ficha mensual`.
+   - Resume qué pasó, qué mejoró, qué exige atención, gastos principales, deuda y documentos asociados.
 
-El dashboard no muestra nombres de propietarios en la sección de morosidad: sólo unidades funcionales. Sin login ni contraseña, la privacidad depende de mantener controlado el enlace publicado.
+2. **Comparador dos meses frente a frente**
+   - Nuevo bloque dentro de `Comparativa`.
+   - Permite elegir Mes A y Mes B.
+   - Muestra diferencias directas de caja, deuda, gastos, recupero e intereses.
 
-## Prueba local
+3. **Ranking anual de proveedores**
+   - Nuevo bloque en `Gasto por proveedor`.
+   - Ordena proveedores por total anual.
+   - Incluye meses con gasto, promedio mensual, mayor gasto y rubro principal.
 
-Desde la carpeta del proyecto:
+4. **Ficha del proveedor**
+   - Se actualiza al seleccionar un proveedor en la torta, en la leyenda o en el ranking.
+   - Muestra total 2026, meses con gasto, cantidad de movimientos, mayor gasto, rubros principales y evolución mensual.
 
-```powershell
-cd "C:\Trabajos\Consorcio_Alem\dashboard-consorcio-alem-2026"
+5. **Estado de documentos y validación**
+   - Nuevo bloque dentro de `Documentos`.
+   - Muestra por mes si hay PDF, informe, datos estructurados y estado de validación.
+
+## Aplicación rápida en Codespaces
+
+Subir el ZIP a la raíz del repositorio y ejecutar:
+
+```bash
+mkdir -p /tmp/dashboard_update
+unzip -o dashboard_consorcio_alem_2026_update_5_codespaces.zip -d /tmp/dashboard_update
+bash /tmp/dashboard_update/aplicar_update.sh
+```
+
+Luego probar:
+
+```bash
 python -m http.server 8080
 ```
 
-Abrir:
+Commit recomendado:
 
-```text
-http://localhost:8080
-```
-
-## Publicación
-
-Después de reemplazar los archivos modificados:
-
-```powershell
+```bash
 git status
 git add index.html styles.css app.js README.md
-git commit -m "Agregar semaforo financiero, modo reunion y gestion"
+git commit -m "Agregar ficha mensual comparador y ranking de proveedores"
 git push
 ```
 
-## Archivos modificados en esta actualización
+## Aplicación manual
 
-```text
-index.html
-styles.css
-app.js
-README.md
-```
+También se puede descomprimir el ZIP en la raíz del proyecto reemplazando los archivos existentes.
 
-## Actualización mensual
+## Nota
 
-Cada mes hay que actualizar principalmente:
-
-```text
-data/expensas-2026.json
-pdfs/
-informes/
-```
-
-El dashboard debe validarse contra el PDF oficial de expensas antes de publicar.
-
-## Notas de uso
-
-- El historial de decisiones se guarda en `localStorage`; por ahora es local del navegador y no queda sincronizado entre usuarios.
-- Para que una decisión sea visible para todos, hay que incorporarla luego como dato permanente en el proyecto.
-- La clasificación “pagos devengados de meses anteriores” aparece como “No cargado” si ese dato no está estructurado en el JSON mensual.
-- La liquidación oficial sigue siendo el PDF mensual: el dashboard es una herramienta de lectura y seguimiento.
-
-
-## Actualización 0.5.1
-
-- Corrige la impresión/guardado en PDF de gráficos de torta para evitar compresión horizontal.
-- Antes de imprimir, el dashboard redibuja los gráficos con el layout de impresión.
-- En PDF, cada panel de torta pasa a ancho completo y conserva la leyenda a la derecha.
+Esta actualización no modifica `data/expensas-2026.json`. Usa los datos ya cargados de 2026.

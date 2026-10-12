@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard Expensas Alem 2026</title>
-  <link rel="stylesheet" href="styles.css?v=20261011-mejoras-v5">
+  <link rel="stylesheet" href="styles.css?v=20261012-codespaces-v1">
 </head>
 <body>
   <header class="hero">
@@ -12,7 +12,7 @@
       <p class="eyebrow">Consorcio Alem 1268/74/80/82</p>
       <h1>Dashboard de expensas 2026</h1>
       <p class="hero-text">Resumen financiero, morosidad por unidad, composición de gastos, proveedores, documentos e indicadores para reuniones de consorcio.</p>
-      <p class="version-badge">Versión 0.5 · semáforo, búsqueda, reunión e historial</p>
+      <p class="version-badge">Versión 0.6 · ficha mensual, comparador, ranking y validación</p>
     </div>
     <div class="hero-card">
       <label for="monthSelect">Mes de análisis</label>
@@ -45,6 +45,7 @@
 
     <nav class="tabs" aria-label="Secciones del dashboard">
       <button class="tab active" data-tab="overview">Resumen</button>
+      <button class="tab" data-tab="monthlyFile">Ficha mensual</button>
       <button class="tab" data-tab="compare">Comparativa</button>
       <button class="tab" data-tab="composition">Composición del gasto</button>
       <button class="tab" data-tab="providers">Gasto por proveedor</button>
@@ -77,8 +78,47 @@
       </div>
     </section>
 
+
+    <section id="monthlyFile" class="tab-panel">
+      <article class="panel">
+        <div class="panel-head horizontal">
+          <div>
+            <h2>Ficha mensual completa</h2>
+            <p class="muted">Lectura consolidada del mes seleccionado: qué pasó, qué mejoró, qué empeoró, principales gastos, proveedores, deuda y documentos.</p>
+          </div>
+          <button id="printMonthFileButton" class="small-action" type="button">Imprimir ficha</button>
+        </div>
+        <div id="monthlyFileHeader" class="monthly-file-header"></div>
+        <div id="monthlyFileGrid" class="monthly-file-grid"></div>
+        <div class="grid two equal spaced-panel">
+          <div class="table-wrap">
+            <table id="monthlyFileExpensesTable"></table>
+          </div>
+          <div class="table-wrap">
+            <table id="monthlyFileDebtorsTable"></table>
+          </div>
+        </div>
+      </article>
+    </section>
+
     <section id="compare" class="tab-panel">
       <article class="panel">
+        <div class="panel-head horizontal">
+          <div>
+            <h2>Comparador dos meses frente a frente</h2>
+            <p class="muted">Elegí dos meses para ver diferencias directas en caja, deuda, gastos, recupero y composición.</p>
+          </div>
+          <div class="controls-inline">
+            <label>Mes A <select id="monthASelect"></select></label>
+            <label>Mes B <select id="monthBSelect"></select></label>
+          </div>
+        </div>
+        <div id="monthPairGrid" class="kpi-grid compact"></div>
+        <div class="table-wrap">
+          <table id="monthPairTable"></table>
+        </div>
+      </article>
+      <article class="panel spaced-panel">
         <div class="panel-head horizontal">
           <div>
             <h2>Comparativa por períodos</h2>
@@ -164,6 +204,24 @@
           <table id="providerTable"></table>
         </div>
       </article>
+      <div class="grid two spaced-panel">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Ranking anual de proveedores</h2>
+            <p class="muted">Total acumulado, meses con movimientos, promedio mensual, mayor gasto y rubro principal.</p>
+          </div>
+          <div class="table-wrap tall">
+            <table id="providerRankingTable"></table>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Ficha del proveedor</h2>
+            <p class="muted">Se actualiza al seleccionar un proveedor en la torta, en la leyenda o en el ranking anual.</p>
+          </div>
+          <div id="providerProfile" class="provider-profile"></div>
+        </article>
+      </div>
     </section>
 
     <section id="debtors" class="tab-panel">
@@ -241,6 +299,15 @@
           <table id="docsTable"></table>
         </div>
       </article>
+      <article class="panel spaced-panel">
+        <div class="panel-head">
+          <h2>Estado de documentos y validación</h2>
+          <p class="muted">Control rápido para saber qué meses tienen PDF, informe, datos estructurados y revisión antes de publicar.</p>
+        </div>
+        <div class="table-wrap">
+          <table id="docsStatusTable"></table>
+        </div>
+      </article>
     </section>
   </main>
 
@@ -248,6 +315,6 @@
     <p>Dashboard estático MVP · HTML/CSS/JavaScript · Datos 2026. Validar contra PDF mensual antes de publicar.</p>
   </footer>
 
-  <script src="app.js?v=20261011-mejoras-v5"></script>
+  <script src="app.js?v=20261012-codespaces-v1"></script>
 </body>
 </html>
