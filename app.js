@@ -153,7 +153,9 @@ function renderCompare() {
 function renderComposition() {
   const m = getMonth(state.selected);
   const rows = [...m.composition].sort((a,b) => b.amount - a.amount);
-  drawBarChart($('compositionChart'), rows.map(r => ({ label: r.category, value: r.amount })), { maxBars: 12 });
+  const pieRows = groupSmallSlices(rows.map(r => ({ label: r.category, value: r.amount })), 8);
+  drawPieChart($('compositionChart'), pieRows);
+  renderPieLegend('compositionLegend', pieRows, m.totalExpenses);
   $('compositionTable').innerHTML = `<thead><tr><th>Rubro</th><th>Tipo</th><th class="num">Importe</th><th class="num">%</th></tr></thead><tbody>${rows.map(r => `<tr><td>${r.category}</td><td>${r.type}</td><td class="num">${money2(r.amount)}</td><td class="num">${pct(r.amount / m.totalExpenses * 100)}</td></tr>`).join('')}</tbody>`;
 }
 
@@ -169,7 +171,9 @@ function renderProviders() {
     return acc;
   }, {})).sort((a,b) => b.value - a.value);
   $('providerSummary').innerHTML = `<strong>${filtered.length}</strong> movimientos · Total filtrado: <strong>${money2(total)}</strong> · Proveedores: <strong>${byProvider.length}</strong>`;
-  drawBarChart($('providerChart'), byProvider.slice(0, 12), { maxBars: 12 });
+  const providerPieRows = groupSmallSlices(byProvider, 8);
+  drawPieChart($('providerChart'), providerPieRows);
+  renderPieLegend('providerLegend', providerPieRows, total);
   $('providerTable').innerHTML = `<thead><tr><th>Mes</th><th>Proveedor</th><th>Rubro</th><th>Detalle</th><th>Tipo</th><th class="num">Importe</th></tr></thead><tbody>${filtered.sort((a,b) => a.monthId.localeCompare(b.monthId) || b.amount - a.amount).map(r => `<tr><td>${r.month}</td><td>${r.provider}</td><td>${r.category}</td><td>${r.detail}</td><td>${r.type}</td><td class="num">${money2(r.amount)}</td></tr>`).join('')}</tbody>`;
 }
 
@@ -179,7 +183,9 @@ function renderDebtors() {
   const top3 = rows.slice(0,3).reduce((a,b) => a + b.amount, 0);
   const top5 = rows.slice(0,5).reduce((a,b) => a + b.amount, 0);
   $('debtConcentration').innerHTML = `Top 3: <strong>${money2(top3)}</strong> (${pct(top3 / m.debtCapital * 100)} de la deuda) · Top 5: <strong>${money2(top5)}</strong> (${pct(top5 / m.debtCapital * 100)})`;
-  drawBarChart($('debtorsChart'), rows.map(r => ({ label: `Unidad ${r.unit}`, value: r.amount })), { maxBars: 10 });
+  const debtorPieRows = groupSmallSlices(rows.map(r => ({ label: `Unidad ${r.unit}`, value: r.amount })), 7);
+  drawPieChart($('debtorsChart'), debtorPieRows);
+  renderPieLegend('debtorsLegend', debtorPieRows, m.debtCapital);
   $('debtorsTable').innerHTML = `<thead><tr><th>Unidad funcional</th><th class="num">Capital adeudado</th><th class="num">% del total</th></tr></thead><tbody>${rows.map(r => `<tr><td>Unidad ${r.unit}</td><td class="num">${money2(r.amount)}</td><td class="num">${pct(r.amount / m.debtCapital * 100)}</td></tr>`).join('')}</tbody>`;
 }
 
@@ -189,14 +195,7 @@ function renderDocs() {
 
 function drawLineChart(canvas, data, series) {
   if (!canvas || !canvas.offsetParent) return;
-  const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.getBoundingClientRect();
-  const cssHeight = Number(canvas.getAttribute('height')) || rect.height || 260;
-  canvas.width = rect.width * dpr;
-  canvas.height = cssHeight * dpr;
-  const ctx = canvas.getContext('2d');
-  ctx.scale(dpr, dpr);
-  const w = rect.width, h = cssHeight;
+  const { ctx, w, h } = prepareCanvas(canvas, getResponsiveChartHeight(canvas, 260));
   const pad = { l: 56, r: 18, t: 24, b: 42 };
   ctx.clearRect(0, 0, w, h);
   const values = data.flatMap(d => series.map(s => d[s.key] || 0));
@@ -228,32 +227,114 @@ function drawLineChart(canvas, data, series) {
   drawLegend(ctx, series.map((s, i) => ({ label: s.label, color: colors[i % colors.length] })), pad.l, 12);
 }
 
-function drawBarChart(canvas, items, options = {}) {
+
+function drawPieChart(canvas, items) {
   if (!canvas || !canvas.offsetParent) return;
-  const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.getBoundingClientRect();
-  const cssHeight = Number(canvas.getAttribute('height')) || rect.height || 260;
-  canvas.width = rect.width * dpr;
-  canvas.height = cssHeight * dpr;
-  const ctx = canvas.getContext('2d');
-  ctx.scale(dpr, dpr);
-  const w = rect.width, h = cssHeight;
+  const rows = items.filter(r => r.value > 0);
+  const { ctx, w, h } = prepareCanvas(canvas, getResponsiveChartHeight(canvas, 280));
   ctx.clearRect(0, 0, w, h);
-  const rows = items.slice(0, options.maxBars || 10);
-  const max = Math.max(...rows.map(r => r.value), 1);
-  const left = 170, right = 30, top = 16, rowH = Math.min(32, (h - top - 20) / rows.length);
-  ctx.font = '12px system-ui';
+  if (!rows.length) {
+    ctx.fillStyle = '#64748b';
+    ctx.font = '14px system-ui';
+    ctx.textAlign = 'center';
+    ctx.fillText('Sin datos para graficar', w / 2, h / 2);
+    return;
+  }
+
+  const total = rows.reduce((acc, r) => acc + r.value, 0);
+  const palette = getPalette();
+  const radius = Math.min(w, h) * (w < 520 ? 0.34 : 0.38);
+  const cx = w / 2;
+  const cy = h / 2;
+  let start = -Math.PI / 2;
+
   rows.forEach((r, i) => {
-    const y = top + i * rowH;
-    ctx.fillStyle = '#334155'; ctx.textAlign = 'right';
-    ctx.fillText(truncate(r.label, 22), left - 10, y + rowH * .65);
-    ctx.fillStyle = '#dbeafe';
-    ctx.fillRect(left, y + 7, w - left - right, Math.max(6, rowH - 14));
-    ctx.fillStyle = '#0f766e';
-    ctx.fillRect(left, y + 7, (r.value / max) * (w - left - right), Math.max(6, rowH - 14));
-    ctx.fillStyle = '#0f172a'; ctx.textAlign = 'left';
-    ctx.fillText(compact(r.value), left + (r.value / max) * (w - left - right) + 6, y + rowH * .65);
+    const angle = (r.value / total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, radius, start, start + angle);
+    ctx.closePath();
+    ctx.fillStyle = palette[i % palette.length];
+    ctx.fill();
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    start += angle;
   });
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius * 0.52, 0, Math.PI * 2);
+  ctx.fillStyle = '#ffffff';
+  ctx.fill();
+  ctx.fillStyle = '#0f172a';
+  ctx.font = '700 14px system-ui';
+  ctx.textAlign = 'center';
+  ctx.fillText('Total', cx, cy - 4);
+  ctx.fillStyle = '#64748b';
+  ctx.font = '12px system-ui';
+  ctx.fillText(compact(total), cx, cy + 16);
+}
+
+function renderPieLegend(containerId, items, total) {
+  const el = $(containerId);
+  if (!el) return;
+  const palette = getPalette();
+  const rows = items.filter(r => r.value > 0);
+  if (!rows.length) {
+    el.innerHTML = '<span class="muted">Sin datos para mostrar.</span>';
+    return;
+  }
+  const denominator = total || rows.reduce((acc, r) => acc + r.value, 0);
+  el.innerHTML = rows.map((r, i) => `
+    <div class="legend-item" title="${escapeHtml(r.label)}: ${money2(r.value)}">
+      <span class="legend-swatch" style="background:${palette[i % palette.length]}"></span>
+      <span class="legend-label">${escapeHtml(r.label)}</span>
+      <span class="legend-value">${pct(r.value / denominator * 100)}</span>
+    </div>
+  `).join('');
+}
+
+function groupSmallSlices(items, limit = 8) {
+  const rows = items.filter(r => r.value > 0).sort((a, b) => b.value - a.value);
+  if (rows.length <= limit) return rows;
+  const visible = rows.slice(0, limit - 1);
+  const other = rows.slice(limit - 1).reduce((acc, r) => acc + r.value, 0);
+  return [...visible, { label: 'Otros', value: other }];
+}
+
+function prepareCanvas(canvas, cssHeight) {
+  const dpr = window.devicePixelRatio || 1;
+  canvas.style.height = `${cssHeight}px`;
+  const rect = canvas.getBoundingClientRect();
+  const w = Math.max(1, rect.width);
+  const h = cssHeight;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx, w, h };
+}
+
+function getResponsiveChartHeight(canvas, preferred) {
+  const rect = canvas.getBoundingClientRect();
+  const width = rect.width || canvas.parentElement?.clientWidth || 320;
+  if (window.innerWidth <= 620) {
+    return Math.round(Math.max(210, Math.min(260, width * 0.68)));
+  }
+  return Math.round(Math.max(240, Math.min(preferred, width * 0.48)));
+}
+
+function getPalette() {
+  return ['#0f766e', '#1d4ed8', '#b45309', '#7c3aed', '#be123c', '#0891b2', '#65a30d', '#c2410c', '#475569'];
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
 }
 
 function drawAxes(ctx, w, h, pad, max) {

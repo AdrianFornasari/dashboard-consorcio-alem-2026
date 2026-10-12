@@ -1,15 +1,35 @@
-# Dashboard Expensas Alem 2026 — MVP
+# Dashboard Expensas Alem 2026 - MVP
 
-Dashboard estático en HTML/CSS/JavaScript puro, pensado para GitHub Pages.
+Dashboard estático HTML/CSS/JavaScript para seguimiento financiero del Consorcio Alem 1268/74/80/82.
 
-## Qué incluye
+## Criterios del MVP
 
-- Resumen mensual con caja, caja neta, deuda, gastos y recupero de mora.
+- Sin login ni contraseña.
+- Uso privado por circulación controlada del enlace entre consorcistas.
+- No se publican nombres de propietarios en la sección de morosidad: sólo unidades funcionales.
+- Datos 2026 cargados de enero a septiembre.
 - Comparativa por períodos a elección.
-- Composición del gasto por rubro.
+- Composición del gasto.
 - Detalle del gasto por proveedor.
-- Morosidad por unidad funcional, sin nombres de propietarios.
-- Enlaces a PDFs de expensas e informes mensuales.
+- Morosidad por unidad.
+- Se incluyen PDFs e informes disponibles como archivos descargables/consultables.
+
+## Archivos incluidos
+
+### PDFs de expensas incluidos
+
+- `pdfs/202607Expensas.pdf`
+- `pdfs/202608Expensas.pdf`
+- `pdfs/202609Expensas.pdf`
+
+### Informes incluidos
+
+- `informes/202605-informe-general.pdf`
+- `informes/202606-informe-ajustado.pdf`
+- `informes/202609-informe.pdf`
+- `informes/202609-informe-ajustado.pdf` copia explícita del informe ajustado de septiembre.
+
+Los PDFs anteriores que no estaban materializados como archivo descargable en este entorno quedaron pendientes de copia manual. Los datos numéricos de enero a septiembre sí están cargados en `data/expensas-2026.json`.
 
 ## Cómo probar localmente
 
@@ -19,30 +39,44 @@ Desde la carpeta del proyecto:
 python -m http.server 8080
 ```
 
-Abrir:
+Luego abrir:
 
 ```text
 http://localhost:8080
 ```
 
-No conviene abrir `index.html` directamente con doble clic porque el navegador puede bloquear la carga de `data/expensas-2026.json`.
+No conviene abrir `index.html` con doble clic porque algunos navegadores bloquean la carga local de `data/expensas-2026.json`.
 
-## Cómo actualizar cada mes
+## Publicación sugerida
 
-1. Copiar el nuevo PDF en `pdfs/`, por ejemplo `202610Expensas.pdf`.
-2. Agregar un nuevo objeto mensual en `data/expensas-2026.json`.
-3. Completar:
-   - caja final;
-   - cuentas por pagar;
-   - gastos ordinarios, extraordinarios y particulares;
-   - deuda de capital;
-   - intereses a cobrar;
-   - expensas corrientes a cobrar;
-   - composición por rubro;
-   - gastos por proveedor;
-   - deudores sólo por unidad funcional.
-4. Publicar en GitHub Pages.
+Repositorio GitHub:
+
+```text
+dashboard-consorcio-alem-2026
+```
+
+Hosting inicial sugerido:
+
+```text
+GitHub Pages
+```
+
+## Actualización mensual
+
+1. Agregar el PDF mensual nuevo en `pdfs/`.
+2. Agregar el informe mensual nuevo en `informes/`.
+3. Actualizar `data/expensas-2026.json`.
+4. Probar localmente.
+5. Hacer commit y push.
+6. GitHub Pages publica la nueva versión.
 
 ## Privacidad
 
-El dashboard no usa login. Por eso, si se publica en GitHub Pages, cualquier persona con el enlace podría verlo. La sección de morosidad está anonimizada por unidad funcional y no incluye nombres de propietarios.
+Aunque el tablero no tiene nombres de propietarios, los PDFs de expensas pueden contener información más detallada. Si se suben al sitio, el enlace debe circularse sólo entre consorcistas.
+
+## Cambios de esta actualización
+
+- Los gráficos de composición del gasto, gasto por proveedor y morosidad pasan de barras horizontales a gráficos de torta.
+- Las categorías menores se agrupan automáticamente como `Otros` para evitar gráficos ilegibles.
+- Se agregó leyenda HTML debajo de cada torta, más legible en celular que etiquetas dibujadas dentro del gráfico.
+- Se ajustó la altura responsiva de los canvas para evitar que los gráficos se vean estirados verticalmente en celulares.
