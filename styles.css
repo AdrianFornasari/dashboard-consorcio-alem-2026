@@ -215,6 +215,26 @@ tr.row-highlight { box-shadow: inset 4px 0 0 #f59e0b; }
 }
 
 
+body.printing .tab-panel { display: block !important; }
+body.printing .grid.two { grid-template-columns: 1fr !important; }
+body.printing .pie-layout,
+body.printing .pie-layout.wide {
+  grid-template-columns: minmax(260px, 340px) minmax(210px, 1fr) !important;
+  align-items: center;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+body.printing .pie-layout canvas {
+  width: 100% !important;
+  max-height: none !important;
+  aspect-ratio: 1 / 1;
+  justify-self: center;
+}
+body.printing .chart-legend {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
 .version-badge {
   display: inline-block;
   margin: 12px 0 0;
@@ -404,10 +424,26 @@ tr.row-highlight { box-shadow: inset 4px 0 0 #f59e0b; }
   .hero-action { padding: 12px; }
 }
 @media print {
+  @page { size: A4; margin: 12mm; }
   body { background: white; }
   .hero, .notice, .tabs, footer, .hero-card, .search-panel, .decision-form, .small-action, .link-button { display: none !important; }
   main { padding: 0; }
-  .tab-panel { display: block !important; page-break-inside: avoid; }
-  .panel, .kpi, .alert-card, .meeting-card { box-shadow: none; border-color: #cbd5e1; }
-  canvas { max-height: 220px; }
+  .tab-panel { display: block !important; page-break-inside: avoid; break-inside: avoid; }
+  .grid.two, .grid.two.equal, .equal { grid-template-columns: 1fr !important; }
+  .panel, .kpi, .alert-card, .meeting-card { box-shadow: none; border-color: #cbd5e1; break-inside: avoid; page-break-inside: avoid; }
+  .pie-layout, .pie-layout.wide {
+    grid-template-columns: minmax(260px, 340px) minmax(210px, 1fr) !important;
+    align-items: center;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .pie-layout canvas {
+    width: 100% !important;
+    max-height: none !important;
+    aspect-ratio: 1 / 1;
+    justify-self: center;
+  }
+  .chart-legend { max-height: none !important; overflow: visible !important; font-size: .72rem; }
+  .legend-item { padding: 4px 6px; }
+  canvas { max-height: none; }
 }

@@ -74,3 +74,10 @@ El dashboard debe validarse contra el PDF oficial de expensas antes de publicar.
 - Para que una decisión sea visible para todos, hay que incorporarla luego como dato permanente en el proyecto.
 - La clasificación “pagos devengados de meses anteriores” aparece como “No cargado” si ese dato no está estructurado en el JSON mensual.
 - La liquidación oficial sigue siendo el PDF mensual: el dashboard es una herramienta de lectura y seguimiento.
+
+
+## Actualización 0.5.1
+
+- Corrige la impresión/guardado en PDF de gráficos de torta para evitar compresión horizontal.
+- Antes de imprimir, el dashboard redibuja los gráficos con el layout de impresión.
+- En PDF, cada panel de torta pasa a ancho completo y conserva la leyenda a la derecha.

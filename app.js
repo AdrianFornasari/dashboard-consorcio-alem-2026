@@ -1,4 +1,4 @@
-const APP_VERSION = '0.5-semaforo-reunion-gestion';
+const APP_VERSION = '0.5.1-print-tortas';
 let DATA = null;
 let state = { selected: null, from: null, to: null, providerFrom: null, providerTo: null, globalSearch: '', decisions: [], highlight: { composition: null, providers: null, debtors: null } };
 
@@ -57,7 +57,7 @@ function bindEvents() {
   $('providerSearch').addEventListener('input', () => { state.highlight.providers = null; renderProviders(); });
   $('globalSearch').addEventListener('input', e => { state.globalSearch = e.target.value.trim(); renderGlobalSearch(); });
   $('clearSearchButton').addEventListener('click', () => { state.globalSearch = ''; $('globalSearch').value = ''; renderGlobalSearch(); });
-  $('printButton').addEventListener('click', () => window.print());
+  $('printButton').addEventListener('click', preparePrintAndOpenDialog);
   $('addDecisionButton').addEventListener('click', addDecisionFromForm);
   $('decisionsTable').addEventListener('click', e => {
     const button = e.target.closest('[data-delete-decision]');
@@ -74,6 +74,24 @@ function bindEvents() {
       requestAnimationFrame(renderAll);
     });
   });
+
+  window.addEventListener('beforeprint', preparePrintLayout);
+  window.addEventListener('afterprint', restoreScreenLayoutAfterPrint);
+}
+
+function preparePrintAndOpenDialog() {
+  preparePrintLayout();
+  setTimeout(() => window.print(), 120);
+}
+
+function preparePrintLayout() {
+  document.body.classList.add('printing');
+  renderAll();
+}
+
+function restoreScreenLayoutAfterPrint() {
+  document.body.classList.remove('printing');
+  renderAll();
 }
 
 function getMonth(id) { return DATA.months.find(m => m.id === id); }
@@ -543,7 +561,7 @@ function drawLineChart(canvas, data, series) {
 function drawPieChart(canvas, items, options = {}) {
   if (!canvas || !canvas.offsetParent) return;
   const rows = items.filter(r => r.value > 0);
-  const { ctx, w, h } = prepareCanvas(canvas, getResponsiveChartHeight(canvas, 280));
+  const { ctx, w, h } = prepareCanvas(canvas, getPieChartHeight(canvas, 280));
   ctx.clearRect(0, 0, w, h);
   canvas.style.cursor = rows.length ? 'pointer' : 'default';
   if (!rows.length) {
@@ -738,6 +756,15 @@ function prepareCanvas(canvas, cssHeight) {
   const ctx = canvas.getContext('2d');
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   return { ctx, w, h };
+}
+
+function getPieChartHeight(canvas, preferred) {
+  const rect = canvas.getBoundingClientRect();
+  const width = rect.width || canvas.parentElement?.clientWidth || 320;
+  if (document.body.classList.contains('printing')) {
+    return Math.round(Math.max(240, Math.min(340, width)));
+  }
+  return getResponsiveChartHeight(canvas, preferred);
 }
 
 function getResponsiveChartHeight(canvas, preferred) {
