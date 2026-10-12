@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard Expensas Alem 2026</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261011-tortas-v3">
 </head>
 <body>
   <header class="hero">
@@ -12,6 +12,7 @@
       <p class="eyebrow">Consorcio Alem 1268/74/80/82</p>
       <h1>Dashboard de expensas 2026</h1>
       <p class="hero-text">Resumen financiero, morosidad por unidad, composición de gastos y detalle por proveedor. Uso privado para consorcistas.</p>
+      <p class="version-badge">Versión 0.3 · tortas + leyenda lateral + selección</p>
     </div>
     <div class="hero-card">
       <label for="monthSelect">Mes de análisis</label>
@@ -80,8 +81,10 @@
             <h2>Composición del gasto mensual</h2>
             <p class="muted">Importe por rubro para el mes seleccionado.</p>
           </div>
-          <canvas id="compositionChart" height="280"></canvas>
-          <div id="compositionLegend" class="chart-legend"></div>
+          <div class="pie-layout">
+            <canvas id="compositionChart" height="280"></canvas>
+            <div id="compositionLegend" class="chart-legend"></div>
+          </div>
         </article>
         <article class="panel">
           <div class="panel-head">
@@ -110,8 +113,10 @@
           </div>
         </div>
         <div id="providerSummary" class="summary-line"></div>
-        <canvas id="providerChart" height="280"></canvas>
-        <div id="providerLegend" class="chart-legend"></div>
+        <div class="pie-layout wide">
+          <canvas id="providerChart" height="280"></canvas>
+          <div id="providerLegend" class="chart-legend"></div>
+        </div>
         <div class="table-wrap tall">
           <table id="providerTable"></table>
         </div>
@@ -125,8 +130,10 @@
             <h2>Morosidad por unidad</h2>
             <p class="muted">Sólo se muestran unidades funcionales. No se muestran nombres de propietarios.</p>
           </div>
-          <canvas id="debtorsChart" height="280"></canvas>
-          <div id="debtorsLegend" class="chart-legend"></div>
+          <div class="pie-layout">
+            <canvas id="debtorsChart" height="280"></canvas>
+            <div id="debtorsLegend" class="chart-legend"></div>
+          </div>
         </article>
         <article class="panel">
           <div class="panel-head">
@@ -158,6 +165,6 @@
     <p>Dashboard estático MVP · HTML/CSS/JavaScript · Datos 2026. Validar contra PDF mensual antes de publicar.</p>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=20261011-tortas-v3"></script>
 </body>
 </html>

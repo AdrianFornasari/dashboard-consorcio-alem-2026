@@ -80,3 +80,18 @@ Aunque el tablero no tiene nombres de propietarios, los PDFs de expensas pueden 
 - Las categorías menores se agrupan automáticamente como `Otros` para evitar gráficos ilegibles.
 - Se agregó leyenda HTML debajo de cada torta, más legible en celular que etiquetas dibujadas dentro del gráfico.
 - Se ajustó la altura responsiva de los canvas para evitar que los gráficos se vean estirados verticalmente en celulares.
+
+
+## Versión 0.2 - tortas y responsive
+
+- Los gráficos de composición del gasto, gasto por proveedor y morosidad se muestran como tortas.
+- Se agregó cache busting en `index.html` para forzar la carga de `styles.css` y `app.js` actualizados en GitHub Pages.
+- Se ajustó la altura de los gráficos en celular para evitar estiramiento vertical.
+- En el encabezado debe verse: `Versión 0.2 · tortas + responsive mobile`.
+
+
+## Actualización 0.3
+
+- Las leyendas de gráficos de torta se muestran apiladas a la derecha del gráfico.
+- Al hacer clic en una porción de la torta, se resalta la fila o filas correspondientes en la tabla de detalle.
+- También se puede hacer clic en una leyenda para resaltar la tabla.

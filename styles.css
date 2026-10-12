@@ -116,6 +116,14 @@ h2 { margin: 0 0 6px; font-size: 1.15rem; }
 }
 .ratio strong { white-space: nowrap; }
 canvas { width: 100%; max-width: 100%; display: block; }
+.pie-layout {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(170px, 0.95fr);
+  gap: 14px;
+  align-items: center;
+}
+.pie-layout.wide { grid-template-columns: minmax(180px, 1fr) minmax(220px, 0.85fr); }
+.pie-layout canvas { min-width: 0; }
 .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
 .table-wrap.tall { max-height: 520px; overflow: auto; }
 table { width: 100%; border-collapse: collapse; background: white; }
@@ -146,19 +154,32 @@ footer { padding: 28px clamp(14px, 4vw, 54px); color: var(--muted); border-top: 
 }
 
 .chart-legend {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 8px 12px;
-  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 0;
   font-size: .86rem;
+  max-height: 280px;
+  overflow: auto;
+  padding-right: 4px;
 }
 .legend-item {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 12px;
+  padding: 7px 8px;
   display: flex;
   align-items: center;
   gap: 8px;
   min-width: 0;
   color: #334155;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
 }
+.legend-item:hover { background: #f8fafc; border-color: var(--line); }
+.legend-item.active { background: #fff7ed; border-color: #fdba74; box-shadow: inset 4px 0 0 #f59e0b; }
 .legend-swatch {
   width: 12px;
   height: 12px;
@@ -176,8 +197,32 @@ footer { padding: 28px clamp(14px, 4vw, 54px); color: var(--muted); border-top: 
   color: var(--muted);
   white-space: nowrap;
 }
+tr.row-highlight td { background: #fff7ed !important; }
+tr.row-highlight { box-shadow: inset 4px 0 0 #f59e0b; }
 @media (max-width: 620px) {
-  canvas { max-height: 260px; }
-  .chart-legend { grid-template-columns: 1fr; font-size: .82rem; }
+  canvas { max-height: 220px; }
+  .pie-layout, .pie-layout.wide {
+    grid-template-columns: minmax(145px, 0.95fr) minmax(145px, 1.05fr);
+    gap: 8px;
+  }
+  .chart-legend { font-size: .78rem; max-height: 220px; }
+  .legend-item { padding: 6px; }
   .legend-label { white-space: normal; }
+}
+@media (max-width: 360px) {
+  .pie-layout, .pie-layout.wide { grid-template-columns: 1fr; }
+  .chart-legend { max-height: none; }
+}
+
+
+.version-badge {
+  display: inline-block;
+  margin: 12px 0 0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.22);
+  color: rgba(255,255,255,.86);
+  font-size: .82rem;
+  font-weight: 700;
 }

@@ -1,5 +1,6 @@
+const APP_VERSION = '0.3-tortas-leyenda-derecha-click';
 let DATA = null;
-let state = { selected: null, from: null, to: null, providerFrom: null, providerTo: null };
+let state = { selected: null, from: null, to: null, providerFrom: null, providerTo: null, highlight: { composition: null, providers: null, debtors: null } };
 
 const $ = (id) => document.getElementById(id);
 const money = (v) => v == null ? "—" : new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(v);
@@ -8,6 +9,7 @@ const compact = (v) => v == null ? "—" : new Intl.NumberFormat('es-AR', { nota
 const pct = (v) => `${new Intl.NumberFormat('es-AR', { maximumFractionDigits: 1 }).format(v)}%`;
 
 async function init() {
+  console.info(`Dashboard Consorcio Alem ${APP_VERSION}`);
   try {
     const res = await fetch('data/expensas-2026.json', { cache: 'no-store' });
     DATA = await res.json();
@@ -43,13 +45,13 @@ function populateSelects() {
 }
 
 function bindEvents() {
-  $('monthSelect').addEventListener('change', e => { state.selected = e.target.value; renderAll(); });
+  $('monthSelect').addEventListener('change', e => { state.selected = e.target.value; clearPieHighlights(); renderAll(); });
   $('fromSelect').addEventListener('change', e => { state.from = e.target.value; renderCompare(); });
   $('toSelect').addEventListener('change', e => { state.to = e.target.value; renderCompare(); });
-  $('providerFrom').addEventListener('change', e => { state.providerFrom = e.target.value; renderProviders(); });
-  $('providerTo').addEventListener('change', e => { state.providerTo = e.target.value; renderProviders(); });
-  $('providerType').addEventListener('change', renderProviders);
-  $('providerSearch').addEventListener('input', renderProviders);
+  $('providerFrom').addEventListener('change', e => { state.providerFrom = e.target.value; state.highlight.providers = null; renderProviders(); });
+  $('providerTo').addEventListener('change', e => { state.providerTo = e.target.value; state.highlight.providers = null; renderProviders(); });
+  $('providerType').addEventListener('change', () => { state.highlight.providers = null; renderProviders(); });
+  $('providerSearch').addEventListener('input', () => { state.highlight.providers = null; renderProviders(); });
   document.querySelectorAll('.tab').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
@@ -69,6 +71,10 @@ function monthRange(from, to) {
   const start = Math.min(a, b);
   const end = Math.max(a, b);
   return DATA.months.slice(start, end + 1);
+}
+
+function clearPieHighlights() {
+  state.highlight = { composition: null, providers: null, debtors: null };
 }
 
 function renderAll() {
@@ -153,10 +159,14 @@ function renderCompare() {
 function renderComposition() {
   const m = getMonth(state.selected);
   const rows = [...m.composition].sort((a,b) => b.amount - a.amount);
-  const pieRows = groupSmallSlices(rows.map(r => ({ label: r.category, value: r.amount })), 8);
-  drawPieChart($('compositionChart'), pieRows);
-  renderPieLegend('compositionLegend', pieRows, m.totalExpenses);
-  $('compositionTable').innerHTML = `<thead><tr><th>Rubro</th><th>Tipo</th><th class="num">Importe</th><th class="num">%</th></tr></thead><tbody>${rows.map(r => `<tr><td>${r.category}</td><td>${r.type}</td><td class="num">${money2(r.amount)}</td><td class="num">${pct(r.amount / m.totalExpenses * 100)}</td></tr>`).join('')}</tbody>`;
+  const pieRows = groupSmallSlices(rows.map(r => ({ label: r.category, value: r.amount, key: r.category })), 8);
+  drawPieChart($('compositionChart'), pieRows, {
+    activeKeys: state.highlight.composition,
+    onSliceClick: item => handlePieSelection('composition', 'compositionTable', 'compositionLegend', item)
+  });
+  renderPieLegend('compositionLegend', pieRows, m.totalExpenses, 'composition', 'compositionTable');
+  $('compositionTable').innerHTML = `<thead><tr><th>Rubro</th><th>Tipo</th><th class="num">Importe</th><th class="num">%</th></tr></thead><tbody>${rows.map(r => `<tr data-pie-key="${escapeHtml(r.category)}"><td>${r.category}</td><td>${r.type}</td><td class="num">${money2(r.amount)}</td><td class="num">${pct(r.amount / m.totalExpenses * 100)}</td></tr>`).join('')}</tbody>`;
+  highlightTableRows('compositionTable', state.highlight.composition);
 }
 
 function renderProviders() {
@@ -171,10 +181,14 @@ function renderProviders() {
     return acc;
   }, {})).sort((a,b) => b.value - a.value);
   $('providerSummary').innerHTML = `<strong>${filtered.length}</strong> movimientos · Total filtrado: <strong>${money2(total)}</strong> · Proveedores: <strong>${byProvider.length}</strong>`;
-  const providerPieRows = groupSmallSlices(byProvider, 8);
-  drawPieChart($('providerChart'), providerPieRows);
-  renderPieLegend('providerLegend', providerPieRows, total);
-  $('providerTable').innerHTML = `<thead><tr><th>Mes</th><th>Proveedor</th><th>Rubro</th><th>Detalle</th><th>Tipo</th><th class="num">Importe</th></tr></thead><tbody>${filtered.sort((a,b) => a.monthId.localeCompare(b.monthId) || b.amount - a.amount).map(r => `<tr><td>${r.month}</td><td>${r.provider}</td><td>${r.category}</td><td>${r.detail}</td><td>${r.type}</td><td class="num">${money2(r.amount)}</td></tr>`).join('')}</tbody>`;
+  const providerPieRows = groupSmallSlices(byProvider.map(r => ({ ...r, key: r.label })), 8);
+  drawPieChart($('providerChart'), providerPieRows, {
+    activeKeys: state.highlight.providers,
+    onSliceClick: item => handlePieSelection('providers', 'providerTable', 'providerLegend', item)
+  });
+  renderPieLegend('providerLegend', providerPieRows, total, 'providers', 'providerTable');
+  $('providerTable').innerHTML = `<thead><tr><th>Mes</th><th>Proveedor</th><th>Rubro</th><th>Detalle</th><th>Tipo</th><th class="num">Importe</th></tr></thead><tbody>${filtered.sort((a,b) => a.monthId.localeCompare(b.monthId) || b.amount - a.amount).map(r => `<tr data-pie-key="${escapeHtml(r.provider)}"><td>${r.month}</td><td>${r.provider}</td><td>${r.category}</td><td>${r.detail}</td><td>${r.type}</td><td class="num">${money2(r.amount)}</td></tr>`).join('')}</tbody>`;
+  highlightTableRows('providerTable', state.highlight.providers);
 }
 
 function renderDebtors() {
@@ -183,10 +197,14 @@ function renderDebtors() {
   const top3 = rows.slice(0,3).reduce((a,b) => a + b.amount, 0);
   const top5 = rows.slice(0,5).reduce((a,b) => a + b.amount, 0);
   $('debtConcentration').innerHTML = `Top 3: <strong>${money2(top3)}</strong> (${pct(top3 / m.debtCapital * 100)} de la deuda) · Top 5: <strong>${money2(top5)}</strong> (${pct(top5 / m.debtCapital * 100)})`;
-  const debtorPieRows = groupSmallSlices(rows.map(r => ({ label: `Unidad ${r.unit}`, value: r.amount })), 7);
-  drawPieChart($('debtorsChart'), debtorPieRows);
-  renderPieLegend('debtorsLegend', debtorPieRows, m.debtCapital);
-  $('debtorsTable').innerHTML = `<thead><tr><th>Unidad funcional</th><th class="num">Capital adeudado</th><th class="num">% del total</th></tr></thead><tbody>${rows.map(r => `<tr><td>Unidad ${r.unit}</td><td class="num">${money2(r.amount)}</td><td class="num">${pct(r.amount / m.debtCapital * 100)}</td></tr>`).join('')}</tbody>`;
+  const debtorPieRows = groupSmallSlices(rows.map(r => ({ label: `Unidad ${r.unit}`, value: r.amount, key: `Unidad ${r.unit}` })), 7);
+  drawPieChart($('debtorsChart'), debtorPieRows, {
+    activeKeys: state.highlight.debtors,
+    onSliceClick: item => handlePieSelection('debtors', 'debtorsTable', 'debtorsLegend', item)
+  });
+  renderPieLegend('debtorsLegend', debtorPieRows, m.debtCapital, 'debtors', 'debtorsTable');
+  $('debtorsTable').innerHTML = `<thead><tr><th>Unidad funcional</th><th class="num">Capital adeudado</th><th class="num">% del total</th></tr></thead><tbody>${rows.map(r => `<tr data-pie-key="${escapeHtml(`Unidad ${r.unit}`)}"><td>Unidad ${r.unit}</td><td class="num">${money2(r.amount)}</td><td class="num">${pct(r.amount / m.debtCapital * 100)}</td></tr>`).join('')}</tbody>`;
+  highlightTableRows('debtorsTable', state.highlight.debtors);
 }
 
 function renderDocs() {
@@ -228,42 +246,53 @@ function drawLineChart(canvas, data, series) {
 }
 
 
-function drawPieChart(canvas, items) {
+function drawPieChart(canvas, items, options = {}) {
   if (!canvas || !canvas.offsetParent) return;
   const rows = items.filter(r => r.value > 0);
   const { ctx, w, h } = prepareCanvas(canvas, getResponsiveChartHeight(canvas, 280));
   ctx.clearRect(0, 0, w, h);
+  canvas.style.cursor = rows.length ? 'pointer' : 'default';
   if (!rows.length) {
     ctx.fillStyle = '#64748b';
     ctx.font = '14px system-ui';
     ctx.textAlign = 'center';
     ctx.fillText('Sin datos para graficar', w / 2, h / 2);
+    canvas._pieSlices = [];
     return;
   }
 
   const total = rows.reduce((acc, r) => acc + r.value, 0);
   const palette = getPalette();
-  const radius = Math.min(w, h) * (w < 520 ? 0.34 : 0.38);
+  const radius = Math.min(w, h) * (w < 520 ? 0.36 : 0.39);
+  const innerRadius = radius * 0.52;
   const cx = w / 2;
   const cy = h / 2;
   let start = -Math.PI / 2;
+  const active = options.activeKeys || [];
+  const activeSet = new Set(active);
+  const slices = [];
 
   rows.forEach((r, i) => {
     const angle = (r.value / total) * Math.PI * 2;
+    const end = start + angle;
+    const keys = getItemKeys(r);
+    const isActive = keys.some(k => activeSet.has(k));
+
     ctx.beginPath();
     ctx.moveTo(cx, cy);
-    ctx.arc(cx, cy, radius, start, start + angle);
+    ctx.arc(cx, cy, radius, start, end);
     ctx.closePath();
     ctx.fillStyle = palette[i % palette.length];
     ctx.fill();
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 2;
+    ctx.strokeStyle = isActive ? '#0f172a' : '#ffffff';
+    ctx.lineWidth = isActive ? 4 : 2;
     ctx.stroke();
-    start += angle;
+    slices.push({ item: r, start, end, cx, cy, radius, innerRadius });
+    start = end;
   });
 
   ctx.beginPath();
-  ctx.arc(cx, cy, radius * 0.52, 0, Math.PI * 2);
+  ctx.arc(cx, cy, innerRadius, 0, Math.PI * 2);
   ctx.fillStyle = '#ffffff';
   ctx.fill();
   ctx.fillStyle = '#0f172a';
@@ -273,9 +302,35 @@ function drawPieChart(canvas, items) {
   ctx.fillStyle = '#64748b';
   ctx.font = '12px system-ui';
   ctx.fillText(compact(total), cx, cy + 16);
+
+  canvas._pieSlices = slices;
+  canvas._pieClickOptions = options;
+  if (canvas._pieClickHandler) canvas.removeEventListener('click', canvas._pieClickHandler);
+  canvas._pieClickHandler = event => {
+    const hit = getPieSliceFromEvent(canvas, event);
+    if (!hit || !canvas._pieClickOptions?.onSliceClick) return;
+    canvas._pieClickOptions.onSliceClick(hit.item);
+  };
+  canvas.addEventListener('click', canvas._pieClickHandler);
 }
 
-function renderPieLegend(containerId, items, total) {
+function getPieSliceFromEvent(canvas, event) {
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  const slices = canvas._pieSlices || [];
+  if (!slices.length) return null;
+  const { cx, cy, radius, innerRadius } = slices[0];
+  const dx = x - cx;
+  const dy = y - cy;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  if (dist < innerRadius || dist > radius) return null;
+  let angle = Math.atan2(dy, dx);
+  if (angle < -Math.PI / 2) angle += Math.PI * 2;
+  return slices.find(s => angle >= s.start && angle <= s.end) || null;
+}
+
+function renderPieLegend(containerId, items, total, scope = null, tableId = null) {
   const el = $(containerId);
   if (!el) return;
   const palette = getPalette();
@@ -285,21 +340,75 @@ function renderPieLegend(containerId, items, total) {
     return;
   }
   const denominator = total || rows.reduce((acc, r) => acc + r.value, 0);
-  el.innerHTML = rows.map((r, i) => `
-    <div class="legend-item" title="${escapeHtml(r.label)}: ${money2(r.value)}">
-      <span class="legend-swatch" style="background:${palette[i % palette.length]}"></span>
-      <span class="legend-label">${escapeHtml(r.label)}</span>
-      <span class="legend-value">${pct(r.value / denominator * 100)}</span>
-    </div>
-  `).join('');
+  const activeSet = new Set(scope ? (state.highlight[scope] || []) : []);
+  el.innerHTML = rows.map((r, i) => {
+    const keys = getItemKeys(r);
+    const isActive = keys.some(k => activeSet.has(k));
+    return `
+      <button type="button" class="legend-item ${isActive ? 'active' : ''}" data-pie-keys="${escapeHtml(keys.join('||'))}" title="${escapeHtml(r.label)}: ${money2(r.value)}">
+        <span class="legend-swatch" style="background:${palette[i % palette.length]}"></span>
+        <span class="legend-label">${escapeHtml(r.label)}</span>
+        <span class="legend-value">${pct(r.value / denominator * 100)}</span>
+      </button>
+    `;
+  }).join('');
+
+  if (scope && tableId) {
+    el.querySelectorAll('.legend-item').forEach((button, index) => {
+      button.addEventListener('click', () => handlePieSelection(scope, tableId, containerId, rows[index]));
+    });
+  }
 }
 
 function groupSmallSlices(items, limit = 8) {
-  const rows = items.filter(r => r.value > 0).sort((a, b) => b.value - a.value);
+  const rows = items
+    .filter(r => r.value > 0)
+    .map(r => ({ ...r, key: r.key || r.label, keys: r.keys || [r.key || r.label] }))
+    .sort((a, b) => b.value - a.value);
   if (rows.length <= limit) return rows;
   const visible = rows.slice(0, limit - 1);
-  const other = rows.slice(limit - 1).reduce((acc, r) => acc + r.value, 0);
-  return [...visible, { label: 'Otros', value: other }];
+  const hidden = rows.slice(limit - 1);
+  const other = hidden.reduce((acc, r) => acc + r.value, 0);
+  const otherKeys = hidden.flatMap(r => getItemKeys(r));
+  return [...visible, { label: 'Otros', value: other, key: 'Otros', keys: otherKeys }];
+}
+
+function getItemKeys(item) {
+  if (!item) return [];
+  if (Array.isArray(item.keys)) return item.keys;
+  return [item.key || item.label];
+}
+
+function handlePieSelection(scope, tableId, legendId, item) {
+  const keys = getItemKeys(item);
+  state.highlight[scope] = keys;
+  highlightTableRows(tableId, keys, true);
+  highlightLegend(legendId, keys);
+}
+
+function highlightTableRows(tableId, keys, scrollToFirst = false) {
+  const table = $(tableId);
+  if (!table) return;
+  const keySet = new Set(keys || []);
+  let first = null;
+  table.querySelectorAll('tbody tr').forEach(row => {
+    const match = keySet.has(row.dataset.pieKey);
+    row.classList.toggle('row-highlight', match);
+    if (match && !first) first = row;
+  });
+  if (scrollToFirst && first) {
+    first.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+}
+
+function highlightLegend(containerId, keys) {
+  const el = $(containerId);
+  if (!el) return;
+  const keySet = new Set(keys || []);
+  el.querySelectorAll('.legend-item').forEach(item => {
+    const itemKeys = (item.dataset.pieKeys || '').split('||').filter(Boolean);
+    item.classList.toggle('active', itemKeys.some(k => keySet.has(k)));
+  });
 }
 
 function prepareCanvas(canvas, cssHeight) {
@@ -319,9 +428,9 @@ function getResponsiveChartHeight(canvas, preferred) {
   const rect = canvas.getBoundingClientRect();
   const width = rect.width || canvas.parentElement?.clientWidth || 320;
   if (window.innerWidth <= 620) {
-    return Math.round(Math.max(210, Math.min(260, width * 0.68)));
+    return Math.round(Math.max(190, Math.min(235, width * 0.62)));
   }
-  return Math.round(Math.max(240, Math.min(preferred, width * 0.48)));
+  return Math.round(Math.max(220, Math.min(preferred, width * 0.46)));
 }
 
 function getPalette() {
