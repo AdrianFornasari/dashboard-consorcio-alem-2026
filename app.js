@@ -1,12 +1,14 @@
-const APP_VERSION = '0.4-proveedor-filtra-tabla';
+const APP_VERSION = '0.5-semaforo-reunion-gestion';
 let DATA = null;
-let state = { selected: null, from: null, to: null, providerFrom: null, providerTo: null, highlight: { composition: null, providers: null, debtors: null } };
+let state = { selected: null, from: null, to: null, providerFrom: null, providerTo: null, globalSearch: '', decisions: [], highlight: { composition: null, providers: null, debtors: null } };
 
 const $ = (id) => document.getElementById(id);
 const money = (v) => v == null ? "—" : new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(v);
 const money2 = (v) => v == null ? "—" : new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);
 const compact = (v) => v == null ? "—" : new Intl.NumberFormat('es-AR', { notation: 'compact', maximumFractionDigits: 1 }).format(v);
-const pct = (v) => `${new Intl.NumberFormat('es-AR', { maximumFractionDigits: 1 }).format(v)}%`;
+const pct = (v) => v == null || !Number.isFinite(v) ? '—' : `${new Intl.NumberFormat('es-AR', { maximumFractionDigits: 1 }).format(v)}%`;
+const signedMoney = (v) => `${v >= 0 ? '+' : '-'}${money2(Math.abs(v))}`;
+const signedPct = (v) => `${v >= 0 ? '+' : ''}${pct(v)}`;
 
 async function init() {
   console.info(`Dashboard Consorcio Alem ${APP_VERSION}`);
@@ -25,6 +27,7 @@ async function init() {
   state.providerFrom = months[0].id;
   state.providerTo = months[months.length - 1].id;
 
+  state.decisions = loadDecisions();
   populateSelects();
   bindEvents();
   renderAll();
@@ -52,6 +55,15 @@ function bindEvents() {
   $('providerTo').addEventListener('change', e => { state.providerTo = e.target.value; state.highlight.providers = null; renderProviders(); });
   $('providerType').addEventListener('change', () => { state.highlight.providers = null; renderProviders(); });
   $('providerSearch').addEventListener('input', () => { state.highlight.providers = null; renderProviders(); });
+  $('globalSearch').addEventListener('input', e => { state.globalSearch = e.target.value.trim(); renderGlobalSearch(); });
+  $('clearSearchButton').addEventListener('click', () => { state.globalSearch = ''; $('globalSearch').value = ''; renderGlobalSearch(); });
+  $('printButton').addEventListener('click', () => window.print());
+  $('addDecisionButton').addEventListener('click', addDecisionFromForm);
+  $('decisionsTable').addEventListener('click', e => {
+    const button = e.target.closest('[data-delete-decision]');
+    if (!button) return;
+    deleteDecision(button.dataset.deleteDecision);
+  });
   document.querySelectorAll('.tab').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
@@ -84,21 +96,28 @@ function renderAll() {
   renderComposition();
   renderProviders();
   renderDebtors();
+  renderMeeting();
+  renderDecisions();
+  renderQuality();
   renderDocs();
+  renderGlobalSearch();
 }
 
 function renderOverview() {
   const m = getMonth(state.selected);
+  const prev = previousMonth(m.id);
   const expenseCoverage = m.totalExpenses ? m.cashFinal / m.totalExpenses * 100 : null;
   const netCoverage = m.totalExpenses ? m.netCash / m.totalExpenses * 100 : null;
   const extraShare = m.totalExpenses ? m.extraordinaryExpenses / m.totalExpenses * 100 : 0;
   const debtRecovered = m.debtRecovered || 0;
-  const prev = DATA.months[DATA.months.findIndex(x => x.id === m.id) - 1];
   const debtDelta = prev ? m.debtCapital - prev.debtCapital : null;
+
+  renderAlerts(m, prev);
+  renderMonthComparison(m, prev);
 
   const cards = [
     { label: 'Caja final', value: money2(m.cashFinal), sub: `Bruta al cierre de ${m.label}`, cls: 'ok' },
-    { label: 'Caja neta', value: money2(m.netCash), sub: `Caja menos cuentas por pagar: ${money2(m.accountsPayable)}`, cls: m.netCash < m.totalExpenses * 0.5 ? 'warn' : 'ok' },
+    { label: 'Caja neta', value: money2(m.netCash), sub: `Caja menos cuentas por pagar: ${money2(m.accountsPayable)}`, cls: m.netCash < m.totalExpenses * 0.5 ? 'danger' : (m.netCash < m.totalExpenses ? 'warn' : 'ok') },
     { label: 'Deuda de capital', value: money2(m.debtCapital), sub: debtDelta == null ? 'Sin mes anterior' : `${debtDelta < 0 ? 'Bajó' : 'Subió'} ${money2(Math.abs(debtDelta))} vs mes anterior`, cls: debtDelta < 0 ? 'ok' : 'danger' },
     { label: 'Gasto total', value: money2(m.totalExpenses), sub: `${pct(extraShare)} extraordinario`, cls: extraShare > 25 ? 'warn' : '' },
     { label: 'Gasto ordinario', value: money2(m.ordinaryExpenses), sub: 'Funcionamiento mensual', cls: '' },
@@ -107,7 +126,8 @@ function renderOverview() {
     { label: 'Intereses cobrados', value: money2(m.interestCollected), sub: 'Cobranza de intereses del mes', cls: '' }
   ];
   $('kpiGrid').innerHTML = cards.map(c => `<div class="kpi ${c.cls || ''}"><div class="label">${c.label}</div><div class="value">${c.value}</div><div class="sub">${c.sub}</div></div>`).join('');
-  $('monthNote').textContent = m.notes;
+
+  $('monthReading').innerHTML = buildMonthReading(m, prev);
   $('monthRatios').innerHTML = [
     ['Cobertura caja bruta / gastos', expenseCoverage == null ? '—' : pct(expenseCoverage)],
     ['Cobertura caja neta / gastos', netCoverage == null ? '—' : pct(netCoverage)],
@@ -167,6 +187,7 @@ function renderComposition() {
   renderPieLegend('compositionLegend', pieRows, m.totalExpenses, 'composition', 'compositionTable');
   $('compositionTable').innerHTML = `<thead><tr><th>Rubro</th><th>Tipo</th><th class="num">Importe</th><th class="num">%</th></tr></thead><tbody>${rows.map(r => `<tr data-pie-key="${escapeHtml(r.category)}"><td>${r.category}</td><td>${r.type}</td><td class="num">${money2(r.amount)}</td><td class="num">${pct(r.amount / m.totalExpenses * 100)}</td></tr>`).join('')}</tbody>`;
   highlightTableRows('compositionTable', state.highlight.composition);
+  renderExpenseTypeTable(m);
 }
 
 function renderProviders() {
@@ -192,7 +213,7 @@ function renderProviders() {
   $('providerSummary').innerHTML = `
     <div class="provider-summary-main">
       <span><strong>${filtered.length}</strong> movimientos · Total filtrado: <strong>${money2(total)}</strong> · Proveedores: <strong>${byProvider.length}</strong></span>
-      ${hasProviderFilter ? `<span class="active-filter">Proveedor seleccionado: <strong>${escapeHtml(selectedLabel)}</strong> · ${tableRows.length} movimientos · ${money2(tableTotal)}</span>` : ''}
+      ${hasProviderFilter ? `<span class="active-filter">Proveedor seleccionado: <strong>${escapeHtml(selectedLabel)}</strong> · ${tableRows.length} movimientos · ${money2(tableTotal)}</span>` : '<span class="muted">Seleccioná una porción o leyenda para filtrar la tabla y ver evolución por proveedor.</span>'}
     </div>
     ${hasProviderFilter ? '<button type="button" id="clearProviderFilter" class="small-action">Ver todos los proveedores</button>' : ''}
   `;
@@ -210,6 +231,7 @@ function renderProviders() {
   renderPieLegend('providerLegend', providerPieRows, total, 'providers', 'providerTable');
   $('providerTable').innerHTML = `<thead><tr><th>Mes</th><th>Proveedor</th><th>Rubro</th><th>Detalle</th><th>Tipo</th><th class="num">Importe</th></tr></thead><tbody>${tableRows.sort((a,b) => a.monthId.localeCompare(b.monthId) || b.amount - a.amount).map(r => `<tr data-pie-key="${escapeHtml(r.provider)}"><td>${r.month}</td><td>${r.provider}</td><td>${r.category}</td><td>${r.detail}</td><td>${r.type}</td><td class="num">${money2(r.amount)}</td></tr>`).join('')}</tbody>`;
   highlightTableRows('providerTable', selectedKeys);
+  renderProviderEvolution(selectedKeys, providerPieRows);
 }
 
 function renderDebtors() {
@@ -230,6 +252,257 @@ function renderDebtors() {
 
 function renderDocs() {
   $('docsTable').innerHTML = `<thead><tr><th>Mes</th><th>PDF expensas</th><th>Informe mensual</th><th>Comentario</th></tr></thead><tbody>${DATA.months.map(m => `<tr><td>${m.label}</td><td>${m.pdf ? `<a href="${m.pdf}" target="_blank">Abrir PDF</a>` : '<span class="muted">Pendiente de copiar</span>'}</td><td>${m.report ? `<a href="${m.report}" target="_blank">Abrir informe</a>` : '<span class="muted">Pendiente</span>'}</td><td>${m.notes}</td></tr>`).join('')}</tbody>`;
+}
+
+
+function previousMonth(id) {
+  const index = DATA.months.findIndex(m => m.id === id);
+  return index > 0 ? DATA.months[index - 1] : null;
+}
+
+function percentChange(current, previous) {
+  if (previous == null || previous === 0 || current == null) return null;
+  return (current - previous) / previous * 100;
+}
+
+function renderAlerts(m, prev) {
+  const rows = buildAlertRows(m, prev);
+  $('alertStrip').innerHTML = rows.map(a => `
+    <div class="alert-card ${a.level}">
+      <div class="alert-icon">${a.icon}</div>
+      <div><strong>${a.title}</strong><span>${a.text}</span></div>
+    </div>
+  `).join('');
+}
+
+function buildAlertRows(m, prev) {
+  const extraShare = m.totalExpenses ? m.extraordinaryExpenses / m.totalExpenses * 100 : 0;
+  const netCoverage = m.ordinaryExpenses ? m.netCash / m.ordinaryExpenses : 0;
+  const payablesShare = m.cashFinal ? m.accountsPayable / m.cashFinal * 100 : 0;
+  const debtRows = [...(m.debtors || [])].sort((a,b) => b.amount - a.amount);
+  const top3 = debtRows.slice(0,3).reduce((a,b) => a + b.amount, 0);
+  const top3Share = m.debtCapital ? top3 / m.debtCapital * 100 : 0;
+  const debtDelta = prev ? m.debtCapital - prev.debtCapital : null;
+  return [
+    {
+      level: netCoverage < .5 ? 'danger' : (netCoverage < 1 ? 'warn' : 'ok'),
+      icon: netCoverage < .5 ? '🔴' : (netCoverage < 1 ? '🟡' : '🟢'),
+      title: 'Caja neta',
+      text: `${pct(netCoverage * 100)} de un mes de gastos ordinarios.`
+    },
+    {
+      level: extraShare > 30 ? 'danger' : (extraShare > 25 ? 'warn' : 'ok'),
+      icon: extraShare > 30 ? '🔴' : (extraShare > 25 ? '🟡' : '🟢'),
+      title: 'Extraordinarios',
+      text: `${pct(extraShare)} del gasto mensual.`
+    },
+    {
+      level: top3Share > 60 ? 'danger' : (top3Share > 45 ? 'warn' : 'ok'),
+      icon: top3Share > 60 ? '🔴' : (top3Share > 45 ? '🟡' : '🟢'),
+      title: 'Concentración de mora',
+      text: `Top 3 explica ${pct(top3Share)} de la deuda.`
+    },
+    {
+      level: payablesShare > 35 ? 'danger' : (payablesShare > 25 ? 'warn' : 'ok'),
+      icon: payablesShare > 35 ? '🔴' : (payablesShare > 25 ? '🟡' : '🟢'),
+      title: 'Cuentas por pagar',
+      text: `${pct(payablesShare)} de la caja final.`
+    },
+    {
+      level: debtDelta == null ? 'neutral' : (debtDelta < 0 ? 'ok' : 'danger'),
+      icon: debtDelta == null ? '⚪' : (debtDelta < 0 ? '🟢' : '🔴'),
+      title: 'Deuda mensual',
+      text: debtDelta == null ? 'Sin comparación anterior.' : `${debtDelta < 0 ? 'Bajó' : 'Subió'} ${money2(Math.abs(debtDelta))}.`
+    }
+  ];
+}
+
+function renderMonthComparison(m, prev) {
+  if (!prev) {
+    $('monthComparison').innerHTML = '<div class="summary-line">No hay mes anterior para comparar.</div>';
+    return;
+  }
+  const items = [
+    ['Caja neta', m.netCash - prev.netCash, percentChange(m.netCash, prev.netCash), m.netCash >= prev.netCash],
+    ['Deuda capital', m.debtCapital - prev.debtCapital, percentChange(m.debtCapital, prev.debtCapital), m.debtCapital <= prev.debtCapital],
+    ['Gasto total', m.totalExpenses - prev.totalExpenses, percentChange(m.totalExpenses, prev.totalExpenses), m.totalExpenses <= prev.totalExpenses],
+    ['Cuentas por pagar', m.accountsPayable - prev.accountsPayable, percentChange(m.accountsPayable, prev.accountsPayable), m.accountsPayable <= prev.accountsPayable]
+  ];
+  $('monthComparison').innerHTML = `
+    <article class="panel mini-panel">
+      <h2>${m.label} vs ${prev.label}</h2>
+      <div class="delta-grid">${items.map(([label, delta, pc, good]) => `
+        <div class="delta-card ${good ? 'ok' : 'warn'}">
+          <span>${label}</span>
+          <strong>${signedMoney(delta)}</strong>
+          <small>${pc == null ? 'Sin %' : signedPct(pc)}</small>
+        </div>`).join('')}
+      </div>
+    </article>
+  `;
+}
+
+function buildMonthReading(m, prev) {
+  const debtDelta = prev ? m.debtCapital - prev.debtCapital : null;
+  const cashDelta = prev ? m.netCash - prev.netCash : null;
+  const extraShare = m.totalExpenses ? m.extraordinaryExpenses / m.totalExpenses * 100 : 0;
+  const positives = [];
+  const warnings = [];
+  if (debtDelta != null && debtDelta < 0) positives.push(`La deuda de capital bajó ${money2(Math.abs(debtDelta))} frente al mes anterior.`);
+  if (cashDelta != null && cashDelta > 0) positives.push(`La caja neta subió ${money2(cashDelta)}.`);
+  if ((m.debtRecovered || 0) > 0) positives.push(`Se recuperaron ${money2(m.debtRecovered)} de expensas adeudadas.`);
+  if (debtDelta != null && debtDelta > 0) warnings.push(`La deuda de capital aumentó ${money2(debtDelta)}.`);
+  if (extraShare > 25) warnings.push(`Los extraordinarios representan ${pct(extraShare)} del gasto mensual.`);
+  if (m.accountsPayable > m.cashFinal * .25) warnings.push(`Las cuentas por pagar equivalen a más del 25% de la caja final.`);
+  if (!positives.length) positives.push('No hay mejora marcada cargada para este mes. Revisar contra informe mensual.');
+  if (!warnings.length) warnings.push('No surgen alertas críticas con las reglas automáticas actuales.');
+  const recommendation = debtDelta != null && debtDelta < 0
+    ? 'Mantener seguimiento mensual de recupero de deuda y evitar que los extraordinarios vuelvan a deteriorar la caja neta.'
+    : 'Priorizar cobranza de deuda, control de extraordinarios y revisión de cuentas por pagar.';
+  return `
+    <p class="note-text">${escapeHtml(m.notes || 'Sin comentario mensual cargado.')}</p>
+    <div class="reading-columns">
+      <div><h3>Puntos favorables</h3><ul>${positives.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></div>
+      <div><h3>Puntos de alerta</h3><ul>${warnings.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></div>
+    </div>
+    <div class="recommendation"><strong>Recomendación del mes:</strong> ${escapeHtml(recommendation)}</div>
+  `;
+}
+
+function renderExpenseTypeTable(m) {
+  const rows = [
+    ['Gasto ordinario del mes', m.ordinaryExpenses, 'Funcionamiento y servicios recurrentes.'],
+    ['Gasto extraordinario del mes', m.extraordinaryExpenses, 'Reparaciones, acopios o gastos no recurrentes.'],
+    ['Gastos particulares', m.particularExpenses || 0, 'Gastos cargados a unidades o sectores específicos si están informados.'],
+    ['Cuentas por pagar', m.accountsPayable, 'Compromisos devengados pendientes de pago al cierre.'],
+    ['Pagos devengados de meses anteriores', m.priorAccruedPaid, 'No estructurado en el JSON actual para todos los meses.']
+  ];
+  $('expenseTypeTable').innerHTML = `<thead><tr><th>Concepto</th><th class="num">Importe</th><th>Lectura</th></tr></thead><tbody>${rows.map(([concept, amount, text]) => `<tr><td>${concept}</td><td class="num">${amount == null ? 'No cargado' : money2(amount)}</td><td>${text}</td></tr>`).join('')}</tbody>`;
+}
+
+function renderProviderEvolution(selectedKeys, pieRows) {
+  const panel = $('providerEvolutionPanel');
+  const chart = $('providerEvolutionChart');
+  const table = $('providerEvolutionTable');
+  if (!panel || !chart || !table) return;
+  if (!selectedKeys || !selectedKeys.length) {
+    panel.classList.add('hidden');
+    return;
+  }
+  panel.classList.remove('hidden');
+  const label = providerFilterLabel(selectedKeys, pieRows);
+  const selectedSet = new Set(selectedKeys);
+  const rows = DATA.months.map(m => {
+    const amount = (m.providers || []).filter(p => selectedSet.has(p.provider)).reduce((acc, p) => acc + p.amount, 0);
+    const count = (m.providers || []).filter(p => selectedSet.has(p.provider)).length;
+    return { label: m.monthShort, month: m.label, amount, count };
+  });
+  const total = rows.reduce((a,b) => a + b.amount, 0);
+  const activeMonths = rows.filter(r => r.amount > 0).length;
+  const max = rows.reduce((a,b) => a.amount > b.amount ? a : b);
+  $('providerEvolutionText').textContent = `${label}: ${money2(total)} acumulados · ${activeMonths} meses con movimientos · mayor mes: ${max.month} (${money2(max.amount)}).`;
+  drawLineChart(chart, rows.map(r => ({ label: r.label, gasto: r.amount })), [{ key: 'gasto', label }]);
+  table.innerHTML = `<thead><tr><th>Mes</th><th class="num">Movimientos</th><th class="num">Importe</th></tr></thead><tbody>${rows.map(r => `<tr><td>${r.month}</td><td class="num">${r.count}</td><td class="num">${money2(r.amount)}</td></tr>`).join('')}</tbody>`;
+}
+
+function renderGlobalSearch() {
+  const q = (state.globalSearch || '').trim().toLowerCase();
+  const panel = $('globalSearchPanel');
+  if (!q) {
+    panel.classList.add('hidden');
+    $('globalSearchTable').innerHTML = '';
+    return;
+  }
+  panel.classList.remove('hidden');
+  const results = [];
+  DATA.months.forEach(m => {
+    if (`${m.label} ${m.monthShort} ${m.notes || ''}`.toLowerCase().includes(q)) {
+      results.push({ type: 'Mes / informe', month: m.label, detail: m.notes || '', amount: null });
+    }
+    (m.providers || []).forEach(p => {
+      if (`${p.provider} ${p.category} ${p.detail} ${p.type} ${m.label}`.toLowerCase().includes(q)) {
+        results.push({ type: 'Proveedor', month: m.label, detail: `${p.provider} · ${p.category} · ${p.detail}`, amount: p.amount });
+      }
+    });
+    (m.debtors || []).forEach(d => {
+      if (`${d.unit} unidad ${m.label}`.toLowerCase().includes(q)) {
+        results.push({ type: 'Morosidad', month: m.label, detail: `Unidad ${d.unit}`, amount: d.amount });
+      }
+    });
+    if ((m.pdf || '').toLowerCase().includes(q) || (m.report || '').toLowerCase().includes(q)) {
+      results.push({ type: 'Documento', month: m.label, detail: `${m.pdf || ''} ${m.report || ''}`, amount: null });
+    }
+  });
+  $('globalSearchSummary').innerHTML = `<strong>${results.length}</strong> resultados para “${escapeHtml(state.globalSearch)}”.`;
+  $('globalSearchTable').innerHTML = `<thead><tr><th>Tipo</th><th>Mes</th><th>Detalle</th><th class="num">Importe</th></tr></thead><tbody>${results.slice(0, 150).map(r => `<tr><td>${r.type}</td><td>${r.month}</td><td>${escapeHtml(r.detail)}</td><td class="num">${r.amount == null ? '—' : money2(r.amount)}</td></tr>`).join('')}</tbody>`;
+}
+
+function renderMeeting() {
+  const m = getMonth(state.selected);
+  const prev = previousMonth(m.id);
+  const debtDelta = prev ? m.debtCapital - prev.debtCapital : null;
+  const cashDelta = prev ? m.netCash - prev.netCash : null;
+  const extraShare = m.totalExpenses ? m.extraordinaryExpenses / m.totalExpenses * 100 : 0;
+  const debtRows = [...(m.debtors || [])].sort((a,b) => b.amount - a.amount);
+  const top3 = debtRows.slice(0,3).reduce((a,b) => a + b.amount, 0);
+  const cards = [
+    ['Estado general', m.notes || 'Sin lectura mensual cargada.'],
+    ['Qué mejoró', prev ? [`Caja neta: ${signedMoney(cashDelta)}`, `Deuda: ${signedMoney(debtDelta)}`, `Recupero deuda: ${money2(m.debtRecovered)}`].join(' · ') : 'Sin mes anterior para comparar.'],
+    ['Qué empeoró o exige atención', `Extraordinarios: ${pct(extraShare)} del gasto · Cuentas por pagar: ${money2(m.accountsPayable)}.`],
+    ['Principales gastos', (m.composition || []).sort((a,b)=>b.amount-a.amount).slice(0,4).map(r => `${r.category}: ${money2(r.amount)}`).join(' · ')],
+    ['Situación de deuda', `Deuda capital: ${money2(m.debtCapital)} · Top 3 unidades: ${pct(top3 / m.debtCapital * 100)}.`],
+    ['Decisiones sugeridas', debtDelta != null && debtDelta < 0 ? 'Sostener política de cobranza y controlar extraordinarios antes de asumir nuevos compromisos.' : 'Priorizar intimaciones/acuerdos de pago y limitar extraordinarios no urgentes.']
+  ];
+  $('meetingGrid').innerHTML = cards.map(([title, text], i) => `<div class="meeting-card"><span>${i + 1}</span><h3>${title}</h3><p>${escapeHtml(text)}</p></div>`).join('');
+}
+
+function loadDecisions() {
+  try { return JSON.parse(localStorage.getItem('alemDashboardDecisions') || '[]'); }
+  catch { return []; }
+}
+
+function saveDecisions() {
+  localStorage.setItem('alemDashboardDecisions', JSON.stringify(state.decisions));
+}
+
+function addDecisionFromForm() {
+  const topic = $('decisionTopic').value.trim();
+  const text = $('decisionText').value.trim();
+  const status = $('decisionStatus').value;
+  if (!topic || !text) return;
+  state.decisions.unshift({ id: String(Date.now()), date: new Date().toLocaleDateString('es-AR'), topic, text, status });
+  saveDecisions();
+  $('decisionTopic').value = '';
+  $('decisionText').value = '';
+  renderDecisions();
+}
+
+function deleteDecision(id) {
+  state.decisions = state.decisions.filter(d => d.id !== id);
+  saveDecisions();
+  renderDecisions();
+}
+
+function renderDecisions() {
+  const rows = state.decisions;
+  $('decisionsTable').innerHTML = `<thead><tr><th>Fecha</th><th>Tema</th><th>Decisión / acción</th><th>Estado</th><th></th></tr></thead><tbody>${rows.length ? rows.map(d => `<tr><td>${d.date}</td><td>${escapeHtml(d.topic)}</td><td>${escapeHtml(d.text)}</td><td>${escapeHtml(d.status)}</td><td><button class="link-button" data-delete-decision="${d.id}" type="button">Borrar</button></td></tr>`).join('') : '<tr><td colspan="5" class="muted">Todavía no hay decisiones cargadas en este navegador.</td></tr>'}</tbody>`;
+}
+
+function renderQuality() {
+  const last = getMonth(DATA.meta.lastLoadedMonth);
+  const docsWithPdf = DATA.months.filter(m => m.pdf).length;
+  const docsWithReport = DATA.months.filter(m => m.report).length;
+  const totalProviders = DATA.months.reduce((a,m) => a + (m.providers || []).length, 0);
+  const rows = [
+    ['Última actualización', last ? last.label : DATA.meta.lastLoadedMonth],
+    ['Política de datos', DATA.meta.dataPolicy || 'Validar contra liquidaciones oficiales.'],
+    ['Meses cargados', `${DATA.months.length} meses`],
+    ['PDFs enlazados', `${docsWithPdf} de ${DATA.months.length}`],
+    ['Informes enlazados', `${docsWithReport} de ${DATA.months.length}`],
+    ['Movimientos de proveedores', `${totalProviders} registros`],
+    ['Advertencia', 'Dashboard informativo: la liquidación oficial sigue siendo el PDF mensual.']
+  ];
+  $('qualityPanel').innerHTML = rows.map(([a,b]) => `<div class="quality-row"><span>${a}</span><strong>${escapeHtml(b)}</strong></div>`).join('');
 }
 
 function drawLineChart(canvas, data, series) {

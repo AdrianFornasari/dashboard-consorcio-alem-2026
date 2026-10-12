@@ -4,19 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard Expensas Alem 2026</title>
-  <link rel="stylesheet" href="styles.css?v=20261011-proveedor-filtro-v4">
+  <link rel="stylesheet" href="styles.css?v=20261011-mejoras-v5">
 </head>
 <body>
   <header class="hero">
     <div>
       <p class="eyebrow">Consorcio Alem 1268/74/80/82</p>
       <h1>Dashboard de expensas 2026</h1>
-      <p class="hero-text">Resumen financiero, morosidad por unidad, composición de gastos y detalle por proveedor. Uso privado para consorcistas.</p>
-      <p class="version-badge">Versión 0.4 · proveedor filtra tabla</p>
+      <p class="hero-text">Resumen financiero, morosidad por unidad, composición de gastos, proveedores, documentos e indicadores para reuniones de consorcio.</p>
+      <p class="version-badge">Versión 0.5 · semáforo, búsqueda, reunión e historial</p>
     </div>
     <div class="hero-card">
       <label for="monthSelect">Mes de análisis</label>
       <select id="monthSelect"></select>
+      <label for="globalSearch" class="field-spaced">Búsqueda global</label>
+      <input id="globalSearch" type="search" placeholder="Proveedor, rubro, unidad o mes">
+      <button id="printButton" class="hero-action" type="button">Imprimir / guardar PDF</button>
       <p id="lastUpdate" class="muted small"></p>
     </div>
   </header>
@@ -26,17 +29,35 @@
       <strong>Privacidad:</strong> este MVP no muestra nombres de propietarios en morosidad; sólo unidades funcionales. Sin contraseña, la privacidad depende de no difundir el enlace fuera del consorcio.
     </section>
 
+    <section id="globalSearchPanel" class="panel search-panel hidden">
+      <div class="panel-head horizontal">
+        <div>
+          <h2>Resultados de búsqueda</h2>
+          <p class="muted">Busca en proveedores, rubros, meses, documentos y unidades funcionales.</p>
+        </div>
+        <button id="clearSearchButton" class="small-action" type="button">Limpiar búsqueda</button>
+      </div>
+      <div id="globalSearchSummary" class="summary-line"></div>
+      <div class="table-wrap tall">
+        <table id="globalSearchTable"></table>
+      </div>
+    </section>
+
     <nav class="tabs" aria-label="Secciones del dashboard">
       <button class="tab active" data-tab="overview">Resumen</button>
       <button class="tab" data-tab="compare">Comparativa</button>
       <button class="tab" data-tab="composition">Composición del gasto</button>
       <button class="tab" data-tab="providers">Gasto por proveedor</button>
       <button class="tab" data-tab="debtors">Morosidad</button>
+      <button class="tab" data-tab="meeting">Modo reunión</button>
+      <button class="tab" data-tab="management">Gestión</button>
       <button class="tab" data-tab="docs">Documentos</button>
     </nav>
 
     <section id="overview" class="tab-panel active">
+      <div id="alertStrip" class="alert-strip"></div>
       <div id="kpiGrid" class="kpi-grid"></div>
+      <div id="monthComparison" class="comparison-strip"></div>
       <div class="grid two">
         <article class="panel">
           <div class="panel-head">
@@ -48,8 +69,9 @@
         <article class="panel">
           <div class="panel-head">
             <h2>Lectura del mes</h2>
-            <p id="monthNote" class="note-text"></p>
+            <p class="muted">Interpretación ejecutiva basada en los datos del mes seleccionado.</p>
           </div>
+          <div id="monthReading" class="reading-block"></div>
           <div id="monthRatios" class="ratio-list"></div>
         </article>
       </div>
@@ -96,6 +118,15 @@
           </div>
         </article>
       </div>
+      <article class="panel spaced-panel">
+        <div class="panel-head">
+          <h2>Clasificación del gasto y compromisos</h2>
+          <p class="muted">Separa gasto ordinario, extraordinario, particulares y cuentas por pagar. Los pagos de meses anteriores se muestran sólo si el dato está cargado en el JSON mensual.</p>
+        </div>
+        <div class="table-wrap">
+          <table id="expenseTypeTable"></table>
+        </div>
+      </article>
     </section>
 
     <section id="providers" class="tab-panel">
@@ -103,7 +134,7 @@
         <div class="panel-head horizontal">
           <div>
             <h2>Detalle del gasto por proveedor</h2>
-            <p class="muted">Filtrable por período, proveedor, rubro y tipo de gasto.</p>
+            <p class="muted">Filtrable por período, proveedor, rubro y tipo de gasto. Al seleccionar un proveedor, se filtra la tabla y aparece su evolución.</p>
           </div>
           <div class="controls-inline wrap">
             <label>Desde <select id="providerFrom"></select></label>
@@ -116,6 +147,18 @@
         <div class="pie-layout wide">
           <canvas id="providerChart" height="280"></canvas>
           <div id="providerLegend" class="chart-legend"></div>
+        </div>
+        <div id="providerEvolutionPanel" class="provider-evolution hidden">
+          <div class="panel-head compact-head">
+            <h3>Evolución del proveedor seleccionado</h3>
+            <p id="providerEvolutionText" class="muted"></p>
+          </div>
+          <div class="grid two equal">
+            <canvas id="providerEvolutionChart" height="220"></canvas>
+            <div class="table-wrap compact-table">
+              <table id="providerEvolutionTable"></table>
+            </div>
+          </div>
         </div>
         <div class="table-wrap tall">
           <table id="providerTable"></table>
@@ -148,6 +191,46 @@
       </div>
     </section>
 
+    <section id="meeting" class="tab-panel">
+      <article class="panel meeting-panel">
+        <div class="panel-head horizontal">
+          <div>
+            <h2>Modo reunión</h2>
+            <p class="muted">Vista simplificada para asamblea, reunión de consejo o pantalla compartida.</p>
+          </div>
+          <button class="small-action" type="button" onclick="window.print()">Imprimir esta vista</button>
+        </div>
+        <div id="meetingGrid" class="meeting-grid"></div>
+      </article>
+    </section>
+
+    <section id="management" class="tab-panel">
+      <div class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Historial de decisiones</h2>
+            <p class="muted">Registro local en este navegador. No se sincroniza con GitHub; para hacerlo permanente hay que cargarlo luego en el JSON o README.</p>
+          </div>
+          <div class="decision-form">
+            <label>Tema <input id="decisionTopic" type="text" placeholder="Ej.: Revisar contrato de limpieza"></label>
+            <label>Decisión / próxima acción <input id="decisionText" type="text" placeholder="Ej.: Pedir 2 presupuestos alternativos"></label>
+            <label>Estado <select id="decisionStatus"><option>Pendiente</option><option>En análisis</option><option>En curso</option><option>Resuelto</option></select></label>
+            <button id="addDecisionButton" class="small-action primary" type="button">Agregar decisión</button>
+          </div>
+          <div class="table-wrap tall">
+            <table id="decisionsTable"></table>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Control de calidad de datos</h2>
+            <p class="muted">Resumen de fuentes, cobertura y advertencias de publicación.</p>
+          </div>
+          <div id="qualityPanel" class="quality-list"></div>
+        </article>
+      </div>
+    </section>
+
     <section id="docs" class="tab-panel">
       <article class="panel">
         <div class="panel-head">
@@ -165,6 +248,6 @@
     <p>Dashboard estático MVP · HTML/CSS/JavaScript · Datos 2026. Validar contra PDF mensual antes de publicar.</p>
   </footer>
 
-  <script src="app.js?v=20261011-proveedor-filtro-v4"></script>
+  <script src="app.js?v=20261011-mejoras-v5"></script>
 </body>
 </html>

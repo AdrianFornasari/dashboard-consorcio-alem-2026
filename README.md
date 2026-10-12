@@ -1,104 +1,76 @@
-# Dashboard Expensas Alem 2026 - MVP
+# Dashboard Consorcio Alem 2026
 
-Dashboard estático HTML/CSS/JavaScript para seguimiento financiero del Consorcio Alem 1268/74/80/82.
+MVP estático en HTML/CSS/JavaScript puro para publicar con GitHub Pages.
 
-## Criterios del MVP
+## Versión 0.5
 
-- Sin login ni contraseña.
-- Uso privado por circulación controlada del enlace entre consorcistas.
-- No se publican nombres de propietarios en la sección de morosidad: sólo unidades funcionales.
-- Datos 2026 cargados de enero a septiembre.
-- Comparativa por períodos a elección.
-- Composición del gasto.
-- Detalle del gasto por proveedor.
-- Morosidad por unidad.
-- Se incluyen PDFs e informes disponibles como archivos descargables/consultables.
+Esta actualización agrega las 10 mejoras funcionales pedidas:
 
-## Archivos incluidos
+1. **Semáforo financiero mensual** en la pestaña Resumen.
+2. **Comparativa automática mes actual vs mes anterior**.
+3. **Modo reunión** con lectura simplificada para asamblea o consejo.
+4. **Buscador global** por proveedor, rubro, unidad, mes y documentos.
+5. **Evolución por proveedor** al seleccionar una porción o leyenda de la torta.
+6. **Detalle ordinario / extraordinario / particulares / cuentas por pagar**.
+7. **Lectura del mes** con puntos favorables, alertas y recomendación.
+8. **Botón imprimir / guardar PDF**.
+9. **Historial local de decisiones** en el navegador.
+10. **Control de calidad de datos** con cobertura de PDFs, informes y advertencias.
 
-### PDFs de expensas incluidos
+## Privacidad
 
-- `pdfs/202607Expensas.pdf`
-- `pdfs/202608Expensas.pdf`
-- `pdfs/202609Expensas.pdf`
+El dashboard no muestra nombres de propietarios en la sección de morosidad: sólo unidades funcionales. Sin login ni contraseña, la privacidad depende de mantener controlado el enlace publicado.
 
-### Informes incluidos
-
-- `informes/202605-informe-general.pdf`
-- `informes/202606-informe-ajustado.pdf`
-- `informes/202609-informe.pdf`
-- `informes/202609-informe-ajustado.pdf` copia explícita del informe ajustado de septiembre.
-
-Los PDFs anteriores que no estaban materializados como archivo descargable en este entorno quedaron pendientes de copia manual. Los datos numéricos de enero a septiembre sí están cargados en `data/expensas-2026.json`.
-
-## Cómo probar localmente
+## Prueba local
 
 Desde la carpeta del proyecto:
 
-```bash
+```powershell
+cd "C:\Trabajos\Consorcio_Alem\dashboard-consorcio-alem-2026"
 python -m http.server 8080
 ```
 
-Luego abrir:
+Abrir:
 
 ```text
 http://localhost:8080
 ```
 
-No conviene abrir `index.html` con doble clic porque algunos navegadores bloquean la carga local de `data/expensas-2026.json`.
+## Publicación
 
-## Publicación sugerida
+Después de reemplazar los archivos modificados:
 
-Repositorio GitHub:
-
-```text
-dashboard-consorcio-alem-2026
+```powershell
+git status
+git add index.html styles.css app.js README.md
+git commit -m "Agregar semaforo financiero, modo reunion y gestion"
+git push
 ```
 
-Hosting inicial sugerido:
+## Archivos modificados en esta actualización
 
 ```text
-GitHub Pages
+index.html
+styles.css
+app.js
+README.md
 ```
 
 ## Actualización mensual
 
-1. Agregar el PDF mensual nuevo en `pdfs/`.
-2. Agregar el informe mensual nuevo en `informes/`.
-3. Actualizar `data/expensas-2026.json`.
-4. Probar localmente.
-5. Hacer commit y push.
-6. GitHub Pages publica la nueva versión.
+Cada mes hay que actualizar principalmente:
 
-## Privacidad
+```text
+data/expensas-2026.json
+pdfs/
+informes/
+```
 
-Aunque el tablero no tiene nombres de propietarios, los PDFs de expensas pueden contener información más detallada. Si se suben al sitio, el enlace debe circularse sólo entre consorcistas.
+El dashboard debe validarse contra el PDF oficial de expensas antes de publicar.
 
-## Cambios de esta actualización
+## Notas de uso
 
-- Los gráficos de composición del gasto, gasto por proveedor y morosidad pasan de barras horizontales a gráficos de torta.
-- Las categorías menores se agrupan automáticamente como `Otros` para evitar gráficos ilegibles.
-- Se agregó leyenda HTML debajo de cada torta, más legible en celular que etiquetas dibujadas dentro del gráfico.
-- Se ajustó la altura responsiva de los canvas para evitar que los gráficos se vean estirados verticalmente en celulares.
-
-
-## Versión 0.2 - tortas y responsive
-
-- Los gráficos de composición del gasto, gasto por proveedor y morosidad se muestran como tortas.
-- Se agregó cache busting en `index.html` para forzar la carga de `styles.css` y `app.js` actualizados en GitHub Pages.
-- Se ajustó la altura de los gráficos en celular para evitar estiramiento vertical.
-- En el encabezado debe verse: `Versión 0.2 · tortas + responsive mobile`.
-
-
-## Actualización 0.3
-
-- Las leyendas de gráficos de torta se muestran apiladas a la derecha del gráfico.
-- Al hacer clic en una porción de la torta, se resalta la fila o filas correspondientes en la tabla de detalle.
-- También se puede hacer clic en una leyenda para resaltar la tabla.
-
-## Actualización 0.4
-
-- En la sección `Gasto por proveedor`, al hacer clic en una porción de la torta o en su leyenda, la tabla queda filtrada para mostrar sólo los movimientos del proveedor seleccionado.
-- Si la porción seleccionada es `Otros`, la tabla muestra sólo los proveedores agrupados en esa categoría.
-- Se agregó un botón `Ver todos los proveedores` para limpiar el filtro aplicado desde la torta.
-- Se actualizó el cache busting de `index.html` para forzar la descarga de `app.js` y `styles.css` nuevos en GitHub Pages.
+- El historial de decisiones se guarda en `localStorage`; por ahora es local del navegador y no queda sincronizado entre usuarios.
+- Para que una decisión sea visible para todos, hay que incorporarla luego como dato permanente en el proyecto.
+- La clasificación “pagos devengados de meses anteriores” aparece como “No cargado” si ese dato no está estructurado en el JSON mensual.
+- La liquidación oficial sigue siendo el PDF mensual: el dashboard es una herramienta de lectura y seguimiento.
