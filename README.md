@@ -95,3 +95,10 @@ Aunque el tablero no tiene nombres de propietarios, los PDFs de expensas pueden 
 - Las leyendas de gráficos de torta se muestran apiladas a la derecha del gráfico.
 - Al hacer clic en una porción de la torta, se resalta la fila o filas correspondientes en la tabla de detalle.
 - También se puede hacer clic en una leyenda para resaltar la tabla.
+
+## Actualización 0.4
+
+- En la sección `Gasto por proveedor`, al hacer clic en una porción de la torta o en su leyenda, la tabla queda filtrada para mostrar sólo los movimientos del proveedor seleccionado.
+- Si la porción seleccionada es `Otros`, la tabla muestra sólo los proveedores agrupados en esa categoría.
+- Se agregó un botón `Ver todos los proveedores` para limpiar el filtro aplicado desde la torta.
+- Se actualizó el cache busting de `index.html` para forzar la descarga de `app.js` y `styles.css` nuevos en GitHub Pages.

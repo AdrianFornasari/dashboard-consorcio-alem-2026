@@ -226,3 +226,26 @@ tr.row-highlight { box-shadow: inset 4px 0 0 #f59e0b; }
   font-size: .82rem;
   font-weight: 700;
 }
+
+.provider-summary-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.active-filter {
+  color: var(--accent);
+}
+.small-action {
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.small-action:hover {
+  background: #f8fafc;
+  border-color: var(--accent);
+}

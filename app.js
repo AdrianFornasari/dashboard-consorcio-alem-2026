@@ -1,4 +1,4 @@
-const APP_VERSION = '0.3-tortas-leyenda-derecha-click';
+const APP_VERSION = '0.4-proveedor-filtra-tabla';
 let DATA = null;
 let state = { selected: null, from: null, to: null, providerFrom: null, providerTo: null, highlight: { composition: null, providers: null, debtors: null } };
 
@@ -180,15 +180,36 @@ function renderProviders() {
     acc[r.provider].value += r.amount;
     return acc;
   }, {})).sort((a,b) => b.value - a.value);
-  $('providerSummary').innerHTML = `<strong>${filtered.length}</strong> movimientos · Total filtrado: <strong>${money2(total)}</strong> · Proveedores: <strong>${byProvider.length}</strong>`;
+
   const providerPieRows = groupSmallSlices(byProvider.map(r => ({ ...r, key: r.label })), 8);
+  const selectedKeys = state.highlight.providers || [];
+  const selectedSet = new Set(selectedKeys);
+  const hasProviderFilter = selectedKeys.length > 0;
+  const tableRows = hasProviderFilter ? filtered.filter(r => selectedSet.has(r.provider)) : filtered;
+  const tableTotal = tableRows.reduce((a, b) => a + b.amount, 0);
+  const selectedLabel = providerFilterLabel(selectedKeys, providerPieRows);
+
+  $('providerSummary').innerHTML = `
+    <div class="provider-summary-main">
+      <span><strong>${filtered.length}</strong> movimientos · Total filtrado: <strong>${money2(total)}</strong> · Proveedores: <strong>${byProvider.length}</strong></span>
+      ${hasProviderFilter ? `<span class="active-filter">Proveedor seleccionado: <strong>${escapeHtml(selectedLabel)}</strong> · ${tableRows.length} movimientos · ${money2(tableTotal)}</span>` : ''}
+    </div>
+    ${hasProviderFilter ? '<button type="button" id="clearProviderFilter" class="small-action">Ver todos los proveedores</button>' : ''}
+  `;
+  if (hasProviderFilter) {
+    $('clearProviderFilter').addEventListener('click', () => {
+      state.highlight.providers = null;
+      renderProviders();
+    });
+  }
+
   drawPieChart($('providerChart'), providerPieRows, {
-    activeKeys: state.highlight.providers,
+    activeKeys: selectedKeys,
     onSliceClick: item => handlePieSelection('providers', 'providerTable', 'providerLegend', item)
   });
   renderPieLegend('providerLegend', providerPieRows, total, 'providers', 'providerTable');
-  $('providerTable').innerHTML = `<thead><tr><th>Mes</th><th>Proveedor</th><th>Rubro</th><th>Detalle</th><th>Tipo</th><th class="num">Importe</th></tr></thead><tbody>${filtered.sort((a,b) => a.monthId.localeCompare(b.monthId) || b.amount - a.amount).map(r => `<tr data-pie-key="${escapeHtml(r.provider)}"><td>${r.month}</td><td>${r.provider}</td><td>${r.category}</td><td>${r.detail}</td><td>${r.type}</td><td class="num">${money2(r.amount)}</td></tr>`).join('')}</tbody>`;
-  highlightTableRows('providerTable', state.highlight.providers);
+  $('providerTable').innerHTML = `<thead><tr><th>Mes</th><th>Proveedor</th><th>Rubro</th><th>Detalle</th><th>Tipo</th><th class="num">Importe</th></tr></thead><tbody>${tableRows.sort((a,b) => a.monthId.localeCompare(b.monthId) || b.amount - a.amount).map(r => `<tr data-pie-key="${escapeHtml(r.provider)}"><td>${r.month}</td><td>${r.provider}</td><td>${r.category}</td><td>${r.detail}</td><td>${r.type}</td><td class="num">${money2(r.amount)}</td></tr>`).join('')}</tbody>`;
+  highlightTableRows('providerTable', selectedKeys);
 }
 
 function renderDebtors() {
@@ -382,8 +403,30 @@ function getItemKeys(item) {
 function handlePieSelection(scope, tableId, legendId, item) {
   const keys = getItemKeys(item);
   state.highlight[scope] = keys;
+  if (scope === 'providers') {
+    renderProviders();
+    requestAnimationFrame(() => {
+      const table = $(tableId);
+      if (table) table.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    });
+    return;
+  }
   highlightTableRows(tableId, keys, true);
   highlightLegend(legendId, keys);
+}
+
+function providerFilterLabel(keys, pieRows) {
+  if (!keys || !keys.length) return '';
+  const grouped = pieRows.find(r => arraysHaveSameMembers(getItemKeys(r), keys));
+  if (grouped?.label === 'Otros') return `Otros (${keys.length} proveedores)`;
+  if (grouped?.label) return grouped.label;
+  return keys.length === 1 ? keys[0] : `${keys.length} proveedores`;
+}
+
+function arraysHaveSameMembers(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false;
+  const set = new Set(a);
+  return b.every(x => set.has(x));
 }
 
 function highlightTableRows(tableId, keys, scrollToFirst = false) {
