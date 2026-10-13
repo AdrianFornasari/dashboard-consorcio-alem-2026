@@ -5,15 +5,17 @@
     "privacy": "Uso privado para consorcistas. No contiene nombres de propietarios en la sección de morosidad; sólo unidades funcionales.",
     "lastLoadedMonth": "2026-09",
     "currency": "ARS",
-    "dataPolicy": "Datos extraídos de liquidaciones mensuales de expensas e informes mensuales preparados para reunión de consorcio. Validar cada actualización contra el PDF mensual antes de publicar."
+    "dataPolicy": "Datos extraídos de liquidaciones mensuales de expensas e informes mensuales preparados para reunión de consorcio. Validar cada actualización contra el PDF mensual antes de publicar.",
+    "documentPolicy": "El paquete incluye los PDFs mensuales de expensas de enero a septiembre 2026 y los informes mensuales generados para cada período. Los datos del dashboard se basan en esas liquidaciones e informes; validar contra el PDF oficial antes de publicar cada actualización.",
+    "dataVersion": "2026-10-12-pdfs-informes-completos"
   },
   "months": [
     {
       "id": "2026-01",
       "label": "Enero 2026",
       "monthShort": "Ene",
-      "pdf": null,
-      "report": null,
+      "pdf": "pdfs/202601Expensas.pdf",
+      "report": "informes/202601-informe.pdf",
       "cashStart": 1600321.55,
       "cashFinal": 3110252.55,
       "accountsPayable": 0,
@@ -162,24 +164,28 @@
       ],
       "debtors": [
         {
-          "unit": "04-01",
-          "amount": 1368244.69
+          "unit": "00-07",
+          "amount": 16733.58
         },
         {
-          "unit": "A2",
-          "amount": 1275311.49
+          "unit": "00-14",
+          "amount": 175919.67
         },
         {
           "unit": "00-17",
           "amount": 1014447.33
         },
         {
-          "unit": "08-01",
-          "amount": 498111.19
+          "unit": "02-02",
+          "amount": 84206.42
         },
         {
-          "unit": "00-14",
-          "amount": 175919.67
+          "unit": "04-01",
+          "amount": 1368244.69
+        },
+        {
+          "unit": "04-04",
+          "amount": 87190.9
         },
         {
           "unit": "05-02",
@@ -190,16 +196,16 @@
           "amount": 168376.1
         },
         {
-          "unit": "04-04",
-          "amount": 87190.9
-        },
-        {
-          "unit": "02-02",
-          "amount": 84206.42
+          "unit": "08-01",
+          "amount": 498111.19
         },
         {
           "unit": "A13",
           "amount": 33993.82
+        },
+        {
+          "unit": "A2",
+          "amount": 1275311.49
         }
       ]
     },
@@ -207,8 +213,8 @@
       "id": "2026-02",
       "label": "Febrero 2026",
       "monthShort": "Feb",
-      "pdf": null,
-      "report": null,
+      "pdf": "pdfs/202602Expensas.pdf",
+      "report": "informes/202602-informe.pdf",
       "cashStart": 3110252.55,
       "cashFinal": 2041337.55,
       "accountsPayable": 300000,
@@ -379,36 +385,92 @@
       ],
       "debtors": [
         {
-          "unit": "04-01",
-          "amount": 1445017
+          "unit": "00-01",
+          "amount": 37483.0
         },
         {
-          "unit": "A2",
-          "amount": 1291217
+          "unit": "00-04",
+          "amount": 40891.0
         },
         {
-          "unit": "00-17",
-          "amount": 1030353
-        },
-        {
-          "unit": "08-01",
-          "amount": 574883
-        },
-        {
-          "unit": "05-02",
-          "amount": 245148
-        },
-        {
-          "unit": "05-04",
-          "amount": 245148
+          "unit": "00-08",
+          "amount": 15906.0
         },
         {
           "unit": "00-14",
-          "amount": 191826
+          "amount": 191826.0
+        },
+        {
+          "unit": "00-16",
+          "amount": 15906.0
+        },
+        {
+          "unit": "00-17",
+          "amount": 1030353.0
+        },
+        {
+          "unit": "00-18",
+          "amount": 15906.0
+        },
+        {
+          "unit": "01-03",
+          "amount": 78557.0
+        },
+        {
+          "unit": "02-03",
+          "amount": 76772.0
+        },
+        {
+          "unit": "04-01",
+          "amount": 1445017.0
         },
         {
           "unit": "04-04",
-          "amount": 163963
+          "amount": 163963.0
+        },
+        {
+          "unit": "05-01",
+          "amount": 76772.0
+        },
+        {
+          "unit": "05-02",
+          "amount": 245148.0
+        },
+        {
+          "unit": "05-03",
+          "amount": 76772.0
+        },
+        {
+          "unit": "05-04",
+          "amount": 245148.0
+        },
+        {
+          "unit": "08-01",
+          "amount": 574883.0
+        },
+        {
+          "unit": "08-04",
+          "amount": 76772.0
+        },
+        {
+          "unit": "09-04",
+          "amount": 76772.0
+        },
+        {
+          "unit": "10-03",
+          "amount": 76772.0
+        },
+        {
+          "unit": "A13",
+          "amount": 49900.0
+        },
+        {
+          "unit": "A14",
+          "amount": 15906.0
+        },
+        {
+          "unit": "A2",
+          "amount": 1291217.0
         }
       ]
     },
@@ -416,8 +478,8 @@
       "id": "2026-03",
       "label": "Marzo 2026",
       "monthShort": "Mar",
-      "pdf": null,
-      "report": null,
+      "pdf": "pdfs/202603Expensas.pdf",
+      "report": "informes/202603-informe.pdf",
       "cashStart": 2041337.55,
       "cashFinal": 2645406.55,
       "accountsPayable": 700000,
@@ -614,28 +676,72 @@
       ],
       "debtors": [
         {
-          "unit": "04-01",
-          "amount": 1529998.3
+          "unit": "00-07",
+          "amount": 16900.0
         },
         {
-          "unit": "A2",
-          "amount": 1308178.3
+          "unit": "00-13",
+          "amount": 16900.0
+        },
+        {
+          "unit": "00-14",
+          "amount": 208717.4
+        },
+        {
+          "unit": "00-15",
+          "amount": 16900.0
         },
         {
           "unit": "00-17",
           "amount": 1047264.7
         },
         {
-          "unit": "08-01",
-          "amount": 579722.8
+          "unit": "00-18",
+          "amount": 32809.4
+        },
+        {
+          "unit": "02-02",
+          "amount": 85000.0
+        },
+        {
+          "unit": "02-04",
+          "amount": 85000.0
+        },
+        {
+          "unit": "04-01",
+          "amount": 1529998.3
         },
         {
           "unit": "05-02",
           "amount": 330185.2
         },
         {
-          "unit": "00-14",
-          "amount": 208717.4
+          "unit": "06-02",
+          "amount": 85000.0
+        },
+        {
+          "unit": "07-02",
+          "amount": 85000.0
+        },
+        {
+          "unit": "08-01",
+          "amount": 579722.8
+        },
+        {
+          "unit": "08-03",
+          "amount": 85000.0
+        },
+        {
+          "unit": "A2",
+          "amount": 1308178.3
+        },
+        {
+          "unit": "A6",
+          "amount": 16900.0
+        },
+        {
+          "unit": "A9",
+          "amount": 16900.0
         }
       ]
     },
@@ -643,8 +749,8 @@
       "id": "2026-04",
       "label": "Abril 2026",
       "monthShort": "Abr",
-      "pdf": null,
-      "report": null,
+      "pdf": "pdfs/202604Expensas.pdf",
+      "report": "informes/202604-informe.pdf",
       "cashStart": 2645406.55,
       "cashFinal": 1575018.55,
       "accountsPayable": 0,
@@ -836,36 +942,60 @@
       ],
       "debtors": [
         {
-          "unit": "04-01",
-          "amount": 1403447.47
+          "unit": "00-07",
+          "amount": 34610.0
         },
         {
-          "unit": "A2",
-          "amount": 1181022.67
+          "unit": "00-08",
+          "amount": 17800.0
         },
         {
-          "unit": "00-17",
-          "amount": 1065038.23
-        },
-        {
-          "unit": "08-01",
-          "amount": 604242.73
-        },
-        {
-          "unit": "05-02",
-          "amount": 422966.68
+          "unit": "00-13",
+          "amount": 34610.0
         },
         {
           "unit": "00-14",
           "amount": 226445.66
         },
         {
+          "unit": "00-17",
+          "amount": 1065038.23
+        },
+        {
           "unit": "02-02",
-          "amount": 177800
+          "amount": 177800.0
+        },
+        {
+          "unit": "04-01",
+          "amount": 1403447.47
+        },
+        {
+          "unit": "05-02",
+          "amount": 422966.68
         },
         {
           "unit": "07-02",
-          "amount": 177800
+          "amount": 177800.0
+        },
+        {
+          "unit": "08-01",
+          "amount": 604242.73
+        },
+        {
+          "unit": "09-04",
+          "amount": 92800.0
+        },
+        {
+          "unit": "A13",
+          "amount": 17800.0
+        },
+        {
+          "unit": "A2",
+          "amount": 1181022.67
+        },
+        {
+          "unit": "A6",
+          "amount": 34610.0
         }
       ]
     },
@@ -873,8 +1003,8 @@
       "id": "2026-05",
       "label": "Mayo 2026",
       "monthShort": "May",
-      "pdf": null,
-      "report": null,
+      "pdf": "pdfs/202605Expensas.pdf",
+      "report": "informes/202605-informe.pdf",
       "cashStart": 1575018.55,
       "cashFinal": 1659457.55,
       "accountsPayable": 0,
@@ -1071,32 +1201,52 @@
       ],
       "debtors": [
         {
-          "unit": "04-01",
-          "amount": 1110541.12
+          "unit": "00-01",
+          "amount": 55500.0
+        },
+        {
+          "unit": "00-07",
+          "amount": 52349.0
+        },
+        {
+          "unit": "00-14",
+          "amount": 244201.09
+        },
+        {
+          "unit": "00-16",
+          "amount": 17800.0
         },
         {
           "unit": "00-17",
           "amount": 1082834.41
         },
         {
-          "unit": "A2",
-          "amount": 911857.72
+          "unit": "00-18",
+          "amount": 17800.0
         },
         {
-          "unit": "08-01",
-          "amount": 716618.46
+          "unit": "02-02",
+          "amount": 290220.0
+        },
+        {
+          "unit": "04-01",
+          "amount": 1110541.12
+        },
+        {
+          "unit": "05-01",
+          "amount": 112400.0
         },
         {
           "unit": "05-02",
           "amount": 535370.01
         },
         {
-          "unit": "02-02",
-          "amount": 290220
+          "unit": "08-01",
+          "amount": 716618.46
         },
         {
-          "unit": "00-14",
-          "amount": 244201.09
+          "unit": "A2",
+          "amount": 911857.72
         }
       ]
     },
@@ -1104,8 +1254,8 @@
       "id": "2026-06",
       "label": "Junio 2026",
       "monthShort": "Jun",
-      "pdf": null,
-      "report": null,
+      "pdf": "pdfs/202606Expensas.pdf",
+      "report": "informes/202606-informe.pdf",
       "cashStart": 1659457.55,
       "cashFinal": 865066.19,
       "accountsPayable": 553563,
@@ -1311,36 +1461,60 @@
       ],
       "debtors": [
         {
+          "unit": "00-01",
+          "amount": 115850.0
+        },
+        {
+          "unit": "00-07",
+          "amount": 71714.1
+        },
+        {
+          "unit": "00-14",
+          "amount": 263580.98
+        },
+        {
+          "unit": "00-16",
+          "amount": 37120.0
+        },
+        {
           "unit": "00-17",
           "amount": 1102150.97
         },
         {
-          "unit": "04-01",
-          "amount": 777291.24
-        },
-        {
-          "unit": "05-02",
-          "amount": 657733.01
-        },
-        {
-          "unit": "A2",
-          "amount": 615513.0
-        },
-        {
-          "unit": "08-01",
-          "amount": 508899.48
-        },
-        {
-          "unit": "05-01",
-          "amount": 444760.0
+          "unit": "00-18",
+          "amount": 37120.0
         },
         {
           "unit": "02-02",
           "amount": 412598.0
         },
         {
-          "unit": "00-14",
-          "amount": 263580.98
+          "unit": "04-01",
+          "amount": 777291.24
+        },
+        {
+          "unit": "04-04",
+          "amount": 122400.0
+        },
+        {
+          "unit": "05-01",
+          "amount": 444760.0
+        },
+        {
+          "unit": "05-02",
+          "amount": 657733.01
+        },
+        {
+          "unit": "08-01",
+          "amount": 508899.48
+        },
+        {
+          "unit": "A13",
+          "amount": 19300.0
+        },
+        {
+          "unit": "A2",
+          "amount": 615513.0
         }
       ]
     },
@@ -1349,7 +1523,7 @@
       "label": "Julio 2026",
       "monthShort": "Jul",
       "pdf": "pdfs/202607Expensas.pdf",
-      "report": null,
+      "report": "informes/202607-informe.pdf",
       "cashStart": 865066.19,
       "cashFinal": 4244829.83,
       "accountsPayable": 807500,
@@ -1534,16 +1708,32 @@
       ],
       "debtors": [
         {
+          "unit": "00-07",
+          "amount": 97042.69
+        },
+        {
+          "unit": "00-13",
+          "amount": 25300.0
+        },
+        {
+          "unit": "00-14",
+          "amount": 288922.88
+        },
+        {
+          "unit": "00-16",
+          "amount": 62408.0
+        },
+        {
           "unit": "00-17",
           "amount": 1127435.87
         },
         {
-          "unit": "05-02",
-          "amount": 829059.71
+          "unit": "00-18",
+          "amount": 62408.0
         },
         {
-          "unit": "05-01",
-          "amount": 616084.0
+          "unit": "01-02",
+          "amount": 171300.0
         },
         {
           "unit": "02-02",
@@ -1558,12 +1748,24 @@
           "amount": 293660.0
         },
         {
-          "unit": "A2",
-          "amount": 293636.86
+          "unit": "05-01",
+          "amount": 616084.0
         },
         {
-          "unit": "00-14",
-          "amount": 288922.88
+          "unit": "05-02",
+          "amount": 829059.71
+        },
+        {
+          "unit": "08-01",
+          "amount": 171300.0
+        },
+        {
+          "unit": "A13",
+          "amount": 500.0
+        },
+        {
+          "unit": "A2",
+          "amount": 293636.86
         }
       ]
     },
@@ -1572,7 +1774,7 @@
       "label": "Agosto 2026",
       "monthShort": "Ago",
       "pdf": "pdfs/202608Expensas.pdf",
-      "report": null,
+      "report": "informes/202608-informe.pdf",
       "cashStart": 4244829.83,
       "cashFinal": 4171392.83,
       "accountsPayable": 1705500,
@@ -1759,36 +1961,72 @@
       ],
       "debtors": [
         {
-          "unit": "00-17",
-          "amount": 1148092.28
+          "unit": "00-01",
+          "amount": 53500.0
         },
         {
-          "unit": "05-02",
-          "amount": 942653.74
+          "unit": "00-07",
+          "amount": 117738.42
         },
         {
-          "unit": "05-01",
-          "amount": 729675.6
+          "unit": "00-10",
+          "amount": 20700.0
         },
         {
-          "unit": "02-02",
-          "amount": 697544.38
-        },
-        {
-          "unit": "A2",
-          "amount": 314373.18
+          "unit": "00-13",
+          "amount": 45970.0
         },
         {
           "unit": "00-14",
           "amount": 309630.59
         },
         {
+          "unit": "00-16",
+          "amount": 83067.2
+        },
+        {
+          "unit": "00-17",
+          "amount": 1148092.28
+        },
+        {
           "unit": "01-02",
           "amount": 284870.0
         },
         {
+          "unit": "02-02",
+          "amount": 697544.38
+        },
+        {
+          "unit": "04-01",
+          "amount": 115700.0
+        },
+        {
+          "unit": "04-04",
+          "amount": 143000.0
+        },
+        {
+          "unit": "05-01",
+          "amount": 729675.6
+        },
+        {
+          "unit": "05-02",
+          "amount": 942653.74
+        },
+        {
+          "unit": "07-02",
+          "amount": 113600.0
+        },
+        {
           "unit": "08-01",
           "amount": 284870.0
+        },
+        {
+          "unit": "A2",
+          "amount": 314373.18
+        },
+        {
+          "unit": "A6",
+          "amount": 20700.0
         }
       ]
     },
@@ -1975,8 +2213,16 @@
       ],
       "debtors": [
         {
-          "unit": "05-01",
-          "amount": 861508.04
+          "unit": "00-07",
+          "amount": 144164.58
+        },
+        {
+          "unit": "00-14",
+          "amount": 336067.53
+        },
+        {
+          "unit": "00-16",
+          "amount": 109560.48
         },
         {
           "unit": "00-17",
@@ -1987,24 +2233,16 @@
           "amount": 829389.94
         },
         {
-          "unit": "08-01",
-          "amount": 416683.0
-        },
-        {
-          "unit": "00-14",
-          "amount": 336067.53
-        },
-        {
           "unit": "04-04",
           "amount": 144200.0
         },
         {
-          "unit": "00-07",
-          "amount": 144164.58
+          "unit": "05-01",
+          "amount": 861508.04
         },
         {
-          "unit": "00-16",
-          "amount": 109560.48
+          "unit": "08-01",
+          "amount": 416683.0
         }
       ]
     }
