@@ -1,4 +1,4 @@
-const APP_VERSION = '0.6.0-codespaces-5-mejoras';
+const APP_VERSION = '0.7.0-analisis-anual-herramientas';
 let DATA = null;
 let state = { selected: null, from: null, to: null, monthA: null, monthB: null, providerFrom: null, providerTo: null, globalSearch: '', decisions: [], highlight: { composition: null, providers: null, debtors: null } };
 
@@ -66,6 +66,9 @@ function bindEvents() {
   $('printButton').addEventListener('click', preparePrintAndOpenDialog);
   $('printMonthFileButton').addEventListener('click', () => { showTab('monthlyFile'); preparePrintAndOpenDialog(); });
   $('addDecisionButton').addEventListener('click', addDecisionFromForm);
+  if ($('copyWhatsappButton')) $('copyWhatsappButton').addEventListener('click', copyWhatsappSummary);
+  if ($('copyWhatsappButtonTools')) $('copyWhatsappButtonTools').addEventListener('click', copyWhatsappSummary);
+  if ($('backToTop')) $('backToTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   $('providerRankingTable').addEventListener('click', e => {
     const row = e.target.closest('[data-provider-row]');
     if (!row) return;
@@ -136,6 +139,7 @@ function clearPieHighlights() {
 function renderAll() {
   $('lastUpdate').textContent = `Datos cargados hasta ${getMonth(DATA.meta.lastLoadedMonth).label}.`;
   renderOverview();
+  renderAnnualAnalysis();
   renderMonthlyFile();
   renderCompare();
   renderMonthPair();
@@ -149,6 +153,7 @@ function renderAll() {
   renderDocs();
   renderDocsStatus();
   renderGlobalSearch();
+  renderTools();
 }
 
 function renderOverview() {
@@ -190,6 +195,77 @@ function renderOverview() {
     { key: 'deuda', label: 'Deuda' },
     { key: 'gastos', label: 'Gastos' }
   ]);
+}
+
+
+function renderAnnualAnalysis() {
+  if (!$('annualSummaryTable')) return;
+  const months = DATA.months;
+  const last = getMonth(DATA.meta.lastLoadedMonth) || months[months.length - 1];
+  const pressureRows = months.map(m => ({
+    label: m.monthShort,
+    month: m.label,
+    exposure: (m.debtCapital || 0) + (m.accountsPayable || 0),
+    cash: m.cashFinal || 0,
+    netPressure: calcFinancialPressure(m)
+  }));
+  const totalRecovered = months.reduce((a, m) => a + (m.debtRecovered || 0), 0);
+  const totalInterest = months.reduce((a, m) => a + (m.interestCollected || 0), 0);
+  const avgExtraShare = weightedAverage(months, m => m.extraordinaryExpenses || 0, m => m.totalExpenses || 0);
+  const worstPressure = months.reduce((a, b) => calcFinancialPressure(a) > calcFinancialPressure(b) ? a : b);
+  const bestCash = months.reduce((a, b) => (a.netCash || 0) > (b.netCash || 0) ? a : b);
+  const cards = [
+    { label: 'Recupero anual deuda', value: money2(totalRecovered), sub: 'Expensas adeudadas cobradas', cls: 'ok' },
+    { label: 'Intereses cobrados', value: money2(totalInterest), sub: 'Total anual cargado', cls: '' },
+    { label: 'Extraordinarios promedio', value: pct(avgExtraShare), sub: 'Sobre gasto total cargado', cls: avgExtraShare > 25 ? 'warn' : 'ok' },
+    { label: 'Mayor presión', value: money2(calcFinancialPressure(worstPressure)), sub: worstPressure.label, cls: calcFinancialPressure(worstPressure) > 0 ? 'danger' : 'ok' },
+    { label: 'Mejor caja neta', value: money2(bestCash.netCash), sub: bestCash.label, cls: 'ok' }
+  ];
+  $('annualPressureCards').innerHTML = cards.map(c => `<div class="kpi ${c.cls || ''}"><div class="label">${c.label}</div><div class="value">${c.value}</div><div class="sub">${c.sub}</div></div>`).join('');
+
+  $('annualSummaryTable').innerHTML = `<thead><tr><th>Mes</th><th>Estado</th><th class="num">Caja neta</th><th class="num">Deuda capital</th><th class="num">Ordinarios</th><th class="num">Extraord.</th><th class="num">Ctas. pagar</th><th class="num">Presión neta</th><th>Lectura</th></tr></thead><tbody>${months.map(m => {
+    const status = classifyMonth(m);
+    const pressure = calcFinancialPressure(m);
+    return `<tr><td><strong>${escapeHtml(m.label)}</strong></td><td><span class="status-pill ${status.level}">${status.label}</span></td><td class="num">${money2(m.netCash)}</td><td class="num">${money2(m.debtCapital)}</td><td class="num">${money2(m.ordinaryExpenses)}</td><td class="num">${money2(m.extraordinaryExpenses)}</td><td class="num">${money2(m.accountsPayable)}</td><td class="num">${money2(pressure)}</td><td>${escapeHtml(status.text)}</td></tr>`;
+  }).join('')}</tbody>`;
+
+  drawLineChart($('financialPressureChart'), pressureRows.map(r => ({ label: r.label, exposicion: r.exposure, caja: r.cash })), [
+    { key: 'exposicion', label: 'Deuda + pagar' },
+    { key: 'caja', label: 'Caja final' }
+  ]);
+  const currentPressure = calcFinancialPressure(last);
+  const pressureLabel = currentPressure > 0 ? `La exposición supera la caja por ${money2(currentPressure)}.` : `La caja supera deuda + cuentas por pagar por ${money2(Math.abs(currentPressure))}.`;
+  $('financialPressureText').innerHTML = `<strong>${escapeHtml(last.label)}:</strong> ${pressureLabel} Presión financiera = deuda de capital + cuentas por pagar - caja final.`;
+
+  const recoveryRows = months.map(m => ({ label: m.monthShort, recupero: m.debtRecovered || 0, intereses: m.interestCollected || 0 }));
+  drawLineChart($('debtRecoveryChart'), recoveryRows, [
+    { key: 'recupero', label: 'Recupero deuda' },
+    { key: 'intereses', label: 'Intereses cobrados' }
+  ]);
+  $('debtRecoveryTable').innerHTML = `<thead><tr><th>Mes</th><th class="num">Recupero deuda</th><th class="num">Intereses cobrados</th><th class="num">Total recuperado</th></tr></thead><tbody>${months.map(m => `<tr><td>${escapeHtml(m.label)}</td><td class="num">${money2(m.debtRecovered || 0)}</td><td class="num">${money2(m.interestCollected || 0)}</td><td class="num">${money2((m.debtRecovered || 0) + (m.interestCollected || 0))}</td></tr>`).join('')}</tbody>`;
+}
+
+function weightedAverage(rows, numeratorFn, denominatorFn) {
+  const den = rows.reduce((acc, row) => acc + (denominatorFn(row) || 0), 0);
+  if (!den) return null;
+  return rows.reduce((acc, row) => acc + (numeratorFn(row) || 0), 0) / den * 100;
+}
+
+function calcFinancialPressure(m) {
+  return (m.debtCapital || 0) + (m.accountsPayable || 0) - (m.cashFinal || 0);
+}
+
+function classifyMonth(m) {
+  const extraShare = m.totalExpenses ? (m.extraordinaryExpenses || 0) / m.totalExpenses * 100 : 0;
+  const netCoverage = m.ordinaryExpenses ? (m.netCash || 0) / m.ordinaryExpenses : 0;
+  const pressure = calcFinancialPressure(m);
+  if (netCoverage < .5 || pressure > m.totalExpenses || extraShare > 35) {
+    return { label: 'Alerta', level: 'danger', text: 'Requiere seguimiento: caja ajustada, presión alta o extraordinarios elevados.' };
+  }
+  if (netCoverage < 1 || pressure > 0 || extraShare > 25 || (m.accountsPayable || 0) > (m.cashFinal || 0) * .25) {
+    return { label: 'Vigilar', level: 'warn', text: 'Situación administrable, pero con variables que conviene controlar.' };
+  }
+  return { label: 'Mejora', level: 'ok', text: 'Indicadores automáticos sin alerta crítica.' };
 }
 
 
@@ -437,7 +513,31 @@ function renderDebtors() {
   renderPieLegend('debtorsLegend', debtorPieRows, m.debtCapital, 'debtors', 'debtorsTable');
   $('debtorsTable').innerHTML = `<thead><tr><th>Unidad funcional</th><th class="num">Capital adeudado</th><th class="num">% del total</th></tr></thead><tbody>${rows.map(r => `<tr data-pie-key="${escapeHtml(`Unidad ${r.unit}`)}"><td>Unidad ${r.unit}</td><td class="num">${money2(r.amount)}</td><td class="num">${pct(r.amount / m.debtCapital * 100)}</td></tr>`).join('')}</tbody>`;
   highlightTableRows('debtorsTable', state.highlight.debtors);
+  renderDebtConcentrationMap(m, rows);
 }
+
+
+function renderDebtConcentrationMap(m, rows) {
+  const table = $('debtConcentrationTable');
+  if (!table) return;
+  const total = m.debtCapital || rows.reduce((a, b) => a + b.amount, 0);
+  const points = [1, 3, 5, 10].filter(n => rows.length >= n);
+  const body = points.map(n => {
+    const amount = rows.slice(0, n).reduce((a, b) => a + b.amount, 0);
+    const share = total ? amount / total * 100 : 0;
+    const level = share > 70 ? 'danger' : (share > 50 ? 'warn' : 'ok');
+    return `<tr><td>Top ${n}</td><td class="num">${money2(amount)}</td><td class="num"><span class="status-pill ${level}">${pct(share)}</span></td><td>${concentrationReading(n, share)}</td></tr>`;
+  }).join('');
+  table.innerHTML = `<thead><tr><th>Grupo</th><th class="num">Capital</th><th class="num">% deuda</th><th>Lectura</th></tr></thead><tbody>${body}</tbody>`;
+}
+
+function concentrationReading(n, share) {
+  if (n === 1 && share > 25) return 'Un solo deudor pesa demasiado sobre la mora.';
+  if (n === 3 && share > 60) return 'La mora está muy concentrada en pocas unidades.';
+  if (n === 5 && share > 75) return 'La mayor parte del problema está en un grupo reducido.';
+  return 'Concentración dentro de rango esperado para seguimiento.';
+}
+
 
 function renderDocs() {
   $('docsTable').innerHTML = `<thead><tr><th>Mes</th><th>PDF expensas</th><th>Informe mensual</th><th>Comentario</th></tr></thead><tbody>${DATA.months.map(m => `<tr><td>${m.label}</td><td>${m.pdf ? `<a href="${m.pdf}" target="_blank">Abrir PDF</a>` : '<span class="muted">Pendiente de copiar</span>'}</td><td>${m.report ? `<a href="${m.report}" target="_blank">Abrir informe</a>` : '<span class="muted">Pendiente</span>'}</td><td>${escapeHtml(m.notes || '')}</td></tr>`).join('')}</tbody>`;
@@ -452,6 +552,123 @@ function renderDocsStatus() {
     const status = ready ? 'Completo' : (hasData ? 'Datos cargados, documentos incompletos' : 'Revisar carga');
     return `<tr><td>${m.label}</td><td>${m.pdf ? 'Disponible' : 'Pendiente'}</td><td>${m.report ? 'Disponible' : 'Pendiente'}</td><td>${hasData ? 'Cargados' : 'Incompletos'}</td><td><span class="status-pill ${ready ? 'ok' : 'warn'}">${status}</span></td><td>${escapeHtml(m.notes || '')}</td></tr>`;
   }).join('')}</tbody>`;
+}
+
+
+function renderTools() {
+  renderWhatsappSummary();
+  renderGlossary();
+  renderDataChecks();
+  renderChangeLog();
+}
+
+function renderWhatsappSummary() {
+  const m = getMonth(state.selected);
+  const prev = previousMonth(m.id);
+  const debtDelta = prev ? m.debtCapital - prev.debtCapital : null;
+  const cashDelta = prev ? m.netCash - prev.netCash : null;
+  const extraShare = m.totalExpenses ? (m.extraordinaryExpenses || 0) / m.totalExpenses * 100 : 0;
+  const text = [
+    `Resumen ${m.label} - Consorcio Alem`,
+    `Caja final: ${money2(m.cashFinal)} | Caja neta: ${money2(m.netCash)}`,
+    `Deuda capital: ${money2(m.debtCapital)}${debtDelta == null ? '' : ` (${debtDelta < 0 ? 'bajó' : 'subió'} ${money2(Math.abs(debtDelta))} vs mes anterior)`}`,
+    `Gastos: ${money2(m.totalExpenses)} | Ordinarios: ${money2(m.ordinaryExpenses)} | Extraordinarios: ${money2(m.extraordinaryExpenses)} (${pct(extraShare)})`,
+    `Cuentas por pagar: ${money2(m.accountsPayable)}`,
+    `Recupero deuda: ${money2(m.debtRecovered || 0)} | Intereses cobrados: ${money2(m.interestCollected || 0)}`,
+    prev ? `Caja neta vs mes anterior: ${signedMoney(cashDelta)}` : '',
+    `Lectura: ${m.notes || 'ver informe mensual.'}`,
+    'Fuente: dashboard informativo. Validar siempre contra liquidación oficial.'
+  ].filter(Boolean).join('\n');
+  if ($('whatsappSummaryText')) $('whatsappSummaryText').value = text;
+}
+
+async function copyWhatsappSummary() {
+  renderWhatsappSummary();
+  const text = $('whatsappSummaryText')?.value || buildWhatsappSummaryFallback();
+  try {
+    await navigator.clipboard.writeText(text);
+    setCopyStatus('Resumen copiado al portapapeles.');
+  } catch (err) {
+    const box = $('whatsappSummaryText');
+    if (box) { box.focus(); box.select(); }
+    setCopyStatus('No se pudo copiar automáticamente; el texto quedó seleccionado para copiar manualmente.');
+  }
+}
+
+function buildWhatsappSummaryFallback() {
+  const m = getMonth(state.selected);
+  return `Resumen ${m.label}: caja final ${money2(m.cashFinal)}, deuda capital ${money2(m.debtCapital)}, gastos ${money2(m.totalExpenses)}.`;
+}
+
+function setCopyStatus(message) {
+  if ($('copyStatus')) $('copyStatus').textContent = message;
+}
+
+function renderGlossary() {
+  const rows = [
+    ['Caja final', 'Saldo bruto disponible al cierre del mes.'],
+    ['Caja neta', 'Caja final menos cuentas por pagar. Es el indicador de liquidez más prudente.'],
+    ['Deuda capital', 'Expensas impagas históricas sin intereses.'],
+    ['Intereses a cobrar', 'Intereses liquidados sobre deuda, separados del capital.'],
+    ['Cuentas por pagar', 'Gastos devengados o compromisos pendientes de pago al cierre.'],
+    ['Presión financiera', 'Deuda capital + cuentas por pagar - caja final. Si es positiva, hay presión neta.'],
+    ['Gastos extraordinarios', 'Egresos no habituales: reparaciones, acopios u obras puntuales.'],
+    ['Recupero de deuda', 'Cobro de expensas adeudadas de períodos anteriores.']
+  ];
+  const el = $('glossaryPanel');
+  if (!el) return;
+  el.innerHTML = rows.map(([term, text]) => `<div class="glossary-item"><strong>${term}</strong><span>${text}</span></div>`).join('');
+}
+
+function renderDataChecks() {
+  const table = $('dataChecksTable');
+  if (!table) return;
+  const rows = buildDataChecks();
+  table.innerHTML = `<thead><tr><th>Chequeo</th><th>Estado</th><th>Detalle</th></tr></thead><tbody>${rows.map(r => `<tr><td>${escapeHtml(r.name)}</td><td><span class="status-pill ${r.level}">${escapeHtml(r.status)}</span></td><td>${escapeHtml(r.detail)}</td></tr>`).join('')}</tbody>`;
+}
+
+function buildDataChecks() {
+  const checks = [];
+  DATA.months.forEach(m => {
+    const compSum = (m.composition || []).reduce((a, b) => a + (b.amount || 0), 0);
+    const debtSum = (m.debtors || []).reduce((a, b) => a + (b.amount || 0), 0);
+    const providerSum = (m.providers || []).reduce((a, b) => a + (b.amount || 0), 0);
+    checks.push(checkDifference(`${m.label}: rubros vs gasto total`, compSum, m.totalExpenses, 1000, 'La suma de rubros debe aproximar el total de gastos.'));
+    checks.push(checkDifference(`${m.label}: deudores vs deuda capital`, debtSum, m.debtCapital, 1000, 'La suma de unidades deudoras debe aproximar la deuda de capital.'));
+    if (!m.pdf) checks.push({ name: `${m.label}: PDF`, status: 'Pendiente', level: 'warn', detail: 'No hay PDF enlazado en el dashboard.' });
+    if (!m.report) checks.push({ name: `${m.label}: informe`, status: 'Pendiente', level: 'warn', detail: 'No hay informe mensual enlazado.' });
+    if (!providerSum) checks.push({ name: `${m.label}: proveedores`, status: 'Revisar', level: 'warn', detail: 'No hay movimientos de proveedores cargados.' });
+  });
+  return checks.length ? checks : [{ name: 'Datos', status: 'OK', level: 'ok', detail: 'No se detectaron advertencias automáticas.' }];
+}
+
+function checkDifference(name, observed, expected, tolerance, detail) {
+  if (observed == null || expected == null) return { name, status: 'Sin dato', level: 'warn', detail: 'Falta valor para verificar.' };
+  const diff = Math.abs(observed - expected);
+  if (diff <= tolerance) return { name, status: 'OK', level: 'ok', detail: `${detail} Diferencia: ${money2(diff)}.` };
+  return { name, status: 'Revisar', level: 'danger', detail: `${detail} Diferencia detectada: ${money2(diff)}.` };
+}
+
+function summarizeDataChecks() {
+  const rows = buildDataChecks();
+  const danger = rows.filter(r => r.level === 'danger').length;
+  const warn = rows.filter(r => r.level === 'warn').length;
+  if (danger || warn) return `${danger} alertas críticas y ${warn} advertencias para revisar en Herramientas.`;
+  return 'Sin inconsistencias automáticas relevantes.';
+}
+
+function renderChangeLog() {
+  const table = $('changeLogTable');
+  if (!table) return;
+  const rows = [
+    ['v0.1', 'MVP inicial: resumen, evolución, composición, proveedores, morosidad y documentos.'],
+    ['v0.2', 'Gráficos de torta, leyendas laterales y responsive móvil.'],
+    ['v0.3', 'Filtro por proveedor desde torta y leyenda.'],
+    ['v0.4', 'Semáforo financiero, modo reunión, búsqueda global, decisiones y PDF.'],
+    ['v0.6', 'Ficha mensual, comparador dos meses, ranking anual y ficha de proveedor.'],
+    ['v0.7', 'Análisis anual, presión financiera, recupero de deuda, WhatsApp, glosario e inconsistencias.']
+  ];
+  table.innerHTML = `<thead><tr><th>Versión</th><th>Cambios</th></tr></thead><tbody>${rows.map(([v, text]) => `<tr><td><strong>${v}</strong></td><td>${escapeHtml(text)}</td></tr>`).join('')}</tbody>`;
 }
 
 
@@ -700,6 +917,7 @@ function renderQuality() {
     ['PDFs enlazados', `${docsWithPdf} de ${DATA.months.length}`],
     ['Informes enlazados', `${docsWithReport} de ${DATA.months.length}`],
     ['Movimientos de proveedores', `${totalProviders} registros`],
+    ['Chequeos automáticos', summarizeDataChecks()],
     ['Advertencia', 'Dashboard informativo: la liquidación oficial sigue siendo el PDF mensual.']
   ];
   $('qualityPanel').innerHTML = rows.map(([a,b]) => `<div class="quality-row"><span>${a}</span><strong>${escapeHtml(b)}</strong></div>`).join('');

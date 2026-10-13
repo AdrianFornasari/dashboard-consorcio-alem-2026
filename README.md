@@ -1,8 +1,43 @@
-# Dashboard Consorcio Alem 2026 — actualización v0.6 viaje / Codespaces
+# Dashboard Consorcio Alem 2026 — actualización v0.7
 
-Esta actualización agrega las 5 mejoras propuestas para continuar el desarrollo desde GitHub Codespaces o desde la PC local.
+Actualización incremental para aplicar sobre la versión que ya funciona en PC, GitHub Pages y Codespaces.
 
-## Archivos incluidos
+## Cambios incluidos
+
+1. **Análisis anual resumido**
+   - Nueva pestaña `Análisis anual`.
+   - Tabla mensual con caja neta, deuda, gastos, cuentas por pagar, presión financiera y estado automático.
+
+2. **Indicador de presión financiera**
+   - Fórmula: `deuda de capital + cuentas por pagar - caja final`.
+   - Gráfico comparando exposición financiera contra caja final.
+
+3. **Evolución del recupero de deuda**
+   - Gráfico y tabla mensual de recupero de expensas adeudadas e intereses cobrados.
+
+4. **Mapa de concentración de deuda**
+   - En `Morosidad`, agrega Top 1 / Top 3 / Top 5 / Top 10 con lectura automática.
+   - Sigue mostrando sólo unidades funcionales, sin nombres de propietarios.
+
+5. **Mejoras para celular/tablet**
+   - Menú de pestañas fijo y con desplazamiento horizontal.
+   - Botón flotante para volver arriba.
+
+6. **Resumen para WhatsApp**
+   - Nueva pestaña `Herramientas`.
+   - Texto copiable con resumen del mes seleccionado.
+
+7. **Glosario para consorcistas**
+   - Explica caja final, caja neta, deuda capital, cuentas por pagar, presión financiera, etc.
+
+8. **Control de inconsistencias**
+   - Chequea diferencias entre rubros/gasto total y deudores/deuda capital.
+   - Marca documentos o informes faltantes.
+
+9. **Historial de cambios**
+   - Bitácora simple de versiones del dashboard.
+
+## Archivos modificados
 
 - `index.html`
 - `styles.css`
@@ -10,37 +45,41 @@ Esta actualización agrega las 5 mejoras propuestas para continuar el desarrollo
 - `README.md`
 - `aplicar_update.sh`
 
-## Mejoras incluidas
+## Aplicación en PC
 
-1. **Ficha mensual completa**
-   - Nueva pestaña `Ficha mensual`.
-   - Resume qué pasó, qué mejoró, qué exige atención, gastos principales, deuda y documentos asociados.
+Desde la carpeta del proyecto:
 
-2. **Comparador dos meses frente a frente**
-   - Nuevo bloque dentro de `Comparativa`.
-   - Permite elegir Mes A y Mes B.
-   - Muestra diferencias directas de caja, deuda, gastos, recupero e intereses.
+```powershell
+cd "C:\Trabajos\Consorcio_Alem\dashboard-consorcio-alem-2026"
+```
 
-3. **Ranking anual de proveedores**
-   - Nuevo bloque en `Gasto por proveedor`.
-   - Ordena proveedores por total anual.
-   - Incluye meses con gasto, promedio mensual, mayor gasto y rubro principal.
+Descomprimir el ZIP reemplazando archivos. Luego probar:
 
-4. **Ficha del proveedor**
-   - Se actualiza al seleccionar un proveedor en la torta, en la leyenda o en el ranking.
-   - Muestra total 2026, meses con gasto, cantidad de movimientos, mayor gasto, rubros principales y evolución mensual.
+```powershell
+python -m http.server 8080
+```
 
-5. **Estado de documentos y validación**
-   - Nuevo bloque dentro de `Documentos`.
-   - Muestra por mes si hay PDF, informe, datos estructurados y estado de validación.
+Abrir:
 
-## Aplicación rápida en Codespaces
+```text
+http://localhost:8080
+```
 
-Subir el ZIP a la raíz del repositorio y ejecutar:
+Commit sugerido:
+
+```powershell
+git add index.html styles.css app.js README.md
+git commit -m "Agregar analisis anual presion financiera y herramientas"
+git push
+```
+
+## Aplicación en Codespaces
+
+Subir el ZIP a la raíz del repo y ejecutar:
 
 ```bash
 mkdir -p /tmp/dashboard_update
-unzip -o dashboard_consorcio_alem_2026_update_5_codespaces.zip -d /tmp/dashboard_update
+unzip -o dashboard_consorcio_alem_2026_update_v07_analisis_herramientas.zip -d /tmp/dashboard_update
 bash /tmp/dashboard_update/aplicar_update.sh
 ```
 
@@ -49,20 +88,3 @@ Luego probar:
 ```bash
 python -m http.server 8080
 ```
-
-Commit recomendado:
-
-```bash
-git status
-git add index.html styles.css app.js README.md
-git commit -m "Agregar ficha mensual comparador y ranking de proveedores"
-git push
-```
-
-## Aplicación manual
-
-También se puede descomprimir el ZIP en la raíz del proyecto reemplazando los archivos existentes.
-
-## Nota
-
-Esta actualización no modifica `data/expensas-2026.json`. Usa los datos ya cargados de 2026.

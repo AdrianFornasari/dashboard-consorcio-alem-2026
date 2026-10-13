@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard Expensas Alem 2026</title>
-  <link rel="stylesheet" href="styles.css?v=20261012-codespaces-v1">
+  <link rel="stylesheet" href="styles.css?v=20261012-next-v1">
 </head>
 <body>
   <header class="hero">
@@ -12,7 +12,7 @@
       <p class="eyebrow">Consorcio Alem 1268/74/80/82</p>
       <h1>Dashboard de expensas 2026</h1>
       <p class="hero-text">Resumen financiero, morosidad por unidad, composición de gastos, proveedores, documentos e indicadores para reuniones de consorcio.</p>
-      <p class="version-badge">Versión 0.6 · ficha mensual, comparador, ranking y validación</p>
+      <p class="version-badge">Versión 0.7 · análisis anual, presión financiera y herramientas</p>
     </div>
     <div class="hero-card">
       <label for="monthSelect">Mes de análisis</label>
@@ -45,6 +45,7 @@
 
     <nav class="tabs" aria-label="Secciones del dashboard">
       <button class="tab active" data-tab="overview">Resumen</button>
+      <button class="tab" data-tab="annualAnalysis">Análisis anual</button>
       <button class="tab" data-tab="monthlyFile">Ficha mensual</button>
       <button class="tab" data-tab="compare">Comparativa</button>
       <button class="tab" data-tab="composition">Composición del gasto</button>
@@ -53,6 +54,7 @@
       <button class="tab" data-tab="meeting">Modo reunión</button>
       <button class="tab" data-tab="management">Gestión</button>
       <button class="tab" data-tab="docs">Documentos</button>
+      <button class="tab" data-tab="tools">Herramientas</button>
     </nav>
 
     <section id="overview" class="tab-panel active">
@@ -78,6 +80,41 @@
       </div>
     </section>
 
+    <section id="annualAnalysis" class="tab-panel">
+      <article class="panel">
+        <div class="panel-head horizontal">
+          <div>
+            <h2>Evolución anual resumida</h2>
+            <p class="muted">Lectura mes a mes con estado automático, presión financiera, caja, deuda, gastos y compromisos.</p>
+          </div>
+          <button id="copyWhatsappButton" class="small-action" type="button">Copiar resumen WhatsApp</button>
+        </div>
+        <div id="annualPressureCards" class="kpi-grid compact"></div>
+        <div class="table-wrap tall">
+          <table id="annualSummaryTable"></table>
+        </div>
+      </article>
+      <div class="grid two spaced-panel">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Presión financiera</h2>
+            <p class="muted">Compara caja final contra deuda de capital más cuentas por pagar.</p>
+          </div>
+          <canvas id="financialPressureChart" height="260"></canvas>
+          <div id="financialPressureText" class="summary-line"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Recupero de deuda</h2>
+            <p class="muted">Expensas adeudadas e intereses efectivamente cobrados por mes.</p>
+          </div>
+          <canvas id="debtRecoveryChart" height="260"></canvas>
+          <div class="table-wrap compact-table">
+            <table id="debtRecoveryTable"></table>
+          </div>
+        </article>
+      </div>
+    </section>
 
     <section id="monthlyFile" class="tab-panel">
       <article class="panel">
@@ -245,6 +282,12 @@
           <div class="table-wrap">
             <table id="debtorsTable"></table>
           </div>
+          <div class="spaced-panel">
+            <h3>Mapa de concentración</h3>
+            <div class="table-wrap compact-table">
+              <table id="debtConcentrationTable"></table>
+            </div>
+          </div>
         </article>
       </div>
     </section>
@@ -309,12 +352,54 @@
         </div>
       </article>
     </section>
+    <section id="tools" class="tab-panel">
+      <div class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Resumen para WhatsApp</h2>
+            <p class="muted">Texto breve para copiar y compartir con consorcistas. No incluye nombres de propietarios.</p>
+          </div>
+          <textarea id="whatsappSummaryText" class="share-textarea" readonly></textarea>
+          <button id="copyWhatsappButtonTools" class="small-action primary" type="button">Copiar texto</button>
+          <p id="copyStatus" class="muted small"></p>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Glosario rápido</h2>
+            <p class="muted">Definiciones para lectura no técnica de los indicadores.</p>
+          </div>
+          <div id="glossaryPanel" class="glossary-grid"></div>
+        </article>
+      </div>
+      <div class="grid two spaced-panel">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Control de inconsistencias</h2>
+            <p class="muted">Verificaciones automáticas sobre sumas, documentos y cobertura de datos.</p>
+          </div>
+          <div class="table-wrap tall">
+            <table id="dataChecksTable"></table>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Historial de cambios</h2>
+            <p class="muted">Bitácora del dashboard para saber qué se agregó en cada versión.</p>
+          </div>
+          <div class="table-wrap">
+            <table id="changeLogTable"></table>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
+
+  <button id="backToTop" class="back-to-top" type="button" aria-label="Volver arriba">↑</button>
 
   <footer>
     <p>Dashboard estático MVP · HTML/CSS/JavaScript · Datos 2026. Validar contra PDF mensual antes de publicar.</p>
   </footer>
 
-  <script src="app.js?v=20261012-codespaces-v1"></script>
+  <script src="app.js?v=20261012-next-v1"></script>
 </body>
 </html>
