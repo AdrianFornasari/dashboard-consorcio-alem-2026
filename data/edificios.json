@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "buildings": [
+    {
+      "id": "alem-1274",
+      "name": "Consorcio Alem 1274",
+      "data": "data/expensas-2026.json",
+      "available": "Enero–septiembre 2026",
+      "source": "Liquidaciones mensuales"
+    },
+    {
+      "id": "lagos-2797",
+      "name": "Torre VI · Lagos 2797",
+      "data": "consorcios/lagos-2797/data/2026.json",
+      "available": "Mayo–julio 2026",
+      "source": "Liquidaciones individuales con resumen general"
+    }
+  ]
+}

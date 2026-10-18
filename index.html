@@ -3,30 +3,54 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard Expensas Alem 2026</title>
-  <link rel="stylesheet" href="styles.css?v=20261012-next-v1">
+  <title>Dashboard de Consorcios · Expensas 2026</title>
+  <link rel="stylesheet" href="styles.css?v=20261018-multi-v1">
 </head>
 <body>
   <header class="hero">
     <div>
-      <p class="eyebrow">Consorcio Alem 1268/74/80/82</p>
+      <p class="eyebrow" id="activeBuildingLabel">Consorcio Alem 1268/74/80/82</p>
       <h1>Dashboard de expensas 2026</h1>
       <p class="hero-text">Resumen financiero, morosidad por unidad, composición de gastos, proveedores, documentos e indicadores para reuniones de consorcio.</p>
-      <p class="version-badge">Versión 0.7 · análisis anual, presión financiera y herramientas</p>
+      <p class="version-badge" id="appVersionLine">Versión 0.8 · selección de edificios (beta)</p>
     </div>
     <div class="hero-card">
+      <label for="buildingSelect">Seleccionar edificio</label>
+      <select id="buildingSelect" aria-label="Seleccionar edificio"><option value="alem-1274">Consorcio Alem 1274</option><option value="lagos-2797">Torre VI · Lagos 2797</option></select>
+      <div id="alemHeroControls" class="field-spaced">
       <label for="monthSelect">Mes de análisis</label>
       <select id="monthSelect"></select>
       <label for="globalSearch" class="field-spaced">Búsqueda global</label>
       <input id="globalSearch" type="search" placeholder="Proveedor, rubro, unidad o mes">
       <button id="printButton" class="hero-action" type="button">Imprimir / guardar PDF</button>
       <p id="lastUpdate" class="muted small"></p>
+      </div>
+      <div id="lagosHeroControls" class="field-spaced" hidden><label for="lagosMonthSelect">Mes de Lagos</label><select id="lagosMonthSelect"></select><p class="small" style="color:#fff">Información disponible: mayo a julio de 2026. Fuente: liquidaciones individuales.</p></div>
     </div>
   </header>
 
   <main>
-    <section class="notice">
+    <section class="notice" id="privacyNotice">
       <strong>Privacidad:</strong> este MVP no muestra nombres de propietarios en morosidad; sólo unidades funcionales. Sin contraseña, la privacidad depende de no difundir el enlace fuera del consorcio.
+    </section>
+
+    <section id="lagosDashboard" class="lagos-dashboard" hidden aria-label="Dashboard Torre VI Lagos 2797">
+      <div class="notice">
+        <strong>Alcance documental:</strong> las cifras representan importes <strong>liquidados</strong> y la suma de un listado de deudores en tres comprobantes individuales; no son movimientos de caja ni saldos contables auditados. Los PDFs originales no se publican por contener nombres de propietarios. Sólo se muestran unidades funcionales.
+      </div>
+      <div id="lagosKPIs" class="kpi-grid"></div>
+      <article class="panel spaced-panel"><div class="panel-head"><h2>Lectura del mes</h2><p class="muted">Interpretación limitada a los datos efectivamente publicados.</p></div><div id="lagosReading"></div></article>
+      <div class="grid two spaced-panel">
+        <article class="panel"><div class="panel-head"><h2>Composición de la liquidación</h2><p class="muted">Rubros 01–04 y rubro 08 (no habituales); incluye fondo operativo.</p></div><div class="pie-layout"><canvas id="lagosCompositionChart" height="260"></canvas><div id="lagosCompositionLegend" class="chart-legend"></div></div></article>
+        <article class="panel"><div class="panel-head"><h2>Detalle por rubro</h2></div><div class="table-wrap"><table id="lagosCompositionTable"></table></div></article>
+      </div>
+      <article class="panel spaced-panel"><div class="panel-head horizontal"><div><h2>Movimientos por proveedor</h2><p class="muted">Seleccioná una porción o leyenda para filtrar. Fondo operativo no se cuenta como proveedor.</p></div><div class="controls-inline"><label>Desde<select id="lagosFrom"></select></label><label>Hasta<select id="lagosTo"></select></label></div></div><div class="grid two"><div><div class="pie-layout"><canvas id="lagosProvidersChart" height="260"></canvas><div id="lagosProvidersLegend" class="chart-legend"></div></div><p class="summary-line" id="lagosProvidersSummary"></p><button id="lagosClearProvider" class="small-action" type="button">Ver todos los proveedores</button></div><div class="table-wrap tall"><table id="lagosProvidersTable"></table></div></div></article>
+      <div class="grid two spaced-panel">
+        <article class="panel"><div class="panel-head"><h2>Morosidad informada por unidad</h2><p class="muted">Suma de los importes publicados en este listado; no equivale a un saldo contable auditado.</p></div><div class="pie-layout"><canvas id="lagosDebtorsChart" height="260"></canvas><div id="lagosDebtorsLegend" class="chart-legend"></div></div></article>
+        <article class="panel"><div class="panel-head"><h2>Detalle de unidades deudoras</h2></div><div class="table-wrap tall"><table id="lagosDebtorsTable"></table></div></article>
+      </div>
+      <article class="panel spaced-panel"><div class="panel-head horizontal"><div><h2>Comparación por períodos</h2><p class="muted">Valores nominales liquidados. No reflejan erogaciones de caja ni cobros.</p></div><div class="controls-inline"><label>Mes A<select id="lagosMonthA"></select></label><label>Mes B<select id="lagosMonthB"></select></label></div></div><div class="table-wrap"><table id="lagosCompareTable"></table></div></article>
+      <article class="panel spaced-panel"><div class="panel-head"><h2>Informes mensuales y estado de fuentes</h2><p class="muted">Los informes están anonimizados. Liquidaciones originales: resguardadas fuera del sitio público.</p></div><div class="table-wrap"><table id="lagosDocsTable"></table></div></article>
     </section>
 
     <section id="globalSearchPanel" class="panel search-panel hidden">
@@ -400,6 +424,7 @@
     <p>Dashboard estático MVP · HTML/CSS/JavaScript · Datos 2026. Validar contra PDF mensual antes de publicar.</p>
   </footer>
 
-  <script src="app.js?v=20261012-next-v1"></script>
+  <script src="app.js?v=20261018-multi-v1"></script>
+  <script src="multibuilding.js?v=20261018-multi-v1"></script>
 </body>
 </html>

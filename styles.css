@@ -622,3 +622,30 @@ body.printing .chart-legend {
   .tabs { position: static; background: transparent; }
   .share-textarea { min-height: 140px; }
 }
+
+/* Extensión multiedificio v0.8: no interfiere con el dashboard Alem. */
+.field-spaced { margin-top: 14px; }
+[hidden] { display: none !important; }
+body[data-active-building="lagos-2797"] .tabs,
+body[data-active-building="lagos-2797"] main > .tab-panel,
+body[data-active-building="lagos-2797"] #globalSearchPanel { display: none !important; }
+body[data-active-building="lagos-2797"] .lagos-dashboard { display: block; }
+.lagos-dashboard .spaced-panel { margin-top: 18px; }
+.lagos-dashboard .chart-legend { min-width: 0; }
+.lagos-dashboard .pie-layout canvas { width: 100%; height: auto; max-width: 360px; aspect-ratio: 1/1; }
+.lagos-dashboard .legend-item { cursor: pointer; }
+.lagos-dashboard table td { overflow-wrap: anywhere; }
+.lagos-dashboard .kpi .value { overflow-wrap: anywhere; }
+.lagos-dashboard .info-missing { color: #7c2d12; }
+@media (max-width: 620px) {
+ .lagos-dashboard .pie-layout { grid-template-columns: 1fr !important; }
+ .lagos-dashboard .pie-layout canvas { max-width: 300px; justify-self: center; }
+ .lagos-dashboard .chart-legend { max-height: 240px; overflow-y: auto; }
+}
+@media print {
+ body[data-active-building="lagos-2797"] main > .tab-panel { display: none !important; }
+ body[data-active-building="lagos-2797"] .lagos-dashboard { display: block !important; }
+ body[data-active-building="lagos-2797"] .lagos-dashboard .pie-layout { grid-template-columns: minmax(260px,340px) minmax(210px,1fr) !important; }
+ body[data-active-building="lagos-2797"] .lagos-dashboard canvas { width: 300px !important; height: 300px !important; max-width: 300px !important; }
+ body[data-active-building="lagos-2797"] .lagos-dashboard .panel { break-inside: avoid; page-break-inside: avoid; }
+}
