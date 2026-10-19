@@ -649,3 +649,51 @@ body[data-active-building="lagos-2797"] .lagos-dashboard { display: block; }
  body[data-active-building="lagos-2797"] .lagos-dashboard canvas { width: 300px !important; height: 300px !important; max-width: 300px !important; }
  body[data-active-building="lagos-2797"] .lagos-dashboard .panel { break-inside: avoid; page-break-inside: avoid; }
 }
+
+
+/* v1.0 Seguimiento de morosidad de Lagos: exclusivo de la vista Lagos */
+.lagos-debt-section { scroll-margin-top: 30px; }
+.lagos-debt-section .section-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; margin: 6px 0 18px; }
+.lagos-debt-section .section-heading h2 {font-size:clamp(1.5rem,2.8vw,2.2rem);margin:0 0 6px;}
+.lagos-debt-section .section-heading p {max-width:840px;margin:0;line-height:1.5;}
+.lagos-debt-section .eyebrow.dark {color:var(--accent);font-weight:800;margin-bottom:7px;}
+.lagos-debt-section h3 {font-size:1.08rem;margin:0;}
+.lagos-debt-section .debt-summary-cards { display:grid; grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px; }
+.lagos-debt-section .debt-stat { background:white; border:1px solid var(--line); border-radius:16px; padding:16px; box-shadow:0 4px 12px rgba(15,23,42,.035); }
+.lagos-debt-section .debt-stat .label {display:block;font-size:.8rem;color:var(--muted);font-weight:800;}
+.lagos-debt-section .debt-stat strong {display:block;font-size:clamp(1.16rem,2vw,1.65rem);margin-top:8px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;}
+.lagos-debt-section .debt-stat small {display:block;color:#475569;margin-top:6px;line-height:1.4;}
+.lagos-debt-section .debt-stat.negative strong {color:var(--danger);}
+.lagos-debt-section .debt-stat.positive strong {color:var(--ok);}
+.lagos-debt-section .debt-chart { width:100%; min-width:0; overflow:hidden; }
+.lagos-debt-section .debt-chart svg { display:block;width:100%;height:auto;max-width:100%;overflow:visible; }
+.lagos-debt-section .debt-chart-panel {overflow:hidden;}
+.lagos-debt-section .debt-chart-panel .panel-head {margin-bottom:6px;}
+.lagos-debt-section .debt-chart-panel .panel-head p {margin:5px 0 0;}
+.lagos-debt-section .debt-change-summary {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px;}
+.lagos-debt-section .debt-change-summary div {background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px;}
+.lagos-debt-section .debt-change-summary strong {display:block;font-size:1.08rem;margin-top:4px;}
+.lagos-debt-section .debt-change-summary span {font-size:.78rem;color:var(--muted);font-weight:700;}
+.lagos-debt-section .debt-filter-row {display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:14px;}
+.lagos-debt-section .debt-filter-row label {flex:0 1 260px;}
+.lagos-debt-section tr.debt-row-emphasis td {background:#e6f6f2;}
+.lagos-debt-section .debt-status {display:inline-block;padding:4px 8px;border-radius:8px;font-size:.8rem;font-weight:750;background:#f1f5f9;color:#334155;}
+.lagos-debt-section .debt-status.increase {background:#fef2f2;color:#991b1b;}
+.lagos-debt-section .debt-status.decrease {background:#ecfdf5;color:#065f46;}
+.lagos-debt-section .debt-status.entry,.lagos-debt-section .debt-status.exit {background:#fff7ed;color:#92400e;}
+.lagos-debt-section .debt-diagnosis {line-height:1.6;}
+.lagos-debt-section .debt-diagnosis ul {margin:6px 0 0;padding-left:22px;}
+.lagos-debt-section .debt-diagnosis li {margin:8px 0;}
+.lagos-debt-section .debt-diagnosis .limits-note {border-left:3px solid #cbd5e1;padding-left:12px;color:#475569;margin-top:16px;}
+.lagos-debt-section #lagosDebtConcentrationKpis {padding:0 0 12px;}
+.lagos-debt-section #lagosDebtConcentrationKpis strong {font-size:1.35rem;color:var(--accent);}
+.lagos-debt-section #lagosDebtConcentrationKpis small {display:block;color:var(--muted);}
+@media(max-width:1050px){.lagos-debt-section .debt-summary-cards{grid-template-columns:repeat(2,minmax(0,1fr));}.lagos-debt-section .debt-change-summary{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:620px){.lagos-debt-section .section-heading{flex-direction:column;}.lagos-debt-section .debt-summary-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}.lagos-debt-section .debt-stat{padding:11px;}.lagos-debt-section .debt-stat strong{font-size:1.04rem;}.lagos-debt-section .debt-change-summary{grid-template-columns:repeat(2,minmax(0,1fr));}.lagos-debt-section .debt-change-summary strong{font-size:.98rem;}.lagos-debt-section .controls-inline{width:100%;flex-wrap:wrap;}.lagos-debt-section .controls-inline label{flex:1 1 130px;min-width:0;}}
+@media print{.lagos-debt-section #lagosDebtExport,.lagos-debt-section .debt-filter-row {display:none !important;}.lagos-debt-section .debt-chart svg{max-height:240px;width:100%;}.lagos-debt-section .debt-chart-panel,.lagos-debt-section .debt-summary-cards,.lagos-debt-section .debt-stat{break-inside:avoid;page-break-inside:avoid;}.lagos-debt-section .debt-summary-cards{grid-template-columns:repeat(4,minmax(0,1fr));}}
+
+.lagos-dashboard .lagos-quicklinks {display:flex;gap:10px;flex-wrap:wrap;margin:0 0 17px;}
+.lagos-dashboard .lagos-quicklinks a {display:inline-flex;padding:9px 12px;border:1px solid #b8d9d2;border-radius:999px;background:white;color:#0f766e;font-size:.86rem;font-weight:800;text-decoration:none;}
+.lagos-dashboard .lagos-quicklinks a:hover,.lagos-dashboard .lagos-quicklinks a:focus-visible{background:#e2f7f3;}
+.lagos-debt-section .debt-unit-link {border:0;background:transparent;color:#0f766e;font:inherit;font-weight:800;text-decoration:underline;cursor:pointer;padding:2px;}
+@media print{.lagos-dashboard .lagos-quicklinks{display:none!important;}}
