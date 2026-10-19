@@ -2,6 +2,38 @@
   "unitNamesOnly": true,
   "months": [
     {
+      "id": "2026-01",
+      "rubroTotal": 3624140.39,
+      "providerTotal": 3624140.39,
+      "liquidationTotal": 3624140.39,
+      "listedDebtTotal": 20757582.44,
+      "debtorCount": 22
+    },
+    {
+      "id": "2026-02",
+      "rubroTotal": 5644866.29,
+      "providerTotal": 5644866.29,
+      "liquidationTotal": 5644866.29,
+      "listedDebtTotal": 22215845.06,
+      "debtorCount": 18
+    },
+    {
+      "id": "2026-03",
+      "rubroTotal": 4557815,
+      "providerTotal": 4557815.0,
+      "liquidationTotal": 4557815,
+      "listedDebtTotal": 24530724.9,
+      "debtorCount": 22
+    },
+    {
+      "id": "2026-04",
+      "rubroTotal": 5034342.34,
+      "providerTotal": 5034342.34,
+      "liquidationTotal": 5034342.34,
+      "listedDebtTotal": 25651031.9,
+      "debtorCount": 21
+    },
+    {
       "id": "2026-05",
       "rubroTotal": 5326850.25,
       "providerTotal": 5326850.25,

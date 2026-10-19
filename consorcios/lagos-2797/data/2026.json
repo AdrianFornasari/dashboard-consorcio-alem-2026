@@ -6,12 +6,1046 @@
     "title": "Dashboard de expensas — Torre VI Lagos 2797",
     "lastLoadedMonth": "2026-07",
     "currency": "ARS",
-    "availableMonths": "Mayo a julio 2026",
-    "sourceScope": "Tres liquidaciones de la unidad 01-03, que contienen rubros generales y listado de deudores.",
-    "dataPolicy": "El total es computable para liquidar expensas, no gasto de caja verificado. La suma de morosos es la suma del listado transcrito y no un saldo contable auditado.",
+    "availableMonths": "Enero a julio 2026",
+    "sourceScope": "Siete liquidaciones individuales de la unidad 01-03 con resumen de rubros generales y listados mensuales de deudores.",
+    "dataPolicy": "Total computable para determinar las expensas, no gasto efectivo ni saldo de caja. Fondos de reserva y operativos se identifican por separado, incluso sus ajustes negativos. Deuda equivale a la suma del listado publicado.",
     "privacy": "No se publican nombres de propietarios ni los PDFs originales, que contienen datos personales. Los informes derivados omiten nombres."
   },
   "months": [
+    {
+      "id": "2026-01",
+      "label": "Enero 2026",
+      "monthShort": "Ene",
+      "liquidatedTotal": 3624140.39,
+      "habitualExpenses": 3624140.39,
+      "nonHabitualExpenses": 0,
+      "fundOperating": 0,
+      "fundReserve": 0,
+      "unitCharge": 68873.24,
+      "debtors": [
+        {
+          "unit": "03-04",
+          "amount": 3208634.33
+        },
+        {
+          "unit": "10-04",
+          "amount": 2727235.98
+        },
+        {
+          "unit": "04-03",
+          "amount": 2703730.04
+        },
+        {
+          "unit": "02-01",
+          "amount": 2660880.88
+        },
+        {
+          "unit": "06-01",
+          "amount": 2476380.72
+        },
+        {
+          "unit": "09-04",
+          "amount": 2084847.71
+        },
+        {
+          "unit": "02-04",
+          "amount": 1259035.07
+        },
+        {
+          "unit": "05-01",
+          "amount": 1048578.53
+        },
+        {
+          "unit": "05-03",
+          "amount": 802475.24
+        },
+        {
+          "unit": "11-03",
+          "amount": 657497.94
+        },
+        {
+          "unit": "09-02",
+          "amount": 509433.92
+        },
+        {
+          "unit": "CH-72",
+          "amount": 74322.88
+        },
+        {
+          "unit": "CH-12",
+          "amount": 74322.88
+        },
+        {
+          "unit": "CH-71",
+          "amount": 74322.88
+        },
+        {
+          "unit": "CH-61",
+          "amount": 66263.72
+        },
+        {
+          "unit": "CH-22",
+          "amount": 66263.72
+        },
+        {
+          "unit": "05-04",
+          "amount": 63944.14
+        },
+        {
+          "unit": "13-02",
+          "amount": 63944.14
+        },
+        {
+          "unit": "11-02",
+          "amount": 63944.14
+        },
+        {
+          "unit": "11-04",
+          "amount": 62134.0
+        },
+        {
+          "unit": "CH-41",
+          "amount": 4694.79
+        },
+        {
+          "unit": "CH-42",
+          "amount": 4694.79
+        }
+      ],
+      "listedDebtTotal": 20757582.44,
+      "composition": [
+        {
+          "category": "Servicios",
+          "amount": 1732500.0,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "Tasas e impuestos",
+          "amount": 571689.39,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "Seguros",
+          "amount": 57651,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "Varios",
+          "amount": 1262300,
+          "type": "Rubros 01-04"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "MB Servicio Limpieza",
+          "category": "Servicios",
+          "amount": 331500,
+          "detail": "Servicio de limpieza enero 2026; factura 2175",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Sergio Sapp",
+          "category": "Servicios",
+          "amount": 225000,
+          "detail": "Honorarios administración enero 2026; factura 0381",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Pérez Taboada Fernando",
+          "category": "Servicios",
+          "amount": 24000,
+          "detail": "Desinfección diciembre 2025; factura 8253",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Ascensores América",
+          "category": "Servicios",
+          "amount": 410000,
+          "detail": "Colocación de dos disyuntores; factura 0039",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Ascensores América",
+          "category": "Servicios",
+          "amount": 500000,
+          "detail": "Cuota 1 del cambio de cables de acero de reguladores; factura 0035",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Ascensores América",
+          "category": "Servicios",
+          "amount": 180000,
+          "detail": "Servicio enero 2026; factura 0035",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Bombas STIB",
+          "category": "Servicios",
+          "amount": 62000,
+          "detail": "Mantenimiento de bombas enero 2026; factura 160242",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Banco Roela",
+          "category": "Tasas e impuestos",
+          "amount": 120870.6,
+          "detail": "Servicios bancarios enero 2026",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 450818.79,
+          "detail": "Energía eléctrica, cuota 2 del bimestre 6",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "La Mercantil Andina",
+          "category": "Seguros",
+          "amount": 57651,
+          "detail": "Seguro, cuota 9/10",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "García Claudio",
+          "category": "Varios",
+          "amount": 1200000,
+          "detail": "Desagüe en subsuelo y rejillas; factura 0093",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Laffitte Emilio",
+          "category": "Varios",
+          "amount": 2300,
+          "detail": "Fotocopias de expensas",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Cerrajería Franco",
+          "category": "Varios",
+          "amount": 60000,
+          "detail": "Reemplazo de cerradura y candado de sala de bombas; factura 2088",
+          "type": "Ordinario habitual"
+        }
+      ],
+      "notes": "Enero liquida $3.624.140,39. Los cargos más relevantes son el trabajo de desagües en subsuelo ($1.200.000) y tres conceptos de Ascensores América que totalizan $1.090.000, incluidos disyuntores y un anticipo para cables reguladores. Aunque figuran dentro de los rubros 01-04, no todos son servicios recurrentes. La lista de unidades morosas no permite verificar su evolución contra la caja.",
+      "observations": [
+        "Los $1.200.000 de desagües figuran en «Varios» y los trabajos especiales de ascensores dentro de «Servicios».",
+        "No existe rubro 08 ni partida de fondo identificada en este comprobante.",
+        "El resumen es de una liquidación individual; no presenta caja final ni cuentas por pagar."
+      ],
+      "cashFinal": null,
+      "netCash": null,
+      "accountsPayable": null,
+      "debtRecovered": null,
+      "interestReceivable": null,
+      "interestCollected": null,
+      "ordinaryExpenses": null,
+      "extraordinaryExpenses": null,
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202601-informe.pdf",
+      "source": {
+        "name": "Lagos-Expensas202601Liquidación.pdf",
+        "page": 1,
+        "scope": "Liquidación individual de unidad 01-03; incluye detalle de gastos y lista de deudores, pero no balance financiero consolidado."
+      },
+      "quality": {
+        "reconciled": true,
+        "scope": "liquidacion-individual",
+        "cashUnavailable": true
+      }
+    },
+    {
+      "id": "2026-02",
+      "label": "Febrero 2026",
+      "monthShort": "Feb",
+      "liquidatedTotal": 5644866.29,
+      "habitualExpenses": 2393418.43,
+      "nonHabitualExpenses": 3251447.86,
+      "fundOperating": 0,
+      "fundReserve": 2600000,
+      "unitCharge": 107252.93,
+      "debtors": [
+        {
+          "unit": "03-04",
+          "amount": 3420235.14
+        },
+        {
+          "unit": "10-04",
+          "amount": 2918496.02
+        },
+        {
+          "unit": "04-03",
+          "amount": 2893996.87
+        },
+        {
+          "unit": "02-01",
+          "amount": 2849337.18
+        },
+        {
+          "unit": "06-01",
+          "amount": 2657041.24
+        },
+        {
+          "unit": "09-04",
+          "amount": 2248964.58
+        },
+        {
+          "unit": "02-04",
+          "amount": 1388258.45
+        },
+        {
+          "unit": "05-01",
+          "amount": 1168909.38
+        },
+        {
+          "unit": "05-03",
+          "amount": 837786.93
+        },
+        {
+          "unit": "11-03",
+          "amount": 761077.94
+        },
+        {
+          "unit": "09-02",
+          "amount": 606984.01
+        },
+        {
+          "unit": "CH-72",
+          "amount": 81248.99
+        },
+        {
+          "unit": "CH-12",
+          "amount": 81248.99
+        },
+        {
+          "unit": "CH-71",
+          "amount": 81248.99
+        },
+        {
+          "unit": "08-02",
+          "amount": 73005.63
+        },
+        {
+          "unit": "CH-61",
+          "amount": 72438.81
+        },
+        {
+          "unit": "CH-22",
+          "amount": 72438.81
+        },
+        {
+          "unit": "CH-51",
+          "amount": 3127.1
+        }
+      ],
+      "listedDebtTotal": 22215845.06,
+      "composition": [
+        {
+          "category": "Servicios",
+          "amount": 1589500,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "Tasas e impuestos",
+          "amount": 639992.09,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "Seguros",
+          "amount": 57651,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "Varios",
+          "amount": 106275.34,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "No habituales",
+          "amount": 3251447.86,
+          "type": "Ordinario no habitual"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "MB Servicio Limpieza",
+          "category": "Servicios",
+          "amount": 331500,
+          "detail": "Servicio de limpieza febrero 2026; factura 2341",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Oliva Brian Iván",
+          "category": "Servicios",
+          "amount": 150000,
+          "detail": "Destape de urgencia en colector de cocina/lavadero; factura 2342",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Oliva Brian Iván",
+          "category": "Servicios",
+          "amount": 75000,
+          "detail": "Destape de colector cocina unidad 7B; factura 2338",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Sergio Sapp",
+          "category": "Servicios",
+          "amount": 232000,
+          "detail": "Honorarios administración febrero 2026; factura 0419",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Pérez Taboada Fernando",
+          "category": "Servicios",
+          "amount": 25000,
+          "detail": "Servicio de desinfección enero 2026; factura 8354",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Pérez Taboada Fernando",
+          "category": "Servicios",
+          "amount": 26000,
+          "detail": "Servicio de desinfección febrero 2026; factura 8458",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Ascensores América",
+          "category": "Servicios",
+          "amount": 500000,
+          "detail": "Cuota 2 de cambio de cables reguladores; factura 0044",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Ascensores América",
+          "category": "Servicios",
+          "amount": 50000,
+          "detail": "Reparación patín ascensor 3; factura 0044",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Ascensores América",
+          "category": "Servicios",
+          "amount": 200000,
+          "detail": "Mantenimiento ascensores febrero 2026; factura 0044",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Banco Roela",
+          "category": "Tasas e impuestos",
+          "amount": 135238.38,
+          "detail": "Comisiones y servicios bancarios febrero 2026",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 504753.71,
+          "detail": "Electricidad, cuota 1 del bimestre 1",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "La Mercantil Andina",
+          "category": "Seguros",
+          "amount": 57651,
+          "detail": "Seguro, cuota 10/10",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Laffitte Emilio",
+          "category": "Varios",
+          "amount": 2300,
+          "detail": "Fotocopias de expensas",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Matafuegos Confiar",
+          "category": "Varios",
+          "amount": 103975.34,
+          "detail": "Recarga de matafuegos; factura 15838",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Fondo de Reserva",
+          "category": "No habituales",
+          "amount": 2600000,
+          "detail": "Partida de fondo de reserva, no acredita egreso efectivo",
+          "type": "Ordinario no habitual / fondo"
+        },
+        {
+          "provider": "García Claudio",
+          "category": "No habituales",
+          "amount": 260000,
+          "detail": "Soldadura de cinco punteras de bronce; factura 0095",
+          "type": "Ordinario no habitual"
+        },
+        {
+          "provider": "Tettamanti",
+          "category": "No habituales",
+          "amount": 391447.86,
+          "detail": "Honorarios y aportes en expediente judicial; concepto de fuente parcialmente abreviado",
+          "type": "Ordinario no habitual"
+        }
+      ],
+      "notes": "Febrero muestra un total computable de $5.644.866,29, del cual $3.251.447,86 se registra en «No habituales». Allí aparece un fondo de reserva de $2.600.000, que debe distinguirse de gastos efectivamente ejecutados. También figuran reparaciones, tareas de desagote y honorarios vinculados con un expediente judicial.",
+      "observations": [
+        "Fondo de reserva por $2.600.000: partida liquidada, sin información de aplicación del fondo.",
+        "Un importe de $391.447,86 corresponde a honorarios y aportes legales según descripción abreviada del comprobante.",
+        "La liquidación incluye dos servicios de desinfección (enero y febrero), lo que explica la duplicidad mensual."
+      ],
+      "cashFinal": null,
+      "netCash": null,
+      "accountsPayable": null,
+      "debtRecovered": null,
+      "interestReceivable": null,
+      "interestCollected": null,
+      "ordinaryExpenses": null,
+      "extraordinaryExpenses": null,
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202602-informe.pdf",
+      "source": {
+        "name": "Lagos-Expensas202602Liquidación.pdf",
+        "page": 1,
+        "scope": "Liquidación individual de unidad 01-03; incluye detalle de gastos y lista de deudores, pero no balance financiero consolidado."
+      },
+      "quality": {
+        "reconciled": true,
+        "scope": "liquidacion-individual",
+        "cashUnavailable": true
+      }
+    },
+    {
+      "id": "2026-03",
+      "label": "Marzo 2026",
+      "monthShort": "Mar",
+      "liquidatedTotal": 4557815,
+      "habitualExpenses": 2157815,
+      "nonHabitualExpenses": 2400000,
+      "fundOperating": 0,
+      "fundReserve": 2200000,
+      "unitCharge": 86356.96,
+      "debtors": [
+        {
+          "unit": "03-04",
+          "amount": 3676650.81
+        },
+        {
+          "unit": "10-04",
+          "amount": 3154570.92
+        },
+        {
+          "unit": "04-03",
+          "amount": 3129078.56
+        },
+        {
+          "unit": "02-01",
+          "amount": 3082608.34
+        },
+        {
+          "unit": "06-01",
+          "amount": 2882516.62
+        },
+        {
+          "unit": "09-04",
+          "amount": 2457896.31
+        },
+        {
+          "unit": "02-04",
+          "amount": 1562296.69
+        },
+        {
+          "unit": "05-01",
+          "amount": 1334055.09
+        },
+        {
+          "unit": "05-03",
+          "amount": 914018.77
+        },
+        {
+          "unit": "09-02",
+          "amount": 749348.96
+        },
+        {
+          "unit": "11-03",
+          "amount": 395906.82
+        },
+        {
+          "unit": "08-02",
+          "amount": 190826.12
+        },
+        {
+          "unit": "11-04",
+          "amount": 113688.1
+        },
+        {
+          "unit": "07-03",
+          "amount": 113688.1
+        },
+        {
+          "unit": "09-03",
+          "amount": 113688.1
+        },
+        {
+          "unit": "13-02",
+          "amount": 113688.1
+        },
+        {
+          "unit": "11-02",
+          "amount": 113688.1
+        },
+        {
+          "unit": "CH-72",
+          "amount": 90424.11
+        },
+        {
+          "unit": "CH-12",
+          "amount": 90424.11
+        },
+        {
+          "unit": "CH-71",
+          "amount": 90424.11
+        },
+        {
+          "unit": "CH-61",
+          "amount": 80619.03
+        },
+        {
+          "unit": "CH-22",
+          "amount": 80619.03
+        }
+      ],
+      "listedDebtTotal": 24530724.9,
+      "composition": [
+        {
+          "category": "Servicios",
+          "amount": 946100,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "Tasas e impuestos",
+          "amount": 663415,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "Varios",
+          "amount": 548300,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "No habituales",
+          "amount": 2400000,
+          "type": "Ordinario no habitual"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "MB Servicio Limpieza",
+          "category": "Servicios",
+          "amount": 347100,
+          "detail": "Servicio de limpieza marzo 2026; factura 2513",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Sergio Sapp",
+          "category": "Servicios",
+          "amount": 242000,
+          "detail": "Honorarios administración marzo 2026; factura 0447",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Pérez Taboada Fernando",
+          "category": "Servicios",
+          "amount": 26000,
+          "detail": "Desinfección marzo 2026; factura 8482",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Ascensores América",
+          "category": "Servicios",
+          "amount": 200000,
+          "detail": "Servicio de ascensores marzo 2026; factura 0048",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Bombas STIB",
+          "category": "Servicios",
+          "amount": 65500,
+          "detail": "Mantenimiento bombas febrero 2026; factura 161796",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Bombas STIB",
+          "category": "Servicios",
+          "amount": 65500,
+          "detail": "Mantenimiento bombas marzo 2026; factura 163349",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Banco Roela",
+          "category": "Tasas e impuestos",
+          "amount": 158661.3,
+          "detail": "Servicios bancarios marzo 2026",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 504753.7,
+          "detail": "Electricidad cuota 2 bimestre 1",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "García Claudio",
+          "category": "Varios",
+          "amount": 100000,
+          "detail": "Puerta de inspección en antebaño 10D; factura 0072",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Laffitte Emilio",
+          "category": "Varios",
+          "amount": 2300,
+          "detail": "Fotocopias de expensas",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Matafuegos Confiar",
+          "category": "Varios",
+          "amount": 350000,
+          "detail": "Anticipo a cuenta compra de matafuegos",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Cerrajería Franco",
+          "category": "Varios",
+          "amount": 36000,
+          "detail": "Control de cerradura sala bombas y copias; factura 2183",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Cerrajería Franco",
+          "category": "Varios",
+          "amount": 30000,
+          "detail": "Copias doble paleta; factura 1844",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Cerrajería Franco",
+          "category": "Varios",
+          "amount": 30000,
+          "detail": "Cambio cerradura puerta de ascensor piso 6; factura 1753",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Fondo de Reserva",
+          "category": "No habituales",
+          "amount": 2200000,
+          "detail": "Partida de fondo de reserva",
+          "type": "Ordinario no habitual / fondo"
+        },
+        {
+          "provider": "García Claudio",
+          "category": "No habituales",
+          "amount": 200000,
+          "detail": "Cambio de llave de paso cocina unidad 11D; facturas 0071/73",
+          "type": "Ordinario no habitual"
+        }
+      ],
+      "notes": "Marzo liquida $4.557.815,00. El rubro 08 alcanza $2.400.000, incluyendo $2.200.000 de fondo de reserva y $200.000 de un trabajo de plomería. Entre los otros conceptos figura un anticipo para matafuegos por $350.000. La fuente no permite establecer si los fondos ya se gastaron o siguen disponibles.",
+      "observations": [
+        "El rubro 03-Seguros no figura este mes; no se presume gasto o saldo cero del seguro fuera de lo liquidado.",
+        "Los servicios de bombas incluyen febrero y marzo: verificar si hubo regularización de facturación.",
+        "Conservar el anticipo de matafuegos para conciliar con ajustes de abril y mayo."
+      ],
+      "cashFinal": null,
+      "netCash": null,
+      "accountsPayable": null,
+      "debtRecovered": null,
+      "interestReceivable": null,
+      "interestCollected": null,
+      "ordinaryExpenses": null,
+      "extraordinaryExpenses": null,
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202603-informe.pdf",
+      "source": {
+        "name": "Lagos-Expensas202603Liquidación.pdf",
+        "page": 1,
+        "scope": "Liquidación individual de unidad 01-03; incluye detalle de gastos y lista de deudores, pero no balance financiero consolidado."
+      },
+      "quality": {
+        "reconciled": true,
+        "scope": "liquidacion-individual",
+        "cashUnavailable": true
+      }
+    },
+    {
+      "id": "2026-04",
+      "label": "Abril 2026",
+      "monthShort": "Abr",
+      "liquidatedTotal": 5034342.34,
+      "habitualExpenses": 1573440.28,
+      "nonHabitualExpenses": 3460902.06,
+      "fundOperating": 0,
+      "fundReserve": -1200000,
+      "unitCharge": 95592.99,
+      "debtors": [
+        {
+          "unit": "03-04",
+          "amount": 3917351.93
+        },
+        {
+          "unit": "10-04",
+          "amount": 3374931.27
+        },
+        {
+          "unit": "04-03",
+          "amount": 3348445.7
+        },
+        {
+          "unit": "02-01",
+          "amount": 3300164.95
+        },
+        {
+          "unit": "06-01",
+          "amount": 3092277.45
+        },
+        {
+          "unit": "09-04",
+          "amount": 2651113.49
+        },
+        {
+          "unit": "02-04",
+          "amount": 1720620.38
+        },
+        {
+          "unit": "05-01",
+          "amount": 1483486.25
+        },
+        {
+          "unit": "05-03",
+          "amount": 1043536.06
+        },
+        {
+          "unit": "11-04",
+          "amount": 211661.65
+        },
+        {
+          "unit": "07-03",
+          "amount": 211661.65
+        },
+        {
+          "unit": "09-03",
+          "amount": 211661.65
+        },
+        {
+          "unit": "13-02",
+          "amount": 211661.65
+        },
+        {
+          "unit": "11-02",
+          "amount": 211661.65
+        },
+        {
+          "unit": "CH-72",
+          "amount": 99875.87
+        },
+        {
+          "unit": "CH-12",
+          "amount": 99875.87
+        },
+        {
+          "unit": "CH-71",
+          "amount": 99875.87
+        },
+        {
+          "unit": "06-03",
+          "amount": 91538.38
+        },
+        {
+          "unit": "04-02",
+          "amount": 91538.38
+        },
+        {
+          "unit": "CH-61",
+          "amount": 89045.9
+        },
+        {
+          "unit": "CH-22",
+          "amount": 89045.9
+        }
+      ],
+      "listedDebtTotal": 25651031.9,
+      "composition": [
+        {
+          "category": "Servicios",
+          "amount": 936200,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "Tasas e impuestos",
+          "amount": 574940.28,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "Varios",
+          "amount": 62300,
+          "type": "Rubros 01-04"
+        },
+        {
+          "category": "No habituales",
+          "amount": 3460902.06,
+          "type": "Ordinario no habitual"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "MB Servicio Limpieza",
+          "category": "Servicios",
+          "amount": 357400,
+          "detail": "Limpieza abril 2026; factura 2680",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Sergio Sapp",
+          "category": "Servicios",
+          "amount": 250300,
+          "detail": "Honorarios administración abril 2026; factura 0487",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Pérez Taboada Fernando",
+          "category": "Servicios",
+          "amount": 28000,
+          "detail": "Desinfección abril 2026; factura 8650",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Ascensores América",
+          "category": "Servicios",
+          "amount": 230000,
+          "detail": "Servicio ascensores abril 2026; factura 0053",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Bombas STIB",
+          "category": "Servicios",
+          "amount": 70500,
+          "detail": "Mantenimiento bombas abril 2026; factura 164930",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Banco Roela",
+          "category": "Tasas e impuestos",
+          "amount": 192907.1,
+          "detail": "Servicios bancarios abril 2026",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 382033.18,
+          "detail": "Electricidad cuota 1 bimestre 3 según comprobante",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Laffitte Emilio",
+          "category": "Varios",
+          "amount": 2300,
+          "detail": "Fotocopias expensas",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Cerrajería Franco",
+          "category": "Varios",
+          "amount": 60000,
+          "detail": "Cerradura cuarto de limpieza y copias; factura 2089",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Ascensores América",
+          "category": "No habituales",
+          "amount": 2400000,
+          "detail": "Entrega para compra de polea; factura 0053",
+          "type": "Ordinario no habitual"
+        },
+        {
+          "provider": "Ascensores América",
+          "category": "No habituales",
+          "amount": 1200000,
+          "detail": "Entrega para reparación; factura 0053",
+          "type": "Ordinario no habitual"
+        },
+        {
+          "provider": "Fondo de Reserva",
+          "category": "No habituales",
+          "amount": -2200000,
+          "detail": "Devolución de fondo de reserva",
+          "type": "Ajuste de fondo"
+        },
+        {
+          "provider": "Fondo de Reserva",
+          "category": "No habituales",
+          "amount": 1000000,
+          "detail": "Nueva partida de fondo de reserva",
+          "type": "Ordinario no habitual / fondo"
+        },
+        {
+          "provider": "Matafuegos Confiar",
+          "category": "No habituales",
+          "amount": -350000,
+          "detail": "Reversión de anticipo de matafuegos",
+          "type": "Ajuste no habitual"
+        },
+        {
+          "provider": "Matafuegos Confiar",
+          "category": "No habituales",
+          "amount": 500000,
+          "detail": "Anticipo para compra de dos matafuegos CO2",
+          "type": "Ordinario no habitual"
+        },
+        {
+          "provider": "Matafuegos Confiar",
+          "category": "No habituales",
+          "amount": 475306.15,
+          "detail": "Compra de tres matafuegos y dos gabinetes; factura 1886",
+          "type": "Ordinario no habitual"
+        },
+        {
+          "provider": "Principi Cristian",
+          "category": "No habituales",
+          "amount": 435595.91,
+          "detail": "Honorarios y aportes; factura 0258",
+          "type": "Ordinario no habitual"
+        }
+      ],
+      "notes": "Abril liquida $5.034.342,34, con partidas no habituales por $3.460.902,06. Incluye anticipos por $3.600.000 para Ascensores América y varios ajustes negativos vinculados con reservas y matafuegos. El fondo de reserva tiene movimientos netos de -$1.200.000 dentro de esta liquidación. Estas cifras no implican que las partidas se hayan efectivamente pagado en abril.",
+      "observations": [
+        "La devolución de $2.200.000 de reserva y la nueva partida de $1.000.000 generan un movimiento neto de -$1.200.000, no un saldo de fondo negativo.",
+        "El ajuste de -$350.000 de matafuegos revierte un anticipo del mes anterior; no omitir el signo.",
+        "La liquidación refiere dos entregas de Ascensores América por $3.600.000; se requiere documentación complementaria para verificar ejecución y pagos."
+      ],
+      "cashFinal": null,
+      "netCash": null,
+      "accountsPayable": null,
+      "debtRecovered": null,
+      "interestReceivable": null,
+      "interestCollected": null,
+      "ordinaryExpenses": null,
+      "extraordinaryExpenses": null,
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202604-informe.pdf",
+      "source": {
+        "name": "Lagos-Expensas202604Liquidación.pdf",
+        "page": 1,
+        "scope": "Liquidación individual de unidad 01-03; incluye detalle de gastos y lista de deudores, pero no balance financiero consolidado."
+      },
+      "quality": {
+        "reconciled": true,
+        "scope": "liquidacion-individual",
+        "cashUnavailable": true
+      }
+    },
     {
       "id": "2026-05",
       "label": "Mayo 2026",
@@ -244,7 +1278,8 @@
         "name": "Lagos-Expensas202605Liquidación.pdf",
         "page": 17,
         "scope": "Liquidación individual 01-03 con resumen de rubros y listado de deudores. Sin cuadro de caja."
-      }
+      },
+      "fundReserve": 0
     },
     {
       "id": "2026-06",
@@ -500,7 +1535,8 @@
         "name": "Lagos-Expensas202606Liquidación.pdf",
         "page": 1,
         "scope": "Liquidación individual 01-03 con resumen de rubros y listado de deudores. Sin cuadro de caja."
-      }
+      },
+      "fundReserve": 0
     },
     {
       "id": "2026-07",
@@ -740,7 +1776,8 @@
         "name": "Lagos-Expensas202607Liquidación.pdf",
         "page": 1,
         "scope": "Liquidación individual 01-03 con resumen de rubros y listado de deudores. Sin cuadro de caja."
-      }
+      },
+      "fundReserve": 0
     }
   ]
 }
