@@ -7,7 +7,7 @@
     "lastLoadedMonth": "2026-07",
     "currency": "ARS",
     "availableMonths": "Enero a julio 2026",
-    "sourceScope": "Siete liquidaciones individuales de la unidad 01-03 con resumen de rubros generales y listados mensuales de deudores.",
+    "sourceScope": "Siete liquidaciones individuales enero–julio 2026; sin cuadro contable de caja.",
     "dataPolicy": "Total computable para determinar las expensas, no gasto efectivo ni saldo de caja. Fondos de reserva y operativos se identifican por separado, incluso sus ajustes negativos. Deuda equivale a la suma del listado publicado.",
     "privacy": "No se publican nombres de propietarios ni los PDFs originales, que contienen datos personales. Los informes derivados omiten nombres."
   },

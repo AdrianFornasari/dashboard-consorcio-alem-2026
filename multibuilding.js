@@ -1,4 +1,4 @@
-/* Selector multi-consorcio v1.0. Mantiene intacta la lógica histórica de Alem. */
+/* Dashboard multiedificio v1.1: gastos, proveedores e histórico documental. Alem sin cambios. */
 (() => {
   'use strict';
   let manifest = null;
@@ -42,7 +42,7 @@
     $l('lagosHeroControls').hidden=!isLagos;
     $l('lagosDashboard').hidden=!isLagos;
     $l('activeBuildingLabel').textContent = isLagos ? 'Torre VI · Ovidio Lagos 2797' : 'Consorcio Alem 1268/74/80/82';
-    $l('appVersionLine').textContent = isLagos ? 'Versión 1.0 · evolución de morosidad · enero–julio 2026' : 'Versión 1.0 · Alem conserva las funciones de la v0.7';
+    $l('appVersionLine').textContent = isLagos ? 'Versión 1.1 · gastos, proveedores y morosidad · 2025–2026' : 'Versión 1.1 · Alem conserva las funciones de la v0.7';
     $l('privacyNotice').innerHTML = isLagos
       ? '<strong>Privacidad:</strong> las liquidaciones individuales incluyen nombres propios. Los originales no se distribuyen en GitHub Pages; los informes públicos sólo muestran unidades.'
       : '<strong>Privacidad:</strong> la vista de morosidad muestra sólo unidades. Atención: los PDF originales de Alem incluidos previamente pueden contener datos personales.';
@@ -63,6 +63,10 @@
         const response=await fetch(found.data,{cache:'no-store'});
         if(!response.ok) throw new Error('HTTP '+response.status);
         lagos=await response.json();
+        const historical = await fetch('consorcios/lagos-2797/data/2025.json',{cache:'no-store'});
+        if (!historical.ok) throw new Error('Histórico 2025 ausente (HTTP '+historical.status+')');
+        const h=await historical.json();
+        lagos.months=[...h.months,...lagos.months].sort((a,b)=>a.id.localeCompare(b.id));
         buildSelectors();
       }
       activeBuilding(id);
@@ -104,7 +108,7 @@
     }
     values.forEach((value,i)=>{
       const xx=x(i),active=months[i].id===currentMonth;
-      labels+=`<text x="${xx.toFixed(1)}" y="${height-20}" text-anchor="middle" fill="${active?'#0f766e':'#64748b'}" font-size="14" font-weight="${active?'800':'500'}">${safe(months[i].monthShort||months[i].label)}</text>`;
+      if(months.length<14||i%2===0||active)labels+=`<text x="${xx.toFixed(1)}" y="${height-20}" text-anchor="middle" fill="${active?'#0f766e':'#64748b'}" font-size="${months.length>13?11:14}" font-weight="${active?'800':'500'}">${safe(months[i].monthShort||months[i].label)}</text>`;
       if(value==null||!Number.isFinite(value)){
         if(segment.length){segments.push(segment);segment=[];}
         return;
@@ -117,28 +121,47 @@
     const paths=segments.map(s=>s.length>1?`<polyline points="${s.join(' ')}" fill="none" stroke="${color}" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/>`:'').join('');
     el.innerHTML=`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${safe(title)}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><title>${safe(title)}</title>${lines}${labels}${paths}${dots}</svg>`;
   }
+  // La evolución cronológica no conecta tramos de meses sin comprobante.
+  function calendarRows(available=lagos.months) {
+    if(!available?.length)return [];
+    const byId=new Map(available.map(m=>[m.id,m]));
+    let [y,mo]=available[0].id.split('-').map(Number);
+    const [yy,mm]=available.at(-1).id.split('-').map(Number);
+    const res=[], names=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    while(y<yy||(y===yy&&mo<=mm)) {
+      const id=y+'-'+String(mo).padStart(2,'0');
+      res.push(byId.has(id)?{...byId.get(id),monthShort:names[mo-1]+'/'+String(y).slice(2)}:{id,label:names[mo-1]+' '+y,monthShort:names[mo-1]+'/'+String(y).slice(2),missing:true});
+      mo++;if(mo===13){mo=1;y++;}
+    }
+    return res;
+  }
+  const prevCalendarMonth=(a,b)=>{
+    const [y,m]=a.id.split('-').map(Number),[yy,mm]=b.id.split('-').map(Number);
+    return (yy*12+mm)-(y*12+m)===1;
+  };
   function renderDebtSummary() {
     const selected=current(), prevIdx=lagos.months.indexOf(selected)-1,prev=lagos.months[prevIdx]||null;
     const difference=prev?selected.listedDebtTotal-prev.listedDebtTotal:null;
     const top5share=100*concentration(selected,5)/selected.listedDebtTotal;
     $l('lagosDebtHighlights').innerHTML=[
       stat('Deuda visible · '+selected.label,peso(selected.listedDebtTotal),'Suma de unidades publicadas'),
-      stat('Variación respecto del mes anterior',difference==null?'Sin referencia':moneySigned(difference),prev?`Comparación con ${prev.label} (${por(100*difference/prev.listedDebtTotal)})`:'Primer mes disponible',difference==null?'':difference>0?'negative':difference<0?'positive':''),
+      stat('Variación vs último mes documentado',difference==null?'Sin referencia':moneySigned(difference),prev?`Comparación con ${prev.label}${prevCalendarMonth(prev,selected)?'':' (hay meses sin liquidación)'} (${por(100*difference/prev.listedDebtTotal)})`:'Primer mes disponible',difference==null?'':difference>0?'negative':difference<0?'positive':''),
       stat('Unidades deudoras',String(selected.debtors.length),'Cantidad de registros en el listado'),
       stat('Top 5 / deuda',por(top5share),`Deuda / total liquidado: ${debtRatio(selected)?.toLocaleString('es-AR',{maximumFractionDigits:2})||'—'} veces`)
     ].join('');
   }
   function renderDebtTrends() {
-    const all=lagos.months;
-    seriesSvg('lagosDebtTotalChart',all,all.map(m=>m.listedDebtTotal),'money','Evolución de deuda visible en ARS', '#0f766e',idFrom());
-    seriesSvg('lagosDebtCountChart',all,all.map(m=>m.debtors.length),'count','Cantidad de unidades deudoras', '#1d4ed8',idFrom());
-    seriesSvg('lagosDebtCoverageChart',all,all.map(m=>debtRatio(m)),'ratio','Deuda visible en equivalentes de liquidación mensual', '#b45309',idFrom());
-    seriesSvg('lagosDebtTop5Chart',all,all.map(m=>100*concentration(m,5)/m.listedDebtTotal),'share','Participación de cinco principales unidades', '#7c3aed',idFrom());
-    makeTable($l('lagosDebtMonthlyTable'),['Mes','Deuda visible','Cambio vs anterior','Unidades','Deuda / liquidado','Top 5 %'],all.map((m,i)=>[
-      safe(m.label),peso(m.listedDebtTotal),i?moneySigned(m.listedDebtTotal-all[i-1].listedDebtTotal):'—',String(m.debtors.length),`${debtRatio(m).toLocaleString('es-AR',{maximumFractionDigits:2})}×`,percent(concentration(m,5),m.listedDebtTotal)
+    const all=lagos.months, calendar=calendarRows(),map=new Map(all.map(m=>[m.id,m]));
+    seriesSvg('lagosDebtTotalChart',calendar,calendar.map(m=>map.get(m.id)?.listedDebtTotal??null),'money','Deuda visible — meses sin PDF interrumpidos','#0f766e',idFrom());
+    seriesSvg('lagosDebtCountChart',calendar,calendar.map(m=>map.get(m.id)?.debtors.length??null),'count','Unidades deudoras — meses sin PDF interrumpidos','#1d4ed8',idFrom());
+    seriesSvg('lagosDebtCoverageChart',calendar,calendar.map(m=>map.has(m.id)?debtRatio(map.get(m.id)):null),'ratio','Relación deuda / liquidación — meses sin PDF interrumpidos','#b45309',idFrom());
+    seriesSvg('lagosDebtTop5Chart',calendar,calendar.map(m=>map.has(m.id)?100*concentration(map.get(m.id),5)/map.get(m.id).listedDebtTotal:null),'share','Top 5 — meses sin PDF interrumpidos','#7c3aed',idFrom());
+    makeTable($l('lagosDebtMonthlyTable'),['Mes','Deuda visible','Diferencia vs último registro','Unidades','Deuda / liquidado','Top 5 %'],all.map((m,i)=>[
+      safe(m.label),peso(m.listedDebtTotal),i?`${moneySigned(m.listedDebtTotal-all[i-1].listedDebtTotal)}${prevCalendarMonth(all[i-1],m)?'':' *'}`:'—',String(m.debtors.length),`${debtRatio(m).toLocaleString('es-AR',{maximumFractionDigits:2})}×`,percent(concentration(m,5),m.listedDebtTotal)
     ]));
     const rows=$l('lagosDebtMonthlyTable').querySelectorAll('tbody tr');
     rows.forEach((r,i)=>{if(all[i].id===idFrom())r.classList.add('debt-row-emphasis');r.tabIndex=0;r.title='Seleccionar este mes en el panel';r.style.cursor='pointer';const f=()=>{$l('lagosMonthSelect').value=all[i].id;selection.category=null;selection.debtors=null;renderLagos();};r.addEventListener('click',f);r.addEventListener('keydown',e=>{if(e.key==='Enter')f();});});
+    $l('lagosDebtMonthlyNote').textContent='* La diferencia compara los dos listados disponibles, pero existen meses intermedios sin liquidación. No indica cambio estrictamente mensual ni cobro efectivo.';
   }
   function setSelectedDebtUnit(unit,scroll=false) {
     if(!unit||!debtUnits().includes(unit))return;
@@ -149,14 +172,15 @@
   function renderDebtUnit(){
     const unit=debtState.unit,all=lagos.months;
     const vals=all.map(m=>debtorMap(m).get(unit)??null);
-    seriesSvg('lagosDebtUnitChart',all,vals,'money',`Historial de saldo visible de la unidad ${unit}`, '#0f766e',idFrom());
+    const calendar=calendarRows(),lookup=new Map(all.map((m,i)=>[m.id,vals[i]]));
+    seriesSvg('lagosDebtUnitChart',calendar,calendar.map(m=>lookup.has(m.id)?lookup.get(m.id):null),'money',`Historial de saldo visible de la unidad ${unit}`, '#0f766e',idFrom());
     const present=vals.map((v,i)=>v!=null?{value:v,month:all[i]}:null).filter(Boolean);
     const missing=vals.filter(v=>v==null).length;
     const first=present[0],last=present.at(-1);
     $l('lagosDebtUnitSummary').textContent=`Unidad ${unit} · ${present.length} de ${all.length} listados con saldo publicado · ${missing} sin registro. ${first&&last&&first!==last?`Entre ${first.month.label} y ${last.month.label}, la diferencia de saldos publicados es ${moneySigned(last.value-first.value)}.`:'Sin suficientes registros distintos para medir variación.'} No equivale a pagos o intereses cobrados.`;
-    makeTable($l('lagosDebtUnitTable'),['Mes','Saldo informado','Variación vs mes anterior','Situación'],all.map((m,i)=>{
+    makeTable($l('lagosDebtUnitTable'),['Mes','Saldo informado','Variación vs último registro','Situación'],all.map((m,i)=>{
       const v=vals[i],previous=i?vals[i-1]:null;
-      const delta=v!=null&&previous!=null?moneySigned(v-previous):'No comparable';
+      const delta=v!=null&&previous!=null?moneySigned(v-previous)+(prevCalendarMonth(all[i-1],m)?'':' *'):'No comparable';
       return [safe(m.label),v==null?'<span class="muted">No figura</span>':peso(v),delta,v==null?'Ausente del listado':'Saldo publicado'];
     }));
   }
@@ -242,6 +266,126 @@
     $l('lagosDebtExport').addEventListener('click',()=>window.print());
   }
 
+
+  /* v1.1: clasificación por naturaleza de movimiento, sin presumir pago efectivo.
+     Los rubros originales de SAPP no distinguen siempre servicio habitual y trabajo adicional. */
+  const expenseState={provider:null};
+  const normalizeProvider = s => (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/gi,'').toUpperCase();
+  function isFund(p){return /^fondo (operativo|de reserva)$/i.test(p.provider);}
+  function classifyEntry(p){
+    const v=Number(p.amount)||0,det=(p.detail||'').toLowerCase();
+    if(isFund(p)) return v<0?'Ajustes y devoluciones':'Fondos liquidados';
+    if(v<0) return 'Ajustes y devoluciones';
+    const name=normalizeProvider(p.provider);
+    const routine=['SERGIOSAPP','BANCOROELA','EPE','LAMERCANTILANDINA','PEREZTABOADAFERNANDO','MBSERVICIOLIMPIEZA','PERAMASJOAQUIN','BOMBASSTIB','LAFFITTEEMILIO','FYMCOPY'];
+    if(name==='ASCENSORESAMERICA'&&/servicio/i.test(det)&&!/reemplaz|cable|polea|repar|contacto/i.test(det))return 'Servicios habituales identificables';
+    if(name==='BOMBASSTIB'&&/servicio|mantenimiento/i.test(det))return 'Servicios habituales identificables';
+    if(routine.includes(name))return 'Servicios habituales identificables';
+    return 'Otros trabajos y conceptos';
+  }
+  const expenseKinds=['Servicios habituales identificables','Otros trabajos y conceptos','Fondos liquidados','Ajustes y devoluciones'];
+  const pvKey = p=>normalizeProvider(p.provider);
+  function expenseEntries(m){return m.providers||[];}
+  const sumNumber=arr=>arr.reduce((n,x)=>n+x,0);
+  function providerCatalog(){
+    const prov=new Map();
+    lagos.months.forEach(m=>m.providers.filter(p=>!isFund(p)).forEach(p=>{
+      const key=pvKey(p);if(!key)return;
+      if(!prov.has(key))prov.set(key,{key,label:p.provider,amount:0});
+      const obj=prov.get(key);obj.amount+=p.amount;
+      // Prefer readable current naming over historical uppercase.
+      if(m.id>='2026-01')obj.label=p.provider;
+    }));
+    return [...prov.values()].sort((a,b)=>b.amount-a.amount||a.label.localeCompare(b.label,'es'));
+  }
+  function initExpenseFilters(){
+    const opts=lagos.months.map(m=>`<option value="${safe(m.id)}">${safe(m.label)}</option>`).join('');
+    $l('lagosExpenseFrom').innerHTML=opts;
+    $l('lagosExpenseTo').innerHTML=opts;
+    $l('lagosExpenseFrom').value=lagos.months[0].id;
+    $l('lagosExpenseTo').value=lagos.months.at(-1).id;
+    const catalog=providerCatalog();
+    $l('lagosExpenseProvider').innerHTML=catalog.map(p=>`<option value="${safe(p.key)}">${safe(p.label)}</option>`).join('');
+    expenseState.provider=catalog.find(p=>p.key==='MBSERVICIOLIMPIEZA')?.key||catalog[0].key;
+    $l('lagosExpenseProvider').value=expenseState.provider;
+    ['lagosExpenseFrom','lagosExpenseTo'].forEach(id=>$l(id).addEventListener('change',renderExpenseEvolution));
+    $l('lagosExpenseProvider').addEventListener('change',()=>{expenseState.provider=$l('lagosExpenseProvider').value;renderExpenseEvolution();});
+    $l('lagosExpenseReset').addEventListener('click',()=>{
+      $l('lagosExpenseFrom').value=lagos.months[0].id;
+      $l('lagosExpenseTo').value=lagos.months.at(-1).id;
+      renderExpenseEvolution();
+    });
+  }
+  function renderExpenseEvolution(){
+    const selected=rowsBetween($l('lagosExpenseFrom').value,$l('lagosExpenseTo').value);
+    if(!selected.length)return;
+    const cal=calendarRows(selected), byMonth=new Map(selected.map(m=>[m.id,m]));
+    const expenses=selected.flatMap(m=>expenseEntries(m).map(p=>({...p,month:m}))), totals=selected.map(m=>m.liquidatedTotal);
+    const fundTotal=sumNumber(expenses.filter(p=>isFund(p)).map(p=>p.amount));
+    const first=selected[0],last=selected.at(-1);
+    const nGap=cal.filter(m=>m.missing).length;
+    $l('lagosExpenseSummary').innerHTML=[
+      stat('Importe liquidado · períodos documentados',peso(sumNumber(totals)),`${selected.length} meses con comprobante`),
+      stat('Fondos netos liquidados',peso(fundTotal),'Incluye aportes y devoluciones; no equivale a caja del fondo'),
+      stat('Promedio por mes documentado',peso(sumNumber(totals)/selected.length),'Sin estimar períodos faltantes'),
+      stat('Meses sin liquidación entre extremos',String(nGap),'Se muestran como interrupciones del gráfico')
+    ].join('');
+    seriesSvg('lagosExpenseTotalChart',cal,cal.map(m=>byMonth.get(m.id)?.liquidatedTotal??null),'money','Total computable liquidado; faltantes sin unir','#0f766e',idFrom());
+    seriesSvg('lagosExpenseExFundsChart',cal,cal.map(m=>{
+      const orig=byMonth.get(m.id);return orig?orig.liquidatedTotal-sumNumber(orig.providers.filter(isFund).map(p=>p.amount)):null;
+    }),'money','Total liquidado descontando partidas identificadas como fondos','#1d4ed8',idFrom());
+    makeTable($l('lagosExpenseMonthsTable'),['Mes','Total liquidado','Rubros 01–04','Rubro 08','Fondos identificados','Otros conceptos sin fondos'],selected.map(m=>{
+      const f=sumNumber(m.providers.filter(isFund).map(p=>p.amount));
+      return [safe(m.label),peso(m.liquidatedTotal),peso(m.habitualExpenses),peso(m.nonHabitualExpenses),peso(f),peso(m.liquidatedTotal-f)];
+    }));
+    // Gastos recurrentes: se compara un servicio en el tiempo, no rubros heterogéneos.
+    const provKey=expenseState.provider||$l('lagosExpenseProvider').value;
+    const prov=providerCatalog().find(p=>p.key===provKey);
+    const pTotal=cal.map(m=>{
+      const mm=byMonth.get(m.id);return mm?sumNumber(mm.providers.filter(p=>pvKey(p)===provKey).map(p=>p.amount)):null;
+    });
+    $l('lagosExpenseProviderName').textContent=prov?.label||'Proveedor';
+    seriesSvg('lagosExpenseProviderChart',cal,pTotal,'money','Liquidación del proveedor; cero es ausencia de movimiento, no pago verificado','#b45309',idFrom());
+    let lastCharge=null;
+    const providerRows=selected.map(m=>{
+      const lines=m.providers.filter(p=>pvKey(p)===provKey),sum=sumNumber(lines.map(p=>p.amount));
+      const delta=lastCharge!=null?sum-lastCharge:null;
+      const result=[safe(m.label),lines.length?peso(sum):'Sin movimiento',delta===null?'—':moneySigned(delta),String(lines.length),lines.map(p=>safe(p.detail)).join(' · ')||'No figura en los movimientos'];
+      if(lines.length)lastCharge=sum;
+      return result;
+    });
+    makeTable($l('lagosExpenseProviderTable'),['Mes','Liquidado al proveedor','Cambio vs cargo registrado previo','Movimientos','Conceptos'],providerRows);
+    $l('lagosExpenseProviderNote').textContent=`${prov?.label||'Proveedor'}: ${selected.filter(m=>m.providers.some(p=>pvKey(p)===provKey)).length} meses con movimientos identificados. Los ceros se dibujan únicamente para meses con liquidación, no para meses sin documento. Las variaciones pueden incluir obras, anticipos y servicios distintos.`;
+    const nature=expenseKinds.map(kind=>({kind,total:sumNumber(expenses.filter(p=>classifyEntry(p)===kind).map(p=>p.amount))}));
+    makeTable($l('lagosExpenseNatureTable'),['Naturaleza de los conceptos identificados','Importe neto','Proporción del total'],nature.map(n=>[safe(n.kind),peso(n.total),percent(n.total,sumNumber(totals))]));
+    const catalog=providerCatalog();
+    const ranking=catalog.map(p=>{
+      const matches=expenses.filter(x=>pvKey(x)===p.key),monthCount=new Set(matches.map(x=>x.month.id)).size;
+      return {...p,total:sumNumber(matches.map(x=>x.amount)),monthCount};
+    }).filter(p=>p.monthCount).sort((a,b)=>b.total-a.total);
+    makeTable($l('lagosExpenseProviderRanking'),['Proveedor','Total período','Meses con cargo','Seleccionar'],ranking.map(p=>[
+      safe(p.label),peso(p.total),String(p.monthCount),`<button type="button" class="debt-unit-link lagos-expense-link" data-provider="${safe(p.key)}">Ver evolución</button>`
+    ]));
+    $l('lagosExpenseProviderRanking').querySelectorAll('[data-provider]').forEach(b=>b.addEventListener('click',()=>{
+      expenseState.provider=b.dataset.provider;$l('lagosExpenseProvider').value=expenseState.provider;renderExpenseEvolution();
+      $l('lagosExpenseProvider').scrollIntoView({behavior:'smooth',block:'center'});
+    }));
+    const alerts=[];
+    if(nGap)alerts.push(`Hay ${nGap} mes(es) sin comprobante entre ${first.label} y ${last.label}; no se completan ni se interpolan.`);
+    if(fundTotal)alerts.push(`Los fondos identificados suman ${peso(fundTotal)} (importe neto liquidado). No acreditan aplicación efectiva a obras.`);
+    const suppliers=selected.flatMap(m=>m.providers.filter(p=>!isFund(p)&&classifyEntry(p)==='Servicios habituales identificables').map(p=>({...p,month:m.id})));
+    const normalized=new Map();
+    suppliers.forEach(p=>{
+      const key=pvKey(p),map=normalized.get(key)||new Map();map.set(p.month,(map.get(p.month)||0)+p.amount);normalized.set(key,map);
+    });
+    [...normalized].forEach(([key,map])=>{
+      const records=[...map];if(records.length<2)return;
+      const [a,b]=records.slice(-2);const growth=a[1]?100*(b[1]-a[1])/a[1]:0;
+      if(growth>20){const name=catalog.find(p=>p.key===key)?.label||key;alerts.push(`${name}: último importe de servicio identificado ${por(growth)} superior al cargo anterior (${a[0]} → ${b[0]}). Verificar equivalencia del servicio y respaldo.`);}
+    });
+    $l('lagosExpenseAlerts').innerHTML=alerts.map(a=>`<li>${safe(a)}</li>`).join('')||'<li>No se identificaron alertas automáticas con los criterios seleccionados.</li>';
+  }
+
   function buildSelectors() {
     const options=lagos.months.map(m=>`<option value="${safe(m.id)}">${safe(m.label)}</option>`).join('');
     for (const id of ['lagosMonthSelect','lagosFrom','lagosTo','lagosMonthA','lagosMonthB']) $l(id).innerHTML=options;
@@ -251,17 +395,18 @@
     $l('lagosMonthA').value=lagos.months[0].id;
     $l('lagosMonthB').value=lagos.months.at(-1).id;
     initializeDebtEvolution();
+    initExpenseFilters();
   }
   function current() {return month(idFrom());}
   function displayKPIs(m) {
     const dat=[
       ['Total computable liquidado',peso(m.liquidatedTotal),'No es gasto efectivo de caja'],
-      ['Rubros 01–04',peso(m.habitualExpenses),'Incluyen cargos que pueden ser no recurrentes'],
+      ['Rubros 01–04',peso(m.habitualExpenses),'Incluyen servicios, trabajos, y a veces fondos'],
       ['Rubro 08 · No habituales',peso(m.nonHabitualExpenses),'Puede incluir fondos, anticipos y ajustes'],
       ['Listado de deudores',peso(m.listedDebtTotal),`${m.debtors.length} unidades enumeradas; suma del listado`],
-      ['Fondo operativo',m.fundOperating ? peso(m.fundOperating) : 'Sin partida','Incluido en el rubro 08 cuando corresponde'],
-      ['Fondo de reserva (neto)',m.fundReserve ? peso(m.fundReserve) : 'Sin partida','Aportes y devoluciones netos, no saldo del fondo'],
-      ['Importe unidad 01-03',peso(m.unitCharge),'Al primer vencimiento; dato del comprobante'],
+      ['Fondo operativo',m.fundOperating ? peso(m.fundOperating) : 'Sin partida','Puede estar en rubro 04 u 08'],
+      ['Fondo de reserva (neto)',m.fundReserve ? peso(m.fundReserve) : 'Sin partida','Aportes/devoluciones netos, no saldo contable'],
+      ['Participación del mes · unidad '+(m.source.unit||'01-03'),peso(m.unitCharge),'No incluye deuda previa ni necesariamente coincide con el total a pagar'],
       ['Caja final','No informada','No figura en el PDF recibido'],
       ['Cuentas por pagar','No informadas','No figuran en el PDF recibido']
     ];
@@ -313,14 +458,14 @@
   function displayDocs() {
     makeTable($l('lagosDocsTable'),['Mes','Liquidación original','Informe interpretativo','Estado'],lagos.months.map(m=>[
       safe(m.label),'<span class="muted">No publicada · contiene datos personales</span>',
-      `<a target="_blank" rel="noopener noreferrer" href="${safe(m.report)}">Abrir informe PDF</a>`,
+      m.report?`<a target="_blank" rel="noopener noreferrer" href="${safe(m.report)}">Abrir informe PDF</a>`:'<span class="muted">No disponible</span>',
       'Rubros y deudores conciliados · sin estado de caja'
     ]));
   }
   function renderLagos() {
     if(chosen!=='lagos-2797'||!lagos)return;
     const m=current(); if(!m)return;
-    displayKPIs(m);displayReading(m);displayComposition(m);displayProviders();displayDebtors(m);displayCompare();displayDocs();renderDebtEvolution();
+    displayKPIs(m);displayReading(m);displayComposition(m);displayProviders();displayDebtors(m);displayCompare();displayDocs();renderDebtEvolution();renderExpenseEvolution();
   }
   async function start() {
     try {

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard de Consorcios · Expensas 2026</title>
-  <link rel="stylesheet" href="styles.css?v=20261018-lagos-debt-v10">
+  <link rel="stylesheet" href="styles.css?v=20261018-lagos-expenses-v11">
 </head>
 <body>
   <header class="hero">
@@ -25,7 +25,7 @@
       <button id="printButton" class="hero-action" type="button">Imprimir / guardar PDF</button>
       <p id="lastUpdate" class="muted small"></p>
       </div>
-      <div id="lagosHeroControls" class="field-spaced" hidden><label for="lagosMonthSelect">Mes de Lagos</label><select id="lagosMonthSelect"></select><p class="small" style="color:#fff">Información disponible: enero a julio de 2026. Fuente: liquidaciones individuales.</p></div>
+      <div id="lagosHeroControls" class="field-spaced" hidden><label for="lagosMonthSelect">Mes de Lagos</label><select id="lagosMonthSelect"></select><p class="small" style="color:#fff">Datos documentados: seis meses de 2025 y enero–julio de 2026. Los faltantes no se estiman.</p></div>
     </div>
   </header>
 
@@ -38,7 +38,7 @@
       <div class="notice">
         <strong>Alcance documental:</strong> las cifras representan importes <strong>liquidados</strong> y la suma de un listado de deudores en siete comprobantes individuales; no son movimientos de caja ni saldos contables auditados. Los PDFs originales no se publican por contener nombres de propietarios. Sólo se muestran unidades funcionales.
       </div>
-      <nav class="lagos-quicklinks" aria-label="Ir a secciones de Lagos"><a href="#lagosDebtEvolution">Ver evolución de morosidad ↓</a><a href="#lagosDebtorsTable">Ver deuda por unidad ↓</a><a href="#lagosDocsTable">Ver informes mensuales ↓</a></nav>
+      <nav class="lagos-quicklinks" aria-label="Ir a secciones de Lagos"><a href="#lagosExpenseEvolution">Ver gastos y proveedores ↓</a><a href="#lagosDebtEvolution">Ver evolución de morosidad ↓</a><a href="#lagosDebtorsTable">Ver deuda por unidad ↓</a><a href="#lagosDocsTable">Ver informes mensuales ↓</a></nav>
       <div id="lagosKPIs" class="kpi-grid"></div>
       <article class="panel spaced-panel"><div class="panel-head"><h2>Lectura del mes</h2><p class="muted">Interpretación limitada a los datos efectivamente publicados.</p></div><div id="lagosReading"></div></article>
       <div class="grid two spaced-panel">
@@ -50,6 +50,15 @@
         <article class="panel"><div class="panel-head"><h2>Morosidad informada por unidad</h2><p class="muted">Suma de los importes publicados en este listado; no equivale a un saldo contable auditado.</p></div><div class="pie-layout"><canvas id="lagosDebtorsChart" height="260"></canvas><div id="lagosDebtorsLegend" class="chart-legend"></div></div></article>
         <article class="panel"><div class="panel-head"><h2>Detalle de unidades deudoras</h2></div><div class="table-wrap tall"><table id="lagosDebtorsTable"></table></div></article>
       </div>
+      <section id="lagosExpenseEvolution" class="lagos-debt-section lagos-expense-section spaced-panel" aria-labelledby="lagosExpenseTitle">
+        <div class="section-heading"><div><p class="eyebrow dark">ANÁLISIS DOCUMENTAL · 2025–2026</p><h2 id="lagosExpenseTitle">Evolución de gastos y proveedores</h2><p class="muted">Comparación de importes nominales liquidados. No son pagos de caja; los fondos operativos y de reserva se identifican por concepto y se muestran por separado.</p></div></div>
+        <article class="panel spaced-panel"><div class="panel-head horizontal"><h3>Período a analizar</h3><div class="controls-inline wrap"><label for="lagosExpenseFrom">Desde<select id="lagosExpenseFrom"></select></label><label for="lagosExpenseTo">Hasta<select id="lagosExpenseTo"></select></label><button type="button" class="small-action" id="lagosExpenseReset">Todo el período</button></div></div><div class="debt-summary-cards" id="lagosExpenseSummary"></div></article>
+        <div class="grid two spaced-panel"><article class="panel debt-chart-panel"><div class="panel-head"><h3>Total liquidado</h3><p class="muted">Las discontinuidades indican ausencia de PDF.</p></div><div class="debt-chart" id="lagosExpenseTotalChart"></div></article><article class="panel debt-chart-panel"><div class="panel-head"><h3>Total menos fondos identificados</h3><p class="muted">No equivale necesariamente a gasto recurrente ni a egresos efectivamente pagados.</p></div><div class="debt-chart" id="lagosExpenseExFundsChart"></div></article></div>
+        <article class="panel spaced-panel"><div class="panel-head"><h3>Descomposición mensual</h3><p class="muted">Rubros 01–04 y 08 según cada PDF. En algunos meses de 2025, los fondos figuran dentro del rubro 04.</p></div><div class="table-wrap"><table id="lagosExpenseMonthsTable"></table></div></article>
+        <article class="panel spaced-panel"><div class="panel-head horizontal"><div><h3>Ficha histórica del proveedor</h3><p class="muted">Incluye abonos, facturas extraordinarias y anticipos con su detalle. Cero significa «no aparece cargo», nunca «no se pagó».</p></div><div class="controls-inline"><label for="lagosExpenseProvider">Proveedor<select id="lagosExpenseProvider"></select></label></div></div><h4 id="lagosExpenseProviderName"></h4><div class="debt-chart" id="lagosExpenseProviderChart"></div><p class="summary-line" id="lagosExpenseProviderNote"></p><div class="table-wrap tall"><table id="lagosExpenseProviderTable"></table></div></article>
+        <div class="grid two spaced-panel"><article class="panel"><div class="panel-head"><h3>Clasificación analítica de movimientos</h3><p class="muted">Aproximación por proveedor y descripción; no reemplaza clasificación contable.</p></div><div class="table-wrap"><table id="lagosExpenseNatureTable"></table></div></article><article class="panel"><div class="panel-head"><h3>Alertas y cuestiones a verificar</h3><p class="muted">Variaciones de servicios, meses ausentes y fondos no conciliados con pagos.</p></div><ul id="lagosExpenseAlerts" class="lagos-alerts"></ul></article></div>
+        <article class="panel spaced-panel"><div class="panel-head"><h3>Ranking de proveedores del período</h3><p class="muted">No incluye fondos. Seleccioná «Ver evolución» para inspeccionar cada proveedor.</p></div><div class="table-wrap tall"><table id="lagosExpenseProviderRanking"></table></div></article>
+      </section>
       <section id="lagosDebtEvolution" class="lagos-debt-section spaced-panel" aria-labelledby="lagosDebtTitle">
         <div class="section-heading">
           <div>
@@ -68,7 +77,7 @@
           <article class="panel debt-chart-panel"><div class="panel-head"><h3>Unidades deudoras</h3><p class="muted">Cantidad de unidades enumeradas en cada listado.</p></div><div class="debt-chart" id="lagosDebtCountChart"></div></article>
           <article class="panel debt-chart-panel"><div class="panel-head"><h3>Deuda / importe liquidado</h3><p class="muted">Cantidad de liquidaciones mensuales equivalentes (no son meses reales de atraso).</p></div><div class="debt-chart" id="lagosDebtCoverageChart"></div></article>
         </div>
-        <article class="panel spaced-panel"><div class="panel-head"><h3>Serie mensual</h3><p class="muted">La variación indica diferencia entre saldos publicados. No confirma pagos ni regularizaciones.</p></div><div class="table-wrap"><table id="lagosDebtMonthlyTable"></table></div></article>
+        <article class="panel spaced-panel"><div class="panel-head"><h3>Serie mensual</h3><p class="muted">La variación indica diferencia entre saldos publicados. No confirma pagos ni regularizaciones.</p></div><div class="table-wrap"><table id="lagosDebtMonthlyTable"></table></div><p class="muted small" id="lagosDebtMonthlyNote"></p></article>
         <article class="panel spaced-panel">
           <div class="panel-head horizontal"><div><h3>Historia por unidad funcional</h3><p class="muted">Elegí una unidad. “No figura” significa que no aparece en ese mes, nunca que tiene deuda cero.</p></div><div class="controls-inline"><label for="lagosDebtUnit">Unidad<select id="lagosDebtUnit" aria-label="Seleccionar unidad funcional"></select></label></div></div>
           <p class="summary-line" id="lagosDebtUnitSummary"></p>
@@ -466,6 +475,6 @@
   </footer>
 
   <script src="app.js?v=20261018-multi-v1"></script>
-  <script src="multibuilding.js?v=20261018-lagos-debt-v10"></script>
+  <script src="multibuilding.js?v=20261018-lagos-expenses-v11"></script>
 </body>
 </html>

@@ -1,0 +1,1478 @@
+{
+  "meta": {
+    "id": "lagos-2797",
+    "building": "Torre VI · Ovidio Lagos 2797",
+    "schema": "liquidacion-individual-resumen",
+    "lastLoadedMonth": "2025-12",
+    "availableMonths": "Abril, mayo, julio, agosto, octubre y diciembre de 2025",
+    "currency": "ARS",
+    "sourceScope": "Seis liquidaciones individuales con gastos generales y listado de deudores; meses ausentes sin interpolación.",
+    "dataPolicy": "Importes computables de liquidación, no erogaciones de caja; fondos separados, sin atribuir pagos a cambios en el listado de deudores.",
+    "privacy": "Nombres de propietarios omitidos; PDF originales no se distribuyen."
+  },
+  "months": [
+    {
+      "id": "2025-04",
+      "label": "Abril 2025",
+      "monthShort": "Abr/25",
+      "liquidatedTotal": 2962268.05,
+      "habitualExpenses": 1462268.05,
+      "nonHabitualExpenses": 1500000.0,
+      "fundOperating": 1500000.0,
+      "fundReserve": 0,
+      "unitCharge": 5217.66,
+      "debtors": [
+        {
+          "unit": "03-04",
+          "amount": 1782854.41
+        },
+        {
+          "unit": "10-04",
+          "amount": 1443841.45
+        },
+        {
+          "unit": "04-03",
+          "amount": 1427287.98
+        },
+        {
+          "unit": "02-01",
+          "amount": 1397112.53
+        },
+        {
+          "unit": "06-01",
+          "amount": 1267182.83
+        },
+        {
+          "unit": "09-04",
+          "amount": 991455.37
+        },
+        {
+          "unit": "02-04",
+          "amount": 409897.16
+        },
+        {
+          "unit": "11-03",
+          "amount": 276575.53
+        },
+        {
+          "unit": "05-01",
+          "amount": 261688.33
+        },
+        {
+          "unit": "09-02",
+          "amount": 178787.53
+        },
+        {
+          "unit": "05-03",
+          "amount": 176787.53
+        },
+        {
+          "unit": "01-02",
+          "amount": 58988.33
+        },
+        {
+          "unit": "01-03",
+          "amount": 58988.33
+        },
+        {
+          "unit": "01-04",
+          "amount": 58988.33
+        },
+        {
+          "unit": "02-02",
+          "amount": 58988.33
+        },
+        {
+          "unit": "06-04",
+          "amount": 58988.33
+        },
+        {
+          "unit": "09-01",
+          "amount": 58988.33
+        },
+        {
+          "unit": "10-03",
+          "amount": 58988.33
+        },
+        {
+          "unit": "11-04",
+          "amount": 58988.33
+        },
+        {
+          "unit": "12-02",
+          "amount": 58988.33
+        },
+        {
+          "unit": "CH-12",
+          "amount": 6118.08
+        },
+        {
+          "unit": "CH-71",
+          "amount": 6118.08
+        },
+        {
+          "unit": "CH-72",
+          "amount": 6118.08
+        },
+        {
+          "unit": "CH-22",
+          "amount": 5454.67
+        },
+        {
+          "unit": "CH-31",
+          "amount": 5454.67
+        },
+        {
+          "unit": "CH-41",
+          "amount": 5454.67
+        },
+        {
+          "unit": "CH-42",
+          "amount": 5454.67
+        },
+        {
+          "unit": "CH-61",
+          "amount": 5454.67
+        }
+      ],
+      "listedDebtTotal": 10189993.21,
+      "composition": [
+        {
+          "category": "Servicios",
+          "amount": 557724.55,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Tasas e impuestos",
+          "amount": 902143.5,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Varios",
+          "amount": 2400.0,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "No habituales",
+          "amount": 1500000.0,
+          "type": "Ordinario no habitual"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "PERAMAS JOAQUIN",
+          "category": "Servicios",
+          "amount": 110224.54,
+          "detail": "EMP LIMPIEZA-Servicio Abril 2025 F 0431                                                                     110.224,54             110.224,54",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "SERGIO SAPP",
+          "category": "Servicios",
+          "amount": 175000.0,
+          "detail": "EMP ADMINISTRACION-Honorarios administarcion Abril 2025 F 0138                                                  175.000,00             175.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "PEREZ TABOADA FERNANDO",
+          "category": "Servicios",
+          "amount": 20000.0,
+          "detail": "EMP DESINFECCION-Servicio Abril 2025 F 7555                                                           20.000,00               20.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "ASCENSORES AMERICA",
+          "category": "Servicios",
+          "amount": 65000.0,
+          "detail": "EMP ASCENSORES-Reemplazo 2 contactos fijos 2 moviles F 0016 65.000,00                                                             65.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "ASCENSORES AMERICA",
+          "category": "Servicios",
+          "amount": 140000.01,
+          "detail": "EMP ASCENSORES-Servicio Abril 2025 F 0016                                   140.000,01                                          140.000,01",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "BOMBAS STIB",
+          "category": "Servicios",
+          "amount": 47500.0,
+          "detail": "EMP MANT DE BOMBAS-Servicio abril 2025 F 146526                                                                    47.500,00             47.500,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 712000.0,
+          "detail": "ENERGIA ELECTRICA-A cuenta epe bImestre 2                                                                                712.000,00            712.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 92953.33,
+          "detail": "ENERGIA ELECTRICA-Convenio Cuota 3                                                                                         92.953,33             92.953,33",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 97190.17,
+          "detail": "ENERGIA ELECTRICA-Convenio cuota 2                                                                                         97.190,17             97.190,17",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "LAFFITTE EMILIO",
+          "category": "Varios",
+          "amount": 2400.0,
+          "detail": "ART LIBRERIA-Fotocopias expensas                                                                                2.400,00              2.400,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Fondo Operativo",
+          "category": "No habituales",
+          "amount": 1500000.0,
+          "detail": "Gasto N.H-A cuenta trabajos cañerias -F17020                                 1.500.000,00                                       1.500.000,00",
+          "type": "Ordinario no habitual / fondo"
+        }
+      ],
+      "notes": "Incluye 1.500.000,00 pesos en aportes al fondo operativo; no equivalen a erogaciones verificadas. El PDF individual no informa caja al cierre, cuentas por pagar ni cobros efectivos de expensas adeudadas.",
+      "observations": [
+        "Las sumas de rubros y del detalle por proveedor coinciden con el total computable del mes.",
+        "La lista de deudores contiene importes visibles por unidad y no permite certificar recuperos ni convenios.",
+        "Los fondos de reserva y operativo se identifican por concepto incluso cuando la administración los ubica en rubro 04."
+      ],
+      "cashFinal": null,
+      "netCash": null,
+      "accountsPayable": null,
+      "debtRecovered": null,
+      "interestReceivable": null,
+      "interestCollected": null,
+      "ordinaryExpenses": null,
+      "extraordinaryExpenses": null,
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202504-informe.pdf",
+      "source": {
+        "name": "Lagos-Expensas202504.pdf",
+        "page": 1,
+        "scope": "Liquidación individual con rubros del consorcio y listado de deudores; sin estado de caja.",
+        "unit": "CH-11"
+      }
+    },
+    {
+      "id": "2025-05",
+      "label": "Mayo 2025",
+      "monthShort": "May/25",
+      "liquidatedTotal": 3327901.72,
+      "habitualExpenses": 1827901.72,
+      "nonHabitualExpenses": 1500000.0,
+      "fundOperating": 1500000.0,
+      "fundReserve": 0,
+      "unitCharge": 62320.17,
+      "debtors": [
+        {
+          "unit": "03-04",
+          "amount": 1838525.2
+        },
+        {
+          "unit": "10-04",
+          "amount": 1499512.24
+        },
+        {
+          "unit": "04-03",
+          "amount": 1482958.77
+        },
+        {
+          "unit": "02-01",
+          "amount": 1452783.32
+        },
+        {
+          "unit": "06-01",
+          "amount": 1322853.62
+        },
+        {
+          "unit": "09-04",
+          "amount": 1047126.16
+        },
+        {
+          "unit": "02-04",
+          "amount": 465567.95
+        },
+        {
+          "unit": "11-03",
+          "amount": 332246.32
+        },
+        {
+          "unit": "05-01",
+          "amount": 317359.12
+        },
+        {
+          "unit": "09-02",
+          "amount": 234458.32
+        },
+        {
+          "unit": "05-03",
+          "amount": 232458.32
+        },
+        {
+          "unit": "01-03",
+          "amount": 114659.12
+        },
+        {
+          "unit": "01-04",
+          "amount": 114659.12
+        },
+        {
+          "unit": "11-04",
+          "amount": 114659.12
+        },
+        {
+          "unit": "08-02",
+          "amount": 55670.79
+        },
+        {
+          "unit": "10-03",
+          "amount": 55670.79
+        },
+        {
+          "unit": "13-02",
+          "amount": 55670.79
+        },
+        {
+          "unit": "CH-12",
+          "amount": 11335.74
+        },
+        {
+          "unit": "CH-71",
+          "amount": 11335.74
+        },
+        {
+          "unit": "CH-72",
+          "amount": 11335.74
+        },
+        {
+          "unit": "CH-22",
+          "amount": 10106.56
+        },
+        {
+          "unit": "CH-41",
+          "amount": 10106.56
+        },
+        {
+          "unit": "CH-42",
+          "amount": 10106.56
+        },
+        {
+          "unit": "CH-61",
+          "amount": 10106.56
+        }
+      ],
+      "listedDebtTotal": 10811272.53,
+      "composition": [
+        {
+          "category": "Servicios",
+          "amount": 638308.9,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Tasas e impuestos",
+          "amount": 917702.67,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Seguros",
+          "amount": 57653.15,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Varios",
+          "amount": 214237.0,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "No habituales",
+          "amount": 1500000.0,
+          "type": "Ordinario no habitual"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "PERAMAS JOAQUIN",
+          "category": "Servicios",
+          "amount": 190908.9,
+          "detail": "EMP LIMPIEZA-Servicio Mayo 2025 F 0450                                                                     190.908,90             190.908,90",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "SERGIO SAPP",
+          "category": "Servicios",
+          "amount": 179900.0,
+          "detail": "EMP ADMINISTRACION-Honorarios Mayo 2025 F 0170                                                                 179.900,00             179.900,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "PEREZ TABOADA FERNANDO",
+          "category": "Servicios",
+          "amount": 20000.0,
+          "detail": "EMP DESINFECCION-Servicio Mayo 2025 F 7644                                                           20.000,00               20.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "ASCENSORES AMERICA",
+          "category": "Servicios",
+          "amount": 200000.0,
+          "detail": "EMP ASCENSORES-Servicio Mayo 2025 // desagote subsuelo F 0017           200.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "BOMBAS STIB",
+          "category": "Servicios",
+          "amount": 47500.0,
+          "detail": "EMP MANT DE BOMBAS-Servicio mayo 2025 F 148046                                                                    47.500,00             47.500,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "BANCO ROELA",
+          "category": "Tasas e impuestos",
+          "amount": 114678.8,
+          "detail": "SERV BANCARIOS-Período: 05/25                                                                                   114.678,80            114.678,80",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 712000.0,
+          "detail": "ENERGIA ELECTRICA-A cuenta bimestre 3                                                                                   712.000,00            712.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 91023.87,
+          "detail": "ENERGIA ELECTRICA-Convenio cuota 4                                                                                        91.023,87             91.023,87",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "LA MERCANTIL ANDINA",
+          "category": "Seguros",
+          "amount": 57653.15,
+          "detail": "EMP SEGUROS-Cuota 1/12 poliza 001186713 desde 27/05/2025 a 27/ -F26                                       57.653,15             57.653,15",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "LAFFITTE EMILIO",
+          "category": "Varios",
+          "amount": 2200.0,
+          "detail": "ART LIBRERIA-Fotocopias expensas                                                                               2.200,00              2.200,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "MANUEL INFANTE",
+          "category": "Varios",
+          "amount": 62700.0,
+          "detail": "EMP. MANT. PLOMERIA Y GAS-Cuota 3 devolucion obra de gas segun acuerdo                                         62.700,00             62.700,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "MARCELO BALBAS",
+          "category": "Varios",
+          "amount": 149337.0,
+          "detail": "EMP. MANT. PLOMERIA Y GAS-Cuota 3/8segun acuerdo obra de gas                                                 149.337,00            149.337,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Fondo Operativo",
+          "category": "No habituales",
+          "amount": 1500000.0,
+          "detail": "Gasto N.H-A cuenta trabajos cañerias                                     1.500.000,00                                          1.500.000,00",
+          "type": "Ordinario no habitual / fondo"
+        }
+      ],
+      "notes": "Incluye 1.500.000,00 pesos en aportes al fondo operativo; no equivalen a erogaciones verificadas. El PDF individual no informa caja al cierre, cuentas por pagar ni cobros efectivos de expensas adeudadas.",
+      "observations": [
+        "Las sumas de rubros y del detalle por proveedor coinciden con el total computable del mes.",
+        "La lista de deudores contiene importes visibles por unidad y no permite certificar recuperos ni convenios.",
+        "Los fondos de reserva y operativo se identifican por concepto incluso cuando la administración los ubica en rubro 04."
+      ],
+      "cashFinal": null,
+      "netCash": null,
+      "accountsPayable": null,
+      "debtRecovered": null,
+      "interestReceivable": null,
+      "interestCollected": null,
+      "ordinaryExpenses": null,
+      "extraordinaryExpenses": null,
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202505-informe.pdf",
+      "source": {
+        "name": "Lagos-Expensas202505.pdf",
+        "page": 1,
+        "scope": "Liquidación individual con rubros del consorcio y listado de deudores; sin estado de caja.",
+        "unit": "01-03"
+      }
+    },
+    {
+      "id": "2025-07",
+      "label": "Julio 2025",
+      "monthShort": "Jul/25",
+      "liquidatedTotal": 3402163.73,
+      "habitualExpenses": 3402163.73,
+      "nonHabitualExpenses": 0,
+      "fundOperating": 0,
+      "fundReserve": 0,
+      "unitCharge": 63552.68,
+      "debtors": [
+        {
+          "unit": "03-04",
+          "amount": 2081303.17
+        },
+        {
+          "unit": "10-04",
+          "amount": 1721949.44
+        },
+        {
+          "unit": "04-03",
+          "amount": 1704402.76
+        },
+        {
+          "unit": "02-01",
+          "amount": 1672416.78
+        },
+        {
+          "unit": "06-01",
+          "amount": 1534691.3
+        },
+        {
+          "unit": "09-04",
+          "amount": 1242420.19
+        },
+        {
+          "unit": "02-04",
+          "amount": 625968.49
+        },
+        {
+          "unit": "05-01",
+          "amount": 468867.13
+        },
+        {
+          "unit": "05-03",
+          "amount": 378872.28
+        },
+        {
+          "unit": "11-03",
+          "amount": 272647.56
+        },
+        {
+          "unit": "11-04",
+          "amount": 254005.13
+        },
+        {
+          "unit": "08-02",
+          "amount": 191477.5
+        },
+        {
+          "unit": "13-02",
+          "amount": 191477.5
+        },
+        {
+          "unit": "01-01",
+          "amount": 66407.08
+        },
+        {
+          "unit": "01-04",
+          "amount": 66407.08
+        },
+        {
+          "unit": "07-03",
+          "amount": 66407.08
+        },
+        {
+          "unit": "09-02",
+          "amount": 66407.08
+        },
+        {
+          "unit": "CH-12",
+          "amount": 24395.5
+        },
+        {
+          "unit": "CH-71",
+          "amount": 24395.5
+        },
+        {
+          "unit": "CH-72",
+          "amount": 24395.5
+        },
+        {
+          "unit": "CH-22",
+          "amount": 21750.2
+        },
+        {
+          "unit": "CH-42",
+          "amount": 21750.2
+        },
+        {
+          "unit": "CH-61",
+          "amount": 21750.2
+        }
+      ],
+      "listedDebtTotal": 12744564.65,
+      "composition": [
+        {
+          "category": "Servicios",
+          "amount": 823500.0,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Tasas e impuestos",
+          "amount": 926974.83,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Seguros",
+          "amount": 57651.0,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Varios",
+          "amount": 1594037.9,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "OLIVA BRIAN IVAN",
+          "category": "Servicios",
+          "amount": 50000.0,
+          "detail": "EMP DESAGOTADORA-Destape coc-lav de 1A a Pb F 1957                                                                  50.000,00               50.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "PERAMAS JOAQUIN",
+          "category": "Servicios",
+          "amount": 312000.0,
+          "detail": "EMP LIMPIEZA-Servicio Limpieza Julio 2025 F 0497                                                                    312.000,00             312.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "SERGIO SAPP",
+          "category": "Servicios",
+          "amount": 187000.0,
+          "detail": "EMP ADMINISTRACION-Honorarios Julio 2025 F 0231                                                                         187.000,00             187.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "PEREZ TABOADA FERNANDO",
+          "category": "Servicios",
+          "amount": 20000.0,
+          "detail": "EMP DESINFECCION-Servicio Junio 2025 F 7729                                                                   20.000,00               20.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "ASCENSORES AMERICA",
+          "category": "Servicios",
+          "amount": 202000.0,
+          "detail": "EMP ASCENSORES-Servicio Julio 2025 F 0019 + rempl 3 palancas202.000,00     asc                                                          202.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "BOMBAS STIB",
+          "category": "Servicios",
+          "amount": 52500.0,
+          "detail": "EMP MANT DE BOMBAS-Servicio Julio 2025 F 151096 -F17764                                                                    52.500,00             52.500,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "BANCO ROELA",
+          "category": "Tasas e impuestos",
+          "amount": 127604.85,
+          "detail": "SERV BANCARIOS-Período: 07/25                                                                                            127.604,85            127.604,85",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 712000.0,
+          "detail": "ENERGIA ELECTRICA-Adelanto bimestre 4                                                                                            712.000,00            712.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 87369.98,
+          "detail": "ENERGIA ELECTRICA-Convenio cuota 6                                                                                                 87.369,98             87.369,98",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "LA MERCANTIL ANDINA",
+          "category": "Seguros",
+          "amount": 57651.0,
+          "detail": "EMP SEGUROS-Cuota 3/12 poliza 001186713 desde 27-05-25 al 27-0                                                     57.651,00             57.651,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "GARCIA CLAUDIO",
+          "category": "Varios",
+          "amount": 1102500.0,
+          "detail": "EMP. MANT. PLOMERIA Y GAS-Cambio desague cocicna y lavadero 1 B F 0054                      1.102.500,00                                 1.102.500,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "GARCIA CLAUDIO",
+          "category": "Varios",
+          "amount": 280000.0,
+          "detail": "EMP. MANT. PLOMERIA Y GAS-Reparacion codo desague gral cocina F 0055                          280.000,00                                    280.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "LAFFITTE EMILIO",
+          "category": "Varios",
+          "amount": 2200.0,
+          "detail": "ART LIBRERIA-Fotocopias expensas                                                                                       2.200,00               2.200,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "MARCELO BALBAS",
+          "category": "Varios",
+          "amount": 149337.9,
+          "detail": "EMP. MANT. PLOMERIA Y GAS-Cuota 5/8 segun acuerdo obra de gas                                                        149.337,90             149.337,90",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "CERRAJERIA FRANCO",
+          "category": "Varios",
+          "amount": 60000.0,
+          "detail": "EMP CERRAJERIA-Reemplazo cerradura pta asc. P6 F 1710                                                              60.000,00               60.000,00",
+          "type": "Ordinario habitual"
+        }
+      ],
+      "notes": "Incluye reparaciones de desagües por GARCIA CLAUDIO dentro de Varios, no confundibles con abonos mensuales. El PDF individual no informa caja al cierre, cuentas por pagar ni cobros efectivos de expensas adeudadas.",
+      "observations": [
+        "Las sumas de rubros y del detalle por proveedor coinciden con el total computable del mes.",
+        "La lista de deudores contiene importes visibles por unidad y no permite certificar recuperos ni convenios.",
+        "Los fondos de reserva y operativo se identifican por concepto incluso cuando la administración los ubica en rubro 04."
+      ],
+      "cashFinal": null,
+      "netCash": null,
+      "accountsPayable": null,
+      "debtRecovered": null,
+      "interestReceivable": null,
+      "interestCollected": null,
+      "ordinaryExpenses": null,
+      "extraordinaryExpenses": null,
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202507-informe.pdf",
+      "source": {
+        "name": "Lagos-Expensas202507.pdf",
+        "page": 1,
+        "scope": "Liquidación individual con rubros del consorcio y listado de deudores; sin estado de caja.",
+        "unit": "01-03"
+      }
+    },
+    {
+      "id": "2025-08",
+      "label": "Agosto 2025",
+      "monthShort": "Ago/25",
+      "liquidatedTotal": 3155508.57,
+      "habitualExpenses": 3155508.57,
+      "nonHabitualExpenses": 0,
+      "fundOperating": 0,
+      "fundReserve": 1000000.0,
+      "unitCharge": 59239.04,
+      "debtors": [
+        {
+          "unit": "03-04",
+          "amount": 2266478.62
+        },
+        {
+          "unit": "10-04",
+          "amount": 1886784.12
+        },
+        {
+          "unit": "04-03",
+          "amount": 1868244.23
+        },
+        {
+          "unit": "02-01",
+          "amount": 1834447.72
+        },
+        {
+          "unit": "06-01",
+          "amount": 1688926.46
+        },
+        {
+          "unit": "09-04",
+          "amount": 1380111.7
+        },
+        {
+          "unit": "02-04",
+          "amount": 728766.51
+        },
+        {
+          "unit": "05-01",
+          "amount": 562772.62
+        },
+        {
+          "unit": "05-03",
+          "amount": 467683.72
+        },
+        {
+          "unit": "11-03",
+          "amount": 355446.28
+        },
+        {
+          "unit": "11-04",
+          "amount": 179013.04
+        },
+        {
+          "unit": "09-02",
+          "amount": 137531.81
+        },
+        {
+          "unit": "CH-12",
+          "amount": 33772.28
+        },
+        {
+          "unit": "CH-71",
+          "amount": 33772.28
+        },
+        {
+          "unit": "CH-72",
+          "amount": 33772.28
+        },
+        {
+          "unit": "CH-22",
+          "amount": 30110.22
+        },
+        {
+          "unit": "CH-61",
+          "amount": 30110.22
+        }
+      ],
+      "listedDebtTotal": 13517744.11,
+      "composition": [
+        {
+          "category": "Servicios",
+          "amount": 1032400.0,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Tasas e impuestos",
+          "amount": 716319.67,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Seguros",
+          "amount": 57651.0,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Varios",
+          "amount": 1349137.9,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "MB SERVICIO LIMPIEZA",
+          "category": "Servicios",
+          "amount": 283400.0,
+          "detail": "EMP LIMPIEZA-Servicio Agosto 2025 F 1346                                                                        283.400,00             283.400,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "PIGNARELLI JOSE",
+          "category": "Servicios",
+          "amount": 70000.0,
+          "detail": "EMP LIMPIEZA-Trabajos jardineria realizado 16-08-25                              70.000,00                                                    70.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "SERGIO SAPP",
+          "category": "Servicios",
+          "amount": 190500.0,
+          "detail": "EMP ADMINISTRACION-Honorarios Agosto 2025 F 0261                                                                         190.500,00             190.500,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "PEREZ TABOADA FERNANDO",
+          "category": "Servicios",
+          "amount": 22000.0,
+          "detail": "EMP DESINFECCION-Servicio Julio 2025 F 7819                                                                    22.000,00               22.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "ASCENSORES AMERICA",
+          "category": "Servicios",
+          "amount": 230000.0,
+          "detail": "EMP ASCENSORES-Coloc nuevo caballete c/llave corte asc 3 F 2020              230.000,00                                                  230.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "ASCENSORES AMERICA",
+          "category": "Servicios",
+          "amount": 180000.0,
+          "detail": "EMP ASCENSORES-Servicio Agosto 2025 F 0020                                   180.000,00                                                  180.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "BOMBAS STIB",
+          "category": "Servicios",
+          "amount": 56500.0,
+          "detail": "EMP MANT DE BOMBAS-Servicio Agosto 2025 F 152603                                                                            56.500,00             56.500,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "BANCO ROELA",
+          "category": "Tasas e impuestos",
+          "amount": 135644.07,
+          "detail": "SERV BANCARIOS-Período: 08/25                                                                                             135.644,07            135.644,07",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 85659.3,
+          "detail": "ENERGIA ELECTRICA-Convenio cuota 7                                                                                                  85.659,30             85.659,30",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 495016.3,
+          "detail": "ENERGIA ELECTRICA-Saldo bimestre 4                                                                                                495.016,30            495.016,30",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "LA MERCANTIL ANDINA",
+          "category": "Seguros",
+          "amount": 57651.0,
+          "detail": "EMP SEGUROS-Cuota 4/12 poliza 001186713 desde 27-05-25 al 27-0                                                      57.651,00             57.651,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Fondo de Reserva",
+          "category": "Varios",
+          "amount": 1000000.0,
+          "detail": "Fondo de reserva-A cuenta trabajos reparacion                                                1.000.000,00                               1.000.000,00",
+          "type": "Fondo de reserva / aporte"
+        },
+        {
+          "provider": "ELECTRICIDAD LAGOS",
+          "category": "Varios",
+          "amount": 33400.0,
+          "detail": "EMP MANT ELECTRICO-Compra y cambio lamparas ingreso F 4521                                                          33.400,00              33.400,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "ELECTRICIDAD LAGOS",
+          "category": "Varios",
+          "amount": 41000.0,
+          "detail": "EMP MANT ELECTRICO-Compra y colocac sensor F 4460 piso 4                                                            41.000,00              41.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "MANUEL INFANTE",
+          "category": "Varios",
+          "amount": 62700.0,
+          "detail": "EMP. MANT. PLOMERIA Y GAS-Cuota 5 dev obra de gas s/acuerdo                       62.700,00                                                    62.700,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "MANUEL INFANTE",
+          "category": "Varios",
+          "amount": 62700.0,
+          "detail": "EMP. MANT. PLOMERIA Y GAS-Cuota 6 dev obra de gas s/acuerdo                       62.700,00                                                    62.700,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "MARCELO BALBAS",
+          "category": "Varios",
+          "amount": 149337.9,
+          "detail": "EMP. MANT. PLOMERIA Y GAS-Cuota 6/8 segun acuerdo obra de gas 149.337,90                                                                     149.337,90",
+          "type": "Ordinario habitual"
+        }
+      ],
+      "notes": "Incluye 1.000.000,00 pesos en fondo de reserva; su saldo y aplicación real no están documentados. El fondo de reserva figura en Varios (rubro 04), no en rubro 08; se identifica separadamente por concepto. El PDF individual no informa caja al cierre, cuentas por pagar ni cobros efectivos de expensas adeudadas.",
+      "observations": [
+        "Las sumas de rubros y del detalle por proveedor coinciden con el total computable del mes.",
+        "La lista de deudores contiene importes visibles por unidad y no permite certificar recuperos ni convenios.",
+        "Los fondos de reserva y operativo se identifican por concepto incluso cuando la administración los ubica en rubro 04."
+      ],
+      "cashFinal": null,
+      "netCash": null,
+      "accountsPayable": null,
+      "debtRecovered": null,
+      "interestReceivable": null,
+      "interestCollected": null,
+      "ordinaryExpenses": null,
+      "extraordinaryExpenses": null,
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202508-informe.pdf",
+      "source": {
+        "name": "Lagos-Expensas202508.pdf",
+        "page": 1,
+        "scope": "Liquidación individual con rubros del consorcio y listado de deudores; sin estado de caja.",
+        "unit": "01-03"
+      }
+    },
+    {
+      "id": "2025-10",
+      "label": "Octubre 2025",
+      "monthShort": "Oct/25",
+      "liquidatedTotal": 2877603.79,
+      "habitualExpenses": 2877603.79,
+      "nonHabitualExpenses": 0,
+      "fundOperating": 0,
+      "fundReserve": 1000000.0,
+      "unitCharge": 53803.49,
+      "debtors": [
+        {
+          "unit": "03-04",
+          "amount": 2637479.04
+        },
+        {
+          "unit": "10-04",
+          "amount": 2217103.0
+        },
+        {
+          "unit": "04-03",
+          "amount": 2196576.69
+        },
+        {
+          "unit": "02-01",
+          "amount": 2159159.12
+        },
+        {
+          "unit": "06-01",
+          "amount": 1998046.3
+        },
+        {
+          "unit": "09-04",
+          "amount": 1656144.24
+        },
+        {
+          "unit": "02-04",
+          "amount": 935012.07
+        },
+        {
+          "unit": "05-01",
+          "amount": 751233.12
+        },
+        {
+          "unit": "05-03",
+          "amount": 645956.12
+        },
+        {
+          "unit": "11-03",
+          "amount": 410405.08
+        },
+        {
+          "unit": "09-02",
+          "amount": 280430.79
+        },
+        {
+          "unit": "11-04",
+          "amount": 154743.5
+        },
+        {
+          "unit": "06-04",
+          "amount": 127754.88
+        },
+        {
+          "unit": "CH-12",
+          "amount": 49896.68
+        },
+        {
+          "unit": "CH-71",
+          "amount": 49896.68
+        },
+        {
+          "unit": "CH-72",
+          "amount": 49896.68
+        },
+        {
+          "unit": "CH-22",
+          "amount": 44486.17
+        },
+        {
+          "unit": "CH-61",
+          "amount": 44486.17
+        }
+      ],
+      "listedDebtTotal": 16408706.33,
+      "composition": [
+        {
+          "category": "Servicios",
+          "amount": 827800.0,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Tasas e impuestos",
+          "amount": 627968.99,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Seguros",
+          "amount": 62797.0,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Varios",
+          "amount": 1359037.8,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "MB SERVICIO LIMPIEZA",
+          "category": "Servicios",
+          "amount": 297800.0,
+          "detail": "EMP LIMPIEZA-Servicio Octubre 2025 F 1683                                                                       297.800,00             297.800,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "PIGNARELLI JOSE",
+          "category": "Servicios",
+          "amount": 70000.0,
+          "detail": "EMP LIMPIEZA-Trabajos jardinería                                                                                      70.000,00               70.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "SERGIO SAPP",
+          "category": "Servicios",
+          "amount": 199000.0,
+          "detail": "EMP ADMINISTRACION-Honorarios Octubre 2025 F 0309                                                                        199.000,00             199.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "PEREZ TABOADA FERNANDO",
+          "category": "Servicios",
+          "amount": 22000.0,
+          "detail": "EMP DESINFECCION-Servicio Septiembre 2025 F 7997                                                               22.000,00               22.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "ASCENSORES AMERICA",
+          "category": "Servicios",
+          "amount": 180000.0,
+          "detail": "EMP ASCENSORES-Servicio Octubre 2025 F 0022                                 180.000,00                                                   180.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "BOMBAS STIB",
+          "category": "Servicios",
+          "amount": 59000.0,
+          "detail": "EMP MANT DE BOMBAS-Servicio Octubre 2025 F 155637                                   59.000,00                                                     59.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "BANCO ROELA",
+          "category": "Tasas e impuestos",
+          "amount": 112459.16,
+          "detail": "SERV BANCARIOS-Período: 10/25 -F00002                                                                                     112.459,16            112.459,16",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 81866.11,
+          "detail": "ENERGIA ELECTRICA-Convenio cuota 9                                                                                                  81.866,11             81.866,11",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 433643.72,
+          "detail": "ENERGIA ELECTRICA-Cuota 1 Bimestre 5                                                                                              433.643,72            433.643,72",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "LA MERCANTIL ANDINA",
+          "category": "Seguros",
+          "amount": 62797.0,
+          "detail": "EMP SEGUROS-Cuota 6/10                                                                                              62.797,00             62.797,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Fondo de Reserva",
+          "category": "Varios",
+          "amount": 1000000.0,
+          "detail": "Fondo de reserva-A cuenta trabajos reparacion                                               1.000.000,00                                1.000.000,00",
+          "type": "Fondo de reserva / aporte"
+        },
+        {
+          "provider": "BARRERA EDUARDO",
+          "category": "Varios",
+          "amount": 90000.0,
+          "detail": "EMP MANT ELECTRICO-Mano de obra trabajos electricidad                                                                  90.000,00              90.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "ELECTRICIDAD LAGOS",
+          "category": "Varios",
+          "amount": 73300.0,
+          "detail": "EMP MANT ELECTRICO-Compra lamp //termica // reloj analogico F 0515                                                  73.300,00              73.300,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "ELECTRICIDAD LAGOS",
+          "category": "Varios",
+          "amount": 44200.0,
+          "detail": "EMP MANT ELECTRICO-Compra materiales de electricidad F 5216                                                         44.200,00              44.200,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "LAFFITTE EMILIO",
+          "category": "Varios",
+          "amount": 2200.0,
+          "detail": "ART LIBRERIA-Fotocopias expensas                                                                                        2.200,00               2.200,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "MARCELO BALBAS",
+          "category": "Varios",
+          "amount": 149337.8,
+          "detail": "EMP. MANT. PLOMERIA Y GAS-Cuota 8/8 segun acuerdo obra de gas 149.337,80                                                                     149.337,80",
+          "type": "Ordinario habitual"
+        }
+      ],
+      "notes": "Incluye 1.000.000,00 pesos en fondo de reserva; su saldo y aplicación real no están documentados. Fondo de reserva incorporado al rubro 04; su inclusión en liquidación no demuestra pago de obra. El PDF individual no informa caja al cierre, cuentas por pagar ni cobros efectivos de expensas adeudadas.",
+      "observations": [
+        "Las sumas de rubros y del detalle por proveedor coinciden con el total computable del mes.",
+        "La lista de deudores contiene importes visibles por unidad y no permite certificar recuperos ni convenios.",
+        "Los fondos de reserva y operativo se identifican por concepto incluso cuando la administración los ubica en rubro 04."
+      ],
+      "cashFinal": null,
+      "netCash": null,
+      "accountsPayable": null,
+      "debtRecovered": null,
+      "interestReceivable": null,
+      "interestCollected": null,
+      "ordinaryExpenses": null,
+      "extraordinaryExpenses": null,
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202510-informe.pdf",
+      "source": {
+        "name": "Lagos-Expensas202510.pdf",
+        "page": 1,
+        "scope": "Liquidación individual con rubros del consorcio y listado de deudores; sin estado de caja.",
+        "unit": "01-03"
+      }
+    },
+    {
+      "id": "2025-12",
+      "label": "Diciembre 2025",
+      "monthShort": "Dic/25",
+      "liquidatedTotal": 3201040.47,
+      "habitualExpenses": 2001040.47,
+      "nonHabitualExpenses": 1200000.0,
+      "fundOperating": 0,
+      "fundReserve": 1200000.0,
+      "unitCharge": 60324.66,
+      "debtors": [
+        {
+          "unit": "03-04",
+          "amount": 3009714.49
+        },
+        {
+          "unit": "10-04",
+          "amount": 2548656.91
+        },
+        {
+          "unit": "04-03",
+          "amount": 2526144.18
+        },
+        {
+          "unit": "02-01",
+          "amount": 2485105.55
+        },
+        {
+          "unit": "06-01",
+          "amount": 2308401.17
+        },
+        {
+          "unit": "09-04",
+          "amount": 1933411.81
+        },
+        {
+          "unit": "02-04",
+          "amount": 1142492.66
+        },
+        {
+          "unit": "05-01",
+          "amount": 940928.65
+        },
+        {
+          "unit": "05-03",
+          "amount": 767163.55
+        },
+        {
+          "unit": "11-03",
+          "amount": 566598.91
+        },
+        {
+          "unit": "09-02",
+          "amount": 424564.8
+        },
+        {
+          "unit": "CH-12",
+          "amount": 65936.46
+        },
+        {
+          "unit": "CH-71",
+          "amount": 65936.46
+        },
+        {
+          "unit": "CH-72",
+          "amount": 65936.46
+        },
+        {
+          "unit": "CH-22",
+          "amount": 58786.68
+        },
+        {
+          "unit": "CH-61",
+          "amount": 58786.68
+        },
+        {
+          "unit": "08-02",
+          "amount": 54669.56
+        },
+        {
+          "unit": "13-01",
+          "amount": 54669.56
+        }
+      ],
+      "listedDebtTotal": 19077904.54,
+      "composition": [
+        {
+          "category": "Servicios",
+          "amount": 1387900.0,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Tasas e impuestos",
+          "amount": 553189.47,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Seguros",
+          "amount": 57651.0,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "Varios",
+          "amount": 2300.0,
+          "type": "Rubros 01–04 (incluyen partidas no recurrentes)"
+        },
+        {
+          "category": "No habituales",
+          "amount": 1200000.0,
+          "type": "Ordinario no habitual"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "MB SERVICIO LIMPIEZA",
+          "category": "Servicios",
+          "amount": 309900.0,
+          "detail": "EMP LIMPIEZA-Servicio Diciembre 2025 F 2011                                                             309.900,00             309.900,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "SERGIO SAPP",
+          "category": "Servicios",
+          "amount": 212000.0,
+          "detail": "EMP ADMINISTRACION-Honorarios Diciembre 2025 F 0375                                                              212.000,00             212.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "PEREZ TABOADA FERNANDO",
+          "category": "Servicios",
+          "amount": 24000.0,
+          "detail": "EMP DESINFECCION-Servicio Noviembre 2025 F 8175                        24.000,00                                               24.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "ASCENSORES AMERICA",
+          "category": "Servicios",
+          "amount": 600000.0,
+          "detail": "EMP ASCENSORES-Anticipo cambio cables de acero F 0028                     600.000,00                                             600.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "ASCENSORES AMERICA",
+          "category": "Servicios",
+          "amount": 180000.0,
+          "detail": "EMP ASCENSORES-Servicio Diciembre 2025 F 0028                             180.000,00                                             180.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "BOMBAS STIB",
+          "category": "Servicios",
+          "amount": 62000.0,
+          "detail": "EMP MANT DE BOMBAS-Servicio Diciembre 2025 F 158706                                                                 62.000,00             62.000,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "BANCO ROELA",
+          "category": "Tasas e impuestos",
+          "amount": 102370.67,
+          "detail": "SERV BANCARIOS-Período: 12/25                                                                                     102.370,67            102.370,67",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "EPE",
+          "category": "Tasas e impuestos",
+          "amount": 450818.8,
+          "detail": "ENERGIA ELECTRICA-Cuota 1 Bimestre 6                                                                                      450.818,80            450.818,80",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "LA MERCANTIL ANDINA",
+          "category": "Seguros",
+          "amount": 57651.0,
+          "detail": "EMP SEGUROS-Cuota 8/10                                                                                      57.651,00             57.651,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "FYM COPY",
+          "category": "Varios",
+          "amount": 2300.0,
+          "detail": "ART LIBRERIA-Fotocopias expensas                                                                                        2.300,00              2.300,00",
+          "type": "Ordinario habitual"
+        },
+        {
+          "provider": "Fondo de Reserva",
+          "category": "No habituales",
+          "amount": 1200000.0,
+          "detail": "Gasto N.H-A cuenta trabajos                                               1.200.000,00                                          1.200.000,00",
+          "type": "Ordinario no habitual / fondo"
+        }
+      ],
+      "notes": "Incluye 1.200.000,00 pesos en fondo de reserva; su saldo y aplicación real no están documentados. El PDF individual no informa caja al cierre, cuentas por pagar ni cobros efectivos de expensas adeudadas.",
+      "observations": [
+        "Las sumas de rubros y del detalle por proveedor coinciden con el total computable del mes.",
+        "La lista de deudores contiene importes visibles por unidad y no permite certificar recuperos ni convenios.",
+        "Los fondos de reserva y operativo se identifican por concepto incluso cuando la administración los ubica en rubro 04."
+      ],
+      "cashFinal": null,
+      "netCash": null,
+      "accountsPayable": null,
+      "debtRecovered": null,
+      "interestReceivable": null,
+      "interestCollected": null,
+      "ordinaryExpenses": null,
+      "extraordinaryExpenses": null,
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202512-informe.pdf",
+      "source": {
+        "name": "Lagos-Expensas202512.pdf",
+        "page": 1,
+        "scope": "Liquidación individual con rubros del consorcio y listado de deudores; sin estado de caja.",
+        "unit": "01-03"
+      }
+    }
+  ]
+}

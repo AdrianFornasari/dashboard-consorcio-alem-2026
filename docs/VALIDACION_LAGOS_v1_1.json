@@ -1,0 +1,165 @@
+{
+  "version": "1.1",
+  "tipo": "Validación financiera y estructural de liquidaciones individuales",
+  "edificio": "Torre VI · Ovidio Lagos 2797",
+  "mesesDocumentados": 13,
+  "meses2025": [
+    "2025-04",
+    "2025-05",
+    "2025-07",
+    "2025-08",
+    "2025-10",
+    "2025-12"
+  ],
+  "meses2026": [
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07"
+  ],
+  "mesesFaltantes2025": [
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-06",
+    "2025-09",
+    "2025-11"
+  ],
+  "control": "Suma de importes rubros y proveedores = total liquidado; suma de unidades = listado visible, con margen ≤ $0,01",
+  "limitaciones": "Sin caja, cobranzas, deudas contables completas ni pagos efectivos. No se imputan meses faltantes.",
+  "porMes": [
+    {
+      "id": "2025-04",
+      "totalLiquidado": 2962268.05,
+      "sumaRubros": 2962268.05,
+      "sumaMovimientos": 2962268.05,
+      "deudaVisible": 10189993.21,
+      "sumaDeudores": 10189993.21,
+      "unidades": 28,
+      "resultado": "conciliado"
+    },
+    {
+      "id": "2025-05",
+      "totalLiquidado": 3327901.72,
+      "sumaRubros": 3327901.72,
+      "sumaMovimientos": 3327901.72,
+      "deudaVisible": 10811272.53,
+      "sumaDeudores": 10811272.53,
+      "unidades": 24,
+      "resultado": "conciliado"
+    },
+    {
+      "id": "2025-07",
+      "totalLiquidado": 3402163.73,
+      "sumaRubros": 3402163.73,
+      "sumaMovimientos": 3402163.73,
+      "deudaVisible": 12744564.65,
+      "sumaDeudores": 12744564.65,
+      "unidades": 23,
+      "resultado": "conciliado"
+    },
+    {
+      "id": "2025-08",
+      "totalLiquidado": 3155508.57,
+      "sumaRubros": 3155508.57,
+      "sumaMovimientos": 3155508.57,
+      "deudaVisible": 13517744.11,
+      "sumaDeudores": 13517744.11,
+      "unidades": 17,
+      "resultado": "conciliado"
+    },
+    {
+      "id": "2025-10",
+      "totalLiquidado": 2877603.79,
+      "sumaRubros": 2877603.79,
+      "sumaMovimientos": 2877603.79,
+      "deudaVisible": 16408706.33,
+      "sumaDeudores": 16408706.33,
+      "unidades": 18,
+      "resultado": "conciliado"
+    },
+    {
+      "id": "2025-12",
+      "totalLiquidado": 3201040.47,
+      "sumaRubros": 3201040.47,
+      "sumaMovimientos": 3201040.47,
+      "deudaVisible": 19077904.54,
+      "sumaDeudores": 19077904.54,
+      "unidades": 18,
+      "resultado": "conciliado"
+    },
+    {
+      "id": "2026-01",
+      "totalLiquidado": 3624140.39,
+      "sumaRubros": 3624140.39,
+      "sumaMovimientos": 3624140.39,
+      "deudaVisible": 20757582.44,
+      "sumaDeudores": 20757582.44,
+      "unidades": 22,
+      "resultado": "conciliado"
+    },
+    {
+      "id": "2026-02",
+      "totalLiquidado": 5644866.29,
+      "sumaRubros": 5644866.29,
+      "sumaMovimientos": 5644866.29,
+      "deudaVisible": 22215845.06,
+      "sumaDeudores": 22215845.06,
+      "unidades": 18,
+      "resultado": "conciliado"
+    },
+    {
+      "id": "2026-03",
+      "totalLiquidado": 4557815,
+      "sumaRubros": 4557815,
+      "sumaMovimientos": 4557815.0,
+      "deudaVisible": 24530724.9,
+      "sumaDeudores": 24530724.9,
+      "unidades": 22,
+      "resultado": "conciliado"
+    },
+    {
+      "id": "2026-04",
+      "totalLiquidado": 5034342.34,
+      "sumaRubros": 5034342.34,
+      "sumaMovimientos": 5034342.34,
+      "deudaVisible": 25651031.9,
+      "sumaDeudores": 25651031.9,
+      "unidades": 21,
+      "resultado": "conciliado"
+    },
+    {
+      "id": "2026-05",
+      "totalLiquidado": 5326850.25,
+      "sumaRubros": 5326850.25,
+      "sumaMovimientos": 5326850.25,
+      "deudaVisible": 25264410.29,
+      "sumaDeudores": 25264410.29,
+      "unidades": 20,
+      "resultado": "conciliado"
+    },
+    {
+      "id": "2026-06",
+      "totalLiquidado": 5360116.56,
+      "sumaRubros": 5360116.56,
+      "sumaMovimientos": 5360116.56,
+      "deudaVisible": 23954550.35,
+      "sumaDeudores": 23954550.35,
+      "unidades": 22,
+      "resultado": "conciliado"
+    },
+    {
+      "id": "2026-07",
+      "totalLiquidado": 5218191.96,
+      "sumaRubros": 5218191.96,
+      "sumaMovimientos": 5218191.96,
+      "deudaVisible": 26630241.82,
+      "sumaDeudores": 26630241.82,
+      "unidades": 25,
+      "resultado": "conciliado"
+    }
+  ]
+}

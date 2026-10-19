@@ -1,17 +1,36 @@
 #!/usr/bin/env bash
 set -euo pipefail
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT="${1:-$PWD}"
-if [[ ! -f "$ROOT/app.js" || ! -f "$ROOT/data/expensas-2026.json" || ! -f "$ROOT/multibuilding.js" ]]; then
-  echo 'ERROR: esta actualización requiere el repositorio con versión multiedificio v0.8.' >&2
-  exit 1
+SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TARGET_DIR="${1:-$PWD}"
+if [[ ! -f "$TARGET_DIR/index.html" || ! -f "$TARGET_DIR/multibuilding.js" || ! -f "$TARGET_DIR/app.js" || ! -f "$TARGET_DIR/consorcios/lagos-2797/data/2026.json" ]]; then
+  echo "Error: la carpeta destino no parece ser la versión funcional multiedificio. No se copiaron archivos." >&2; exit 1
 fi
-for file in index.html multibuilding.js data/edificios.json consorcios/lagos-2797/data/2026.json docs/validacion_lagos_2026.json docs/ACTUALIZACION_LAGOS_ENERO_JULIO_2026.md; do
-  mkdir -p "$ROOT/$(dirname "$file")"
-  cp "$SCRIPT_DIR/$file" "$ROOT/$file"
+FILES=(
+  "index.html"
+  "styles.css"
+  "multibuilding.js"
+  "data/edificios.json"
+  "consorcios/lagos-2797/data/2025.json"
+  "consorcios/lagos-2797/data/2026.json"
+  "consorcios/lagos-2797/informes/202504-informe.pdf"
+  "consorcios/lagos-2797/informes/202505-informe.pdf"
+  "consorcios/lagos-2797/informes/202507-informe.pdf"
+  "consorcios/lagos-2797/informes/202508-informe.pdf"
+  "consorcios/lagos-2797/informes/202510-informe.pdf"
+  "consorcios/lagos-2797/informes/202512-informe.pdf"
+  "consorcios/lagos-2797/informes/202601-informe.pdf"
+  "consorcios/lagos-2797/informes/202602-informe.pdf"
+  "consorcios/lagos-2797/informes/202603-informe.pdf"
+  "consorcios/lagos-2797/informes/202604-informe.pdf"
+  "docs/VALIDACION_LAGOS_v1_1.json"
+  "docs/EVOLUCION_GASTOS_LAGOS_2025_2026_v1_1.md"
+  "README_ACTUALIZACION_LAGOS_v1_1.md"
+)
+for relative in "${FILES[@]}"; do
+  mkdir -p "$TARGET_DIR/$(dirname "$relative")"
+  if [[ "$SOURCE_DIR/$relative" != "$TARGET_DIR/$relative" ]]; then
+    cp "$SOURCE_DIR/$relative" "$TARGET_DIR/$relative"
+  fi
 done
-mkdir -p "$ROOT/consorcios/lagos-2797/informes"
-for month in 01 02 03 04; do
-  cp "$SCRIPT_DIR/consorcios/lagos-2797/informes/2026${month}-informe.pdf" "$ROOT/consorcios/lagos-2797/informes/"
-done
-echo 'Aplicación completa. Revisá git diff y probá localhost antes de publicar.'
+echo "Actualización v1.1 aplicada en: $TARGET_DIR"
+echo "Revisá git diff / git status y probá el servidor local antes de publicar."

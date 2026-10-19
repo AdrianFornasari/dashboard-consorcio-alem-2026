@@ -697,3 +697,14 @@ body[data-active-building="lagos-2797"] .lagos-dashboard { display: block; }
 .lagos-dashboard .lagos-quicklinks a:hover,.lagos-dashboard .lagos-quicklinks a:focus-visible{background:#e2f7f3;}
 .lagos-debt-section .debt-unit-link {border:0;background:transparent;color:#0f766e;font:inherit;font-weight:800;text-decoration:underline;cursor:pointer;padding:2px;}
 @media print{.lagos-dashboard .lagos-quicklinks{display:none!important;}}
+
+/* v1.1 Lagos: evolución de gastos y proveedores 2025–26 */
+.lagos-expense-section { scroll-margin-top: 25px; }
+.lagos-expense-section h4 {margin:14px 0 4px;font-size:1.15rem;color:#0f766e;}
+.lagos-expense-section .lagos-alerts {margin:4px 0 0;padding-left:22px;line-height:1.65;}
+.lagos-expense-section .lagos-alerts li {padding-bottom:7px;}
+.lagos-expense-section .controls-inline.wrap {display:flex;flex-wrap:wrap;align-items:end;gap:10px;}
+.lagos-expense-section .controls-inline.wrap label {min-width:130px;}
+.lagos-expense-section #lagosExpenseProviderRanking .debt-unit-link {white-space:nowrap;}
+@media(max-width:620px){.lagos-expense-section .controls-inline{width:100%;}.lagos-expense-section .debt-summary-cards{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media print{.lagos-expense-section .controls-inline,.lagos-expense-section .lagos-expense-link,.lagos-expense-section #lagosExpenseReset{display:none!important;}.lagos-expense-section .debt-chart svg{max-height:230px;}}
