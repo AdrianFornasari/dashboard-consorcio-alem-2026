@@ -3,11 +3,11 @@
     "title": "Dashboard Expensas Alem 2026",
     "building": "Consorcio Alem 1268/74/80/82",
     "privacy": "Uso privado para consorcistas. No contiene nombres de propietarios en la sección de morosidad; sólo unidades funcionales.",
-    "lastLoadedMonth": "2026-09",
+    "lastLoadedMonth": "2026-10",
     "currency": "ARS",
     "dataPolicy": "Datos extraídos de liquidaciones mensuales de expensas e informes mensuales preparados para reunión de consorcio. Validar cada actualización contra el PDF mensual antes de publicar.",
-    "documentPolicy": "El paquete incluye los PDFs mensuales de expensas de enero a septiembre 2026 y los informes mensuales generados para cada período. Los datos del dashboard se basan en esas liquidaciones e informes; validar contra el PDF oficial antes de publicar cada actualización.",
-    "dataVersion": "2026-10-12-pdfs-informes-completos"
+    "documentPolicy": "PDF mensual de octubre publicado en versión anonimizada (sin nombres de propietarios); el original debe conservarse fuera del repositorio público. Los datos están extraídos de las liquidaciones y deben verificarse contra las fuentes oficiales.",
+    "dataVersion": "2026-11-04-octubre-2026"
   },
   "months": [
     {
@@ -2243,6 +2243,245 @@
         {
           "unit": "08-01",
           "amount": 416683.0
+        }
+      ]
+    },
+    {
+      "id": "2026-10",
+      "label": "Octubre 2026",
+      "monthShort": "Oct",
+      "pdf": "pdfs/202610Expensas.pdf",
+      "report": "informes/202610-informe.pdf",
+      "cashStart": 6817910.83,
+      "cashFinal": 8086605.43,
+      "accountsPayable": 1550000,
+      "netCash": 6536605.43,
+      "ordinaryExpenses": 4715005.4,
+      "extraordinaryExpenses": 1504500,
+      "particularExpenses": 0,
+      "totalExpenses": 6219505.4,
+      "paidCurrent": 5462193.15,
+      "lateFeesCollected": 27500,
+      "debtRecovered": 1613582.53,
+      "interestCollected": 390424.32,
+      "otherIncome": 0,
+      "debtCapital": 2574656.88,
+      "interestReceivable": 979008.82,
+      "currentReceivables": 6222234.3,
+      "unidentifiedCollections": -84910,
+      "notes": "La deuda de capital baja 30,2% respecto de septiembre y la caja final sube 18,6%. Los pagos de capital vencido ascienden a $1.613.582,53, pero la variación de saldo no equivale al recupero neto. De $1.504.500 extraordinarios, $1.450.000 corresponden a acopios/saldos aún pendientes de pago. La liquidez neta de compromisos es $6.536.605,43.",
+      "composition": [
+        {
+          "category": "Servicios públicos",
+          "amount": 420632,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Abonos de servicios",
+          "amount": 150000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Mantenimiento ordinario",
+          "amount": 290000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Gastos bancarios",
+          "amount": 273843,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Limpieza",
+          "amount": 2156035,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Administración",
+          "amount": 506950,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguros",
+          "amount": 137129.2,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Ascensores",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Seguridad",
+          "amount": 620416.2,
+          "type": "Ordinario"
+        },
+        {
+          "category": "Extraordinarios",
+          "amount": 1504500,
+          "type": "Extraordinario"
+        }
+      ],
+      "providers": [
+        {
+          "provider": "EPE Santa Fe",
+          "category": "Servicios públicos",
+          "detail": "Energía eléctrica, bimestre 5 cuota 1",
+          "amount": 420632,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Electromecánica Melian",
+          "category": "Abonos de servicios",
+          "detail": "Mantenimiento bombas, abono 9/26",
+          "amount": 82000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Landini Desinfección",
+          "category": "Abonos de servicios",
+          "detail": "Desinfección 8/26 y 9/26 (dos cuotas)",
+          "amount": 68000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Adrian Castro Electricista",
+          "category": "Mantenimiento ordinario",
+          "detail": "Tubos y fusible en tablero",
+          "amount": 65000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Alem Cerrajería",
+          "category": "Mantenimiento ordinario",
+          "detail": "Cambio de cerradura de ascensor",
+          "amount": 65000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "GPS Automatización",
+          "category": "Mantenimiento ordinario",
+          "detail": "Mantenimiento de portones",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Roela Siro",
+          "category": "Gastos bancarios",
+          "detail": "Sistema de recaudación octubre",
+          "amount": 273843,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "SURLIMP",
+          "category": "Limpieza",
+          "detail": "Limpieza general de áreas comunes",
+          "amount": 2041650,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "SURLIMP",
+          "category": "Limpieza",
+          "detail": "Limpieza de balcones y patio",
+          "amount": 114385,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "CA Cupones / Barras",
+          "category": "Administración",
+          "detail": "Vinculación de cupones/códigos",
+          "amount": 48000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Federico Giorgi",
+          "category": "Administración",
+          "detail": "Honorarios administración",
+          "amount": 425000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Librería ABC",
+          "category": "Administración",
+          "detail": "Fotocopias de expensas",
+          "amount": 33950,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Sancor Seguros",
+          "category": "Seguros",
+          "detail": "Seguro integral cuota 8",
+          "amount": 137129.2,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Opción Ascensores",
+          "category": "Ascensores",
+          "detail": "Mantenimiento de ascensores",
+          "amount": 160000,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "Centitower",
+          "category": "Seguridad",
+          "detail": "Monitoreo de puerta de ingreso",
+          "amount": 620416.2,
+          "type": "Ordinario"
+        },
+        {
+          "provider": "BY PASS",
+          "category": "Extraordinarios",
+          "detail": "Saldo reparaciones 5D a 4D (pagado)",
+          "amount": 54500,
+          "type": "Extraordinario"
+        },
+        {
+          "provider": "Gastos varios",
+          "category": "Extraordinarios",
+          "detail": "Saldo para trabajo de cámara (pendiente)",
+          "amount": 1150000,
+          "type": "Extraordinario"
+        },
+        {
+          "provider": "Gastos varios",
+          "category": "Extraordinarios",
+          "detail": "Acopio extraordinario para reparaciones (pendiente)",
+          "amount": 300000,
+          "type": "Extraordinario"
+        }
+      ],
+      "debtors": [
+        {
+          "unit": "02-02",
+          "amount": 953850.94
+        },
+        {
+          "unit": "08-01",
+          "amount": 541114.7
+        },
+        {
+          "unit": "00-17",
+          "amount": 364382.34
+        },
+        {
+          "unit": "00-14",
+          "amount": 361560.78
+        },
+        {
+          "unit": "00-07",
+          "amount": 169648.12
+        },
+        {
+          "unit": "04-04",
+          "amount": 133100
+        },
+        {
+          "unit": "A2",
+          "amount": 25500
+        },
+        {
+          "unit": "A13",
+          "amount": 25500
         }
       ]
     }
