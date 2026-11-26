@@ -708,3 +708,60 @@ body[data-active-building="lagos-2797"] .lagos-dashboard { display: block; }
 .lagos-expense-section #lagosExpenseProviderRanking .debt-unit-link {white-space:nowrap;}
 @media(max-width:620px){.lagos-expense-section .controls-inline{width:100%;}.lagos-expense-section .debt-summary-cards{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media print{.lagos-expense-section .controls-inline,.lagos-expense-section .lagos-expense-link,.lagos-expense-section #lagosExpenseReset{display:none!important;}.lagos-expense-section .debt-chart svg{max-height:230px;}}
+
+/* v1.2: seguimiento documental de fondos, anticipos y obras */
+.funds-shell{margin:0 0 20px;border:1px solid #b7d2ce;border-radius:18px;background:#fff;box-shadow:var(--shadow);overflow:hidden;scroll-margin-top:20px}
+.funds-shell>summary{cursor:pointer;padding:18px 22px;background:#ecfdf7;color:#0d554e;font-weight:800;font-size:1.13rem;list-style:revert}
+.funds-shell[open]>summary{border-bottom:1px solid #b7d2ce}
+.funds-body{padding:18px}
+.funds-lead{color:#526272;line-height:1.5;margin:2px 0 16px;max-width:1000px}
+.funds-controls{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:12px;margin-bottom:15px;align-items:end}
+.funds-controls label{min-width:0}
+.funds-actions{display:flex;gap:10px;flex-wrap:wrap;margin:5px 0 16px}
+.funds-actions button{background:#fff;border:1px solid #cbd5e1;border-radius:10px;cursor:pointer;padding:9px 12px;color:#075e55;font-weight:700}
+.funds-actions button:hover,.funds-actions button:focus-visible{background:#d5f5e8}
+.funds-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.funds-kpi{background:#f6fafc;border:1px solid #d7e3ec;padding:15px;border-radius:13px;min-width:0;display:grid;gap:7px}
+.funds-kpi span{color:#475569;font-size:.82rem;font-weight:750}
+.funds-kpi strong{font-size:clamp(1.03rem,1.55vw,1.42rem);overflow-wrap:anywhere}
+.funds-kpi small{color:#64748b;line-height:1.45}
+.funds-pane{margin-top:18px;padding:18px;border:1px solid var(--line);border-radius:15px;background:white;min-width:0}
+.funds-pane h3{margin:0 0 5px;color:#134e4a}
+.funds-pane>p{margin:5px 0 14px}
+.funds-grid{display:grid;grid-template-columns:minmax(270px,1fr) minmax(360px,1.25fr);gap:16px}
+.funds-project-list{display:grid;gap:8px;max-height:470px;overflow:auto}
+.funds-project{display:grid;gap:4px;text-align:left;background:#f8fafc;color:#1e293b;padding:13px 15px;border:1px solid #e2e8f0;border-radius:12px;cursor:pointer;font:inherit}
+.funds-project strong{font-size:.95rem}
+.funds-project span{font-size:.82rem;color:#475569}
+.funds-project small{color:#64748b;line-height:1.45}
+.funds-project:hover,.funds-project:focus-visible{border-color:#0f766e;background:#eef9f5}
+.funds-project.funds-active{border:2px solid #0f766e;background:#e2f7f3}
+.funds-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.76rem;color:#526272;margin:8px 0 12px}
+.funds-legend span::before{content:'';display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;background:var(--tint)}
+.funds-month-chart{display:grid;gap:9px;max-height:470px;overflow:auto}
+.funds-month-row{display:grid;grid-template-columns:78px minmax(0,1fr);gap:10px;align-items:center;font-size:.82rem}
+.funds-month-name{font-weight:800;color:#334155}
+.funds-bars{display:grid;grid-template-columns:minmax(0,1fr) minmax(110px,auto);gap:5px 8px;align-items:center}
+.funds-track{height:15px;display:flex;gap:0;border-radius:5px;background:#edf2f7;overflow:hidden;min-width:0}
+.funds-segment{height:100%;min-width:1px;display:block}
+.funds-segment.funds-fondo{background:#0f766e}
+.funds-segment.funds-acopio{background:#b45309}
+.funds-segment.funds-trabajo{background:#1d4ed8}
+.funds-segment.funds-mixto{background:#64748b}
+.funds-month-total{font-weight:750;text-align:right;font-size:.72rem;line-height:1.4;color:#475569;overflow-wrap:anywhere}
+.funds-bars small{grid-column:1/-1;color:#a3410b}
+.funds-month-row.is-missing{color:#8a95a6;background:#f8fafc;padding:5px;border-radius:5px}
+.funds-no-doc{font-size:.75rem;font-style:italic}
+.funds-table{width:100%;border-collapse:collapse;min-width:730px}
+.funds-table th,.funds-table td{border-bottom:1px solid #e2e8f0;padding:10px;text-align:left;vertical-align:top;font-size:.83rem}
+.funds-table thead th{background:#f1f5f9}
+.funds-table th.num,.funds-table td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.funds-kind{border-radius:6px;background:#e2e8f0;color:#334155;padding:4px 7px;font-weight:700;display:inline-block;white-space:nowrap;font-size:.74rem}
+.funds-kind.fondo{background:#d1fae5;color:#065f46}.funds-kind.acopio,.funds-kind.anticipo{background:#fef3c7;color:#92400e}.funds-kind.trabajo{background:#dbeafe;color:#1e40af}.funds-kind.ajuste{background:#fee2e2;color:#991b1b}
+.funds-movements-filter{display:grid;grid-template-columns:minmax(0,1fr) minmax(130px,1fr);gap:12px;margin:12px 0}
+.funds-warning{background:#fff7ed;border-left:4px solid #d97706;border-radius:8px;padding:12px 15px;color:#78350f;font-size:.88rem;line-height:1.5}
+@media(max-width:1000px){.funds-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.funds-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.funds-grid{grid-template-columns:1fr}}
+@media(max-width:620px){.funds-body{padding:12px}.funds-shell>summary{padding:14px}.funds-pane{padding:13px}.funds-controls{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.funds-kpis{gap:8px}.funds-kpi{padding:10px}.funds-month-row{grid-template-columns:60px 1fr;gap:5px}.funds-bars{grid-template-columns:1fr;gap:2px}.funds-month-total{text-align:left}.funds-movements-filter{grid-template-columns:1fr}}
+@media print{.funds-shell>summary{list-style:none}.funds-controls,.funds-actions,.funds-movements-filter,.funds-project-list{display:none!important}.funds-grid{grid-template-columns:1fr}.funds-pane,.funds-kpi{box-shadow:none;break-inside:avoid}.funds-month-chart{max-height:none;overflow:visible}.funds-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.funds-month-row{break-inside:avoid}.funds-shell{border:0}}
+
+@media print{body.funds-print-only #lagosDashboard,body.funds-print-only .tabs,body.funds-print-only .tab-panel,body.funds-print-only #globalSearchPanel{display:none!important;}body.funds-print-only .funds-shell{display:block!important;}}

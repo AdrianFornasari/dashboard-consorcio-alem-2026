@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard de Consorcios · Expensas 2026</title>
-  <link rel="stylesheet" href="styles.css?v=20261018-lagos-expenses-v11">
+  <link rel="stylesheet" href="styles.css?v=20261125-funds-v12">
 </head>
 <body>
   <header class="hero">
@@ -12,7 +12,7 @@
       <p class="eyebrow" id="activeBuildingLabel">Consorcio Alem 1268/74/80/82</p>
       <h1>Dashboard de expensas 2026</h1>
       <p class="hero-text">Resumen financiero, morosidad por unidad, composición de gastos, proveedores, documentos e indicadores para reuniones de consorcio.</p>
-      <p class="version-badge" id="appVersionLine">Versión 1.0 · seguimiento de morosidad de Lagos</p>
+      <p class="version-badge" id="appVersionLine">Versión 1.2 · seguimiento de fondos y obras</p>
     </div>
     <div class="hero-card">
       <label for="buildingSelect">Seleccionar edificio</label>
@@ -33,6 +33,29 @@
     <section class="notice" id="privacyNotice">
       <strong>Privacidad:</strong> este MVP no muestra nombres de propietarios en morosidad; sólo unidades funcionales. Sin contraseña, la privacidad depende de no difundir el enlace fuera del consorcio.
     </section>
+
+    <details id="fondosObras" class="funds-shell" aria-labelledby="fundsSummaryTitle">
+      <summary id="fundsSummaryTitle">Fondos, anticipos y obras · seguimiento documental v1.2</summary>
+      <div id="fundsBody" class="funds-body">
+        <p class="funds-lead" id="fundsScope">Cargando seguimiento documental...</p>
+        <p class="funds-warning"><strong>Alcance:</strong> se muestran cargos y ajustes incluidos en liquidaciones, no una rendición bancaria de fondos ni el saldo efectivo de las obras. Fondos, anticipos y trabajos no se compensan automáticamente: pueden referirse a etapas del mismo proyecto.</p>
+        <div class="funds-controls">
+          <label for="fundsFrom">Desde<select id="fundsFrom"></select></label>
+          <label for="fundsTo">Hasta<select id="fundsTo"></select></label>
+          <label for="fundsProject">Proyecto o fondo<select id="fundsProject"></select></label>
+          <label for="fundsKind">Tipo de movimiento<select id="fundsKind"><option value="all">Todos</option><option value="fondo">Partidas de fondo</option><option value="acopio">Acopios</option><option value="anticipo">Anticipos y cuotas</option><option value="trabajo">Trabajos y compras</option><option value="mixto">Partidas mixtas</option><option value="ajuste">Ajustes</option></select></label>
+        </div>
+        <div class="funds-actions"><button type="button" id="fundsClearFilters">Restablecer período y filtros</button><button type="button" id="fundsPrint">Imprimir / guardar PDF</button></div>
+        <div class="funds-kpis" id="fundsKpis"></div>
+        <div class="funds-grid">
+          <section class="funds-pane"><h3>Proyectos y fondos identificados</h3><p class="muted small">Seleccioná un proyecto para analizar sus movimientos. Los totales son cargos netos informados, no saldos disponibles.</p><div id="fundsProjects" class="funds-project-list"></div></section>
+          <section class="funds-pane"><h3>Evolución de partidas liquidadas</h3><div class="funds-legend"><span style="--tint:#0f766e">Fondos</span><span style="--tint:#b45309">Acopios/anticipos</span><span style="--tint:#1d4ed8">Trabajos/compras</span><span style="--tint:#64748b">Partidas mixtas</span></div><div id="fundsMonthGraph" class="funds-month-chart" role="img" aria-label="Evolución mensual de partidas documentadas"></div><p id="fundsGraphHelp" class="muted small"></p></section>
+        </div>
+        <section class="funds-pane"><h3>Saldos de cuentas por pagar informados</h3><p class="muted small">Se presenta sólo la última foto disponible cuando la liquidación permite atribuir saldos a un concepto concreto.</p><div id="fundsPending"></div></section>
+        <section class="funds-pane"><h3 id="fundsMovementsTitle">Detalle de movimientos y referencias</h3><p class="muted small" id="fundsMovementCount"></p><div class="funds-movements-filter"><label for="fundsQuery">Buscar concepto o proveedor<input id="fundsQuery" type="search" placeholder="Ej.: cámara, ascensores, cañerías"></label><div><p class="muted small">El origen se indica por nombre de liquidación y página. Los PDF originales de Lagos no se publican porque contienen datos personales.</p></div></div><div class="table-wrap tall"><table id="fundsMovements" class="funds-table"></table></div></section>
+        <p id="fundsStatus" class="muted small"></p>
+      </div>
+    </details>
 
     <section id="lagosDashboard" class="lagos-dashboard" hidden aria-label="Dashboard Torre VI Lagos 2797">
       <div class="notice">
@@ -475,6 +498,7 @@
   </footer>
 
   <script src="app.js?v=20261018-multi-v1"></script>
-  <script src="multibuilding.js?v=20261018-lagos-expenses-v11"></script>
+  <script src="multibuilding.js?v=20261125-funds-v12"></script>
+  <script src="fondos.js?v=20261125-funds-v12"></script>
 </body>
 </html>

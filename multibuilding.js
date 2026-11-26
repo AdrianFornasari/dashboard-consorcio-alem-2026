@@ -1,4 +1,4 @@
-/* Dashboard multiedificio v1.1: gastos, proveedores e histórico documental. Alem sin cambios. */
+/* Dashboard multiedificio v1.2: gastos, proveedores e histórico documental. Alem sin cambios. */
 (() => {
   'use strict';
   let manifest = null;
@@ -42,7 +42,7 @@
     $l('lagosHeroControls').hidden=!isLagos;
     $l('lagosDashboard').hidden=!isLagos;
     $l('activeBuildingLabel').textContent = isLagos ? 'Torre VI · Ovidio Lagos 2797' : 'Consorcio Alem 1268/74/80/82';
-    $l('appVersionLine').textContent = isLagos ? 'Versión 1.1 · gastos, proveedores y morosidad · 2025–2026' : 'Versión 1.1 · Alem conserva las funciones de la v0.7';
+    $l('appVersionLine').textContent = isLagos ? 'Versión 1.2 · fondos, gastos y morosidad · 2025–2026' : 'Versión 1.2 · fondos y obras · Alem 2026';
     $l('privacyNotice').innerHTML = isLagos
       ? '<strong>Privacidad:</strong> las liquidaciones individuales incluyen nombres propios. Los originales no se distribuyen en GitHub Pages; los informes públicos sólo muestran unidades.'
       : '<strong>Privacidad:</strong> la vista de morosidad muestra sólo unidades. Atención: los PDF originales de Alem incluidos previamente pueden contener datos personales.';
