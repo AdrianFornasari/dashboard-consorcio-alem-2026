@@ -1,0 +1,2710 @@
+{
+  "version": "1.3.0",
+  "generatedAt": "2026-11-26T00:18:24+00:00",
+  "method": "Controles estructurales y aritméticos sobre JSON; documentos verificados sólo por presencia. Sin auditoría externa ni certificación de importes contra PDF.",
+  "tolerance": "0.02",
+  "sourcePolicy": "El cotejo con los PDFs, la confidencialidad y la conciliación bancaria requieren control adicional.",
+  "funds": {
+    "included": true,
+    "entries": 64,
+    "unreferenced": 0,
+    "pending": 3
+  },
+  "sourceHashes": {
+    "data/expensas-2026.json": "8d85a38ddda6c82097aa3cc36f268fdfbbb10e656429982bee640008b138d11f",
+    "consorcios/lagos-2797/data/2025.json": "c70fa42c72fb7eeeb742989db30b2f8414ed37abae40f441a4ef600e128cdb98",
+    "consorcios/lagos-2797/data/2026.json": "7eecb498d37bf0da0471b2063f05b43357130101823a3c6119e4b92ced77a159",
+    "data/seguimiento_fondos_v12.json": "c52dc4bef38c5f860f40c3d180fbda52378dade9948c9ec103a6820c95ad05ad"
+  },
+  "summaries": {
+    "alem-1274": {
+      "name": "Consorcio Alem 1274",
+      "months": 10,
+      "states": {
+        "ok": 90,
+        "warning": 0,
+        "error": 0,
+        "pending": 20,
+        "info": 0
+      },
+      "asOf": "2026-10"
+    },
+    "lagos-2797": {
+      "name": "Torre VI · Ovidio Lagos 2797",
+      "months": 13,
+      "states": {
+        "ok": 91,
+        "warning": 0,
+        "error": 0,
+        "pending": 13,
+        "info": 26
+      },
+      "asOf": "2026-07"
+    }
+  },
+  "months": [
+    {
+      "building": "alem-1274",
+      "buildingName": "Consorcio Alem 1274",
+      "id": "2026-01",
+      "label": "Enero 2026",
+      "source": "data/expensas-2026.json",
+      "sourcePath": "data/expensas-2026.json → months[0]",
+      "pdf": "pdfs/202601Expensas.pdf",
+      "report": "informes/202601-informe.pdf",
+      "total": "3382502.32",
+      "debt": "4890911.29",
+      "counts": {
+        "rubros": 8,
+        "movimientos": 12,
+        "unidades": 11
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $3,382,502.32 · obtenido $3,382,502.32 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[0]",
+          "expected": "3382502.32",
+          "found": "3382502.32",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $3,382,502.32 · obtenido $3,382,502.32 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[0] → composition",
+          "expected": "3382502.32",
+          "found": "3382502.32",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $3,382,502.32 · obtenido $3,382,502.32 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[0] → providers",
+          "expected": "3382502.32",
+          "found": "3382502.32",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $4,890,911.29 · obtenido $4,890,911.29 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[0] → debtors",
+          "expected": "4890911.29",
+          "found": "4890911.29",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "11 unidades sin duplicados.",
+          "source": "data/expensas-2026.json → months[0] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "12 movimientos con proveedor y monto.",
+          "source": "data/expensas-2026.json → months[0] → providers"
+        },
+        {
+          "id": "net-cash",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Caja neta = caja final − cuentas por pagar",
+          "detail": "Esperado $3,110,252.55 · obtenido $3,110,252.55 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[0]",
+          "expected": "3110252.55",
+          "found": "3110252.55",
+          "difference": "0.00"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "informes/202601-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "ok",
+          "group": "documentos",
+          "title": "PDF publicado presente",
+          "detail": "El archivo existe. Esto no acredita que esté correctamente anonimizado.",
+          "source": "pdfs/202601Expensas.pdf"
+        },
+        {
+          "id": "privacy",
+          "state": "pending",
+          "group": "privacidad",
+          "title": "Privacidad del PDF",
+          "detail": "La existencia del archivo no verifica ausencia de nombres o datos personales. Revisar antes de publicar.",
+          "source": "pdfs/202601Expensas.pdf"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "pdfs/202601Expensas.pdf"
+        }
+      ]
+    },
+    {
+      "building": "alem-1274",
+      "buildingName": "Consorcio Alem 1274",
+      "id": "2026-02",
+      "label": "Febrero 2026",
+      "source": "data/expensas-2026.json",
+      "sourcePath": "data/expensas-2026.json → months[1]",
+      "pdf": "pdfs/202602Expensas.pdf",
+      "report": "informes/202602-informe.pdf",
+      "total": "4052990.00",
+      "debt": "5918642.00",
+      "counts": {
+        "rubros": 11,
+        "movimientos": 13,
+        "unidades": 22
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $4,052,990.00 · obtenido $4,052,990.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[1]",
+          "expected": "4052990.00",
+          "found": "4052990.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $4,052,990.00 · obtenido $4,052,990.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[1] → composition",
+          "expected": "4052990.00",
+          "found": "4052990.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $4,052,990.00 · obtenido $4,052,990.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[1] → providers",
+          "expected": "4052990.00",
+          "found": "4052990.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $5,918,642.00 · obtenido $5,918,642.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[1] → debtors",
+          "expected": "5918642.00",
+          "found": "5918642.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "22 unidades sin duplicados.",
+          "source": "data/expensas-2026.json → months[1] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "13 movimientos con proveedor y monto.",
+          "source": "data/expensas-2026.json → months[1] → providers"
+        },
+        {
+          "id": "net-cash",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Caja neta = caja final − cuentas por pagar",
+          "detail": "Esperado $1,741,337.55 · obtenido $1,741,337.55 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[1]",
+          "expected": "1741337.55",
+          "found": "1741337.55",
+          "difference": "0.00"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "informes/202602-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "ok",
+          "group": "documentos",
+          "title": "PDF publicado presente",
+          "detail": "El archivo existe. Esto no acredita que esté correctamente anonimizado.",
+          "source": "pdfs/202602Expensas.pdf"
+        },
+        {
+          "id": "privacy",
+          "state": "pending",
+          "group": "privacidad",
+          "title": "Privacidad del PDF",
+          "detail": "La existencia del archivo no verifica ausencia de nombres o datos personales. Revisar antes de publicar.",
+          "source": "pdfs/202602Expensas.pdf"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "pdfs/202602Expensas.pdf"
+        }
+      ]
+    },
+    {
+      "building": "alem-1274",
+      "buildingName": "Consorcio Alem 1274",
+      "id": "2026-03",
+      "label": "Marzo 2026",
+      "source": "data/expensas-2026.json",
+      "sourcePath": "data/expensas-2026.json → months[2]",
+      "pdf": "pdfs/202603Expensas.pdf",
+      "report": "informes/202603-informe.pdf",
+      "total": "4404517.00",
+      "debt": "5546376.10",
+      "counts": {
+        "rubros": 12,
+        "movimientos": 16,
+        "unidades": 17
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $4,404,517.00 · obtenido $4,404,517.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[2]",
+          "expected": "4404517.00",
+          "found": "4404517.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $4,404,517.00 · obtenido $4,404,517.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[2] → composition",
+          "expected": "4404517.00",
+          "found": "4404517.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $4,404,517.00 · obtenido $4,404,517.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[2] → providers",
+          "expected": "4404517.00",
+          "found": "4404517.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $5,546,376.10 · obtenido $5,546,376.10 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[2] → debtors",
+          "expected": "5546376.10",
+          "found": "5546376.10",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "17 unidades sin duplicados.",
+          "source": "data/expensas-2026.json → months[2] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "16 movimientos con proveedor y monto.",
+          "source": "data/expensas-2026.json → months[2] → providers"
+        },
+        {
+          "id": "net-cash",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Caja neta = caja final − cuentas por pagar",
+          "detail": "Esperado $1,945,406.55 · obtenido $1,945,406.55 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[2]",
+          "expected": "1945406.55",
+          "found": "1945406.55",
+          "difference": "0.00"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "informes/202603-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "ok",
+          "group": "documentos",
+          "title": "PDF publicado presente",
+          "detail": "El archivo existe. Esto no acredita que esté correctamente anonimizado.",
+          "source": "pdfs/202603Expensas.pdf"
+        },
+        {
+          "id": "privacy",
+          "state": "pending",
+          "group": "privacidad",
+          "title": "Privacidad del PDF",
+          "detail": "La existencia del archivo no verifica ausencia de nombres o datos personales. Revisar antes de publicar.",
+          "source": "pdfs/202603Expensas.pdf"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "pdfs/202603Expensas.pdf"
+        }
+      ]
+    },
+    {
+      "building": "alem-1274",
+      "buildingName": "Consorcio Alem 1274",
+      "id": "2026-04",
+      "label": "Abril 2026",
+      "source": "data/expensas-2026.json",
+      "sourcePath": "data/expensas-2026.json → months[3]",
+      "pdf": "pdfs/202604Expensas.pdf",
+      "report": "informes/202604-informe.pdf",
+      "total": "5563488.00",
+      "debt": "5490993.44",
+      "counts": {
+        "rubros": 11,
+        "movimientos": 16,
+        "unidades": 14
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $5,563,488.00 · obtenido $5,563,488.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[3]",
+          "expected": "5563488.00",
+          "found": "5563488.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $5,563,488.00 · obtenido $5,563,488.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[3] → composition",
+          "expected": "5563488.00",
+          "found": "5563488.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $5,563,488.00 · obtenido $5,563,488.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[3] → providers",
+          "expected": "5563488.00",
+          "found": "5563488.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $5,490,993.44 · obtenido $5,490,993.44 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[3] → debtors",
+          "expected": "5490993.44",
+          "found": "5490993.44",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "14 unidades sin duplicados.",
+          "source": "data/expensas-2026.json → months[3] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "16 movimientos con proveedor y monto.",
+          "source": "data/expensas-2026.json → months[3] → providers"
+        },
+        {
+          "id": "net-cash",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Caja neta = caja final − cuentas por pagar",
+          "detail": "Esperado $1,575,018.55 · obtenido $1,575,018.55 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[3]",
+          "expected": "1575018.55",
+          "found": "1575018.55",
+          "difference": "0.00"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "informes/202604-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "ok",
+          "group": "documentos",
+          "title": "PDF publicado presente",
+          "detail": "El archivo existe. Esto no acredita que esté correctamente anonimizado.",
+          "source": "pdfs/202604Expensas.pdf"
+        },
+        {
+          "id": "privacy",
+          "state": "pending",
+          "group": "privacidad",
+          "title": "Privacidad del PDF",
+          "detail": "La existencia del archivo no verifica ausencia de nombres o datos personales. Revisar antes de publicar.",
+          "source": "pdfs/202604Expensas.pdf"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "pdfs/202604Expensas.pdf"
+        }
+      ]
+    },
+    {
+      "building": "alem-1274",
+      "buildingName": "Consorcio Alem 1274",
+      "id": "2026-05",
+      "label": "Mayo 2026",
+      "source": "data/expensas-2026.json",
+      "sourcePath": "data/expensas-2026.json → months[4]",
+      "pdf": "pdfs/202605Expensas.pdf",
+      "report": "informes/202605-informe.pdf",
+      "total": "5906812.00",
+      "debt": "5147491.81",
+      "counts": {
+        "rubros": 12,
+        "movimientos": 16,
+        "unidades": 12
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $5,906,812.00 · obtenido $5,906,812.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[4]",
+          "expected": "5906812.00",
+          "found": "5906812.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $5,906,812.00 · obtenido $5,906,812.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[4] → composition",
+          "expected": "5906812.00",
+          "found": "5906812.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $5,906,812.00 · obtenido $5,906,812.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[4] → providers",
+          "expected": "5906812.00",
+          "found": "5906812.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $5,147,491.81 · obtenido $5,147,491.81 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[4] → debtors",
+          "expected": "5147491.81",
+          "found": "5147491.81",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "12 unidades sin duplicados.",
+          "source": "data/expensas-2026.json → months[4] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "16 movimientos con proveedor y monto.",
+          "source": "data/expensas-2026.json → months[4] → providers"
+        },
+        {
+          "id": "net-cash",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Caja neta = caja final − cuentas por pagar",
+          "detail": "Esperado $1,659,457.55 · obtenido $1,659,457.55 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[4]",
+          "expected": "1659457.55",
+          "found": "1659457.55",
+          "difference": "0.00"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "informes/202605-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "ok",
+          "group": "documentos",
+          "title": "PDF publicado presente",
+          "detail": "El archivo existe. Esto no acredita que esté correctamente anonimizado.",
+          "source": "pdfs/202605Expensas.pdf"
+        },
+        {
+          "id": "privacy",
+          "state": "pending",
+          "group": "privacidad",
+          "title": "Privacidad del PDF",
+          "detail": "La existencia del archivo no verifica ausencia de nombres o datos personales. Revisar antes de publicar.",
+          "source": "pdfs/202605Expensas.pdf"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "pdfs/202605Expensas.pdf"
+        }
+      ]
+    },
+    {
+      "building": "alem-1274",
+      "buildingName": "Consorcio Alem 1274",
+      "id": "2026-06",
+      "label": "Junio 2026",
+      "source": "data/expensas-2026.json",
+      "sourcePath": "data/expensas-2026.json → months[5]",
+      "pdf": "pdfs/202606Expensas.pdf",
+      "report": "informes/202606-informe.pdf",
+      "total": "7929854.36",
+      "debt": "5186030.78",
+      "counts": {
+        "rubros": 11,
+        "movimientos": 18,
+        "unidades": 14
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $7,929,854.36 · obtenido $7,929,854.36 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[5]",
+          "expected": "7929854.36",
+          "found": "7929854.36",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $7,929,854.36 · obtenido $7,929,854.36 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[5] → composition",
+          "expected": "7929854.36",
+          "found": "7929854.36",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $7,929,854.36 · obtenido $7,929,854.36 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[5] → providers",
+          "expected": "7929854.36",
+          "found": "7929854.36",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $5,186,030.78 · obtenido $5,186,030.78 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[5] → debtors",
+          "expected": "5186030.78",
+          "found": "5186030.78",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "14 unidades sin duplicados.",
+          "source": "data/expensas-2026.json → months[5] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "18 movimientos con proveedor y monto.",
+          "source": "data/expensas-2026.json → months[5] → providers"
+        },
+        {
+          "id": "net-cash",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Caja neta = caja final − cuentas por pagar",
+          "detail": "Esperado $311,503.19 · obtenido $311,503.19 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[5]",
+          "expected": "311503.19",
+          "found": "311503.19",
+          "difference": "0.00"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "informes/202606-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "ok",
+          "group": "documentos",
+          "title": "PDF publicado presente",
+          "detail": "El archivo existe. Esto no acredita que esté correctamente anonimizado.",
+          "source": "pdfs/202606Expensas.pdf"
+        },
+        {
+          "id": "privacy",
+          "state": "pending",
+          "group": "privacidad",
+          "title": "Privacidad del PDF",
+          "detail": "La existencia del archivo no verifica ausencia de nombres o datos personales. Revisar antes de publicar.",
+          "source": "pdfs/202606Expensas.pdf"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "pdfs/202606Expensas.pdf"
+        }
+      ]
+    },
+    {
+      "building": "alem-1274",
+      "buildingName": "Consorcio Alem 1274",
+      "id": "2026-07",
+      "label": "Julio 2026",
+      "source": "data/expensas-2026.json",
+      "sourcePath": "data/expensas-2026.json → months[6]",
+      "pdf": "pdfs/202607Expensas.pdf",
+      "report": "informes/202607-informe.pdf",
+      "total": "5353373.36",
+      "debt": "5120565.46",
+      "counts": {
+        "rubros": 11,
+        "movimientos": 15,
+        "unidades": 15
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $5,353,373.36 · obtenido $5,353,373.36 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[6]",
+          "expected": "5353373.36",
+          "found": "5353373.36",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $5,353,373.36 · obtenido $5,353,373.36 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[6] → composition",
+          "expected": "5353373.36",
+          "found": "5353373.36",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $5,353,373.36 · obtenido $5,353,373.36 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[6] → providers",
+          "expected": "5353373.36",
+          "found": "5353373.36",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $5,120,565.46 · obtenido $5,120,565.46 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[6] → debtors",
+          "expected": "5120565.46",
+          "found": "5120565.46",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "15 unidades sin duplicados.",
+          "source": "data/expensas-2026.json → months[6] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "15 movimientos con proveedor y monto.",
+          "source": "data/expensas-2026.json → months[6] → providers"
+        },
+        {
+          "id": "net-cash",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Caja neta = caja final − cuentas por pagar",
+          "detail": "Esperado $3,437,329.83 · obtenido $3,437,329.83 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[6]",
+          "expected": "3437329.83",
+          "found": "3437329.83",
+          "difference": "0.00"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "informes/202607-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "ok",
+          "group": "documentos",
+          "title": "PDF publicado presente",
+          "detail": "El archivo existe. Esto no acredita que esté correctamente anonimizado.",
+          "source": "pdfs/202607Expensas.pdf"
+        },
+        {
+          "id": "privacy",
+          "state": "pending",
+          "group": "privacidad",
+          "title": "Privacidad del PDF",
+          "detail": "La existencia del archivo no verifica ausencia de nombres o datos personales. Revisar antes de publicar.",
+          "source": "pdfs/202607Expensas.pdf"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "pdfs/202607Expensas.pdf"
+        }
+      ]
+    },
+    {
+      "building": "alem-1274",
+      "buildingName": "Consorcio Alem 1274",
+      "id": "2026-08",
+      "label": "Agosto 2026",
+      "source": "data/expensas-2026.json",
+      "sourcePath": "data/expensas-2026.json → months[7]",
+      "pdf": "pdfs/202608Expensas.pdf",
+      "report": "informes/202608-informe.pdf",
+      "total": "6297637.00",
+      "debt": "5425685.39",
+      "counts": {
+        "rubros": 10,
+        "movimientos": 16,
+        "unidades": 17
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $6,297,637.00 · obtenido $6,297,637.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[7]",
+          "expected": "6297637.00",
+          "found": "6297637.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $6,297,637.00 · obtenido $6,297,637.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[7] → composition",
+          "expected": "6297637.00",
+          "found": "6297637.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $6,297,637.00 · obtenido $6,297,637.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[7] → providers",
+          "expected": "6297637.00",
+          "found": "6297637.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $5,425,685.39 · obtenido $5,425,685.39 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[7] → debtors",
+          "expected": "5425685.39",
+          "found": "5425685.39",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "17 unidades sin duplicados.",
+          "source": "data/expensas-2026.json → months[7] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "16 movimientos con proveedor y monto.",
+          "source": "data/expensas-2026.json → months[7] → providers"
+        },
+        {
+          "id": "net-cash",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Caja neta = caja final − cuentas por pagar",
+          "detail": "Esperado $2,465,892.83 · obtenido $2,465,892.83 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[7]",
+          "expected": "2465892.83",
+          "found": "2465892.83",
+          "difference": "0.00"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "informes/202608-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "ok",
+          "group": "documentos",
+          "title": "PDF publicado presente",
+          "detail": "El archivo existe. Esto no acredita que esté correctamente anonimizado.",
+          "source": "pdfs/202608Expensas.pdf"
+        },
+        {
+          "id": "privacy",
+          "state": "pending",
+          "group": "privacidad",
+          "title": "Privacidad del PDF",
+          "detail": "La existencia del archivo no verifica ausencia de nombres o datos personales. Revisar antes de publicar.",
+          "source": "pdfs/202608Expensas.pdf"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "pdfs/202608Expensas.pdf"
+        }
+      ]
+    },
+    {
+      "building": "alem-1274",
+      "buildingName": "Consorcio Alem 1274",
+      "id": "2026-09",
+      "label": "Septiembre 2026",
+      "source": "data/expensas-2026.json",
+      "sourcePath": "data/expensas-2026.json → months[8]",
+      "pdf": "pdfs/202609Expensas.pdf",
+      "report": "informes/202609-informe.pdf",
+      "total": "5959282.00",
+      "debt": "3687369.52",
+      "counts": {
+        "rubros": 11,
+        "movimientos": 14,
+        "unidades": 8
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $5,959,282.00 · obtenido $5,959,282.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[8]",
+          "expected": "5959282.00",
+          "found": "5959282.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $5,959,282.00 · obtenido $5,959,282.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[8] → composition",
+          "expected": "5959282.00",
+          "found": "5959282.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $5,959,282.00 · obtenido $5,959,282.00 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[8] → providers",
+          "expected": "5959282.00",
+          "found": "5959282.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $3,687,369.52 · obtenido $3,687,369.52 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[8] → debtors",
+          "expected": "3687369.52",
+          "found": "3687369.52",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "8 unidades sin duplicados.",
+          "source": "data/expensas-2026.json → months[8] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "14 movimientos con proveedor y monto.",
+          "source": "data/expensas-2026.json → months[8] → providers"
+        },
+        {
+          "id": "net-cash",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Caja neta = caja final − cuentas por pagar",
+          "detail": "Esperado $5,262,410.83 · obtenido $5,262,410.83 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[8]",
+          "expected": "5262410.83",
+          "found": "5262410.83",
+          "difference": "0.00"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "informes/202609-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "ok",
+          "group": "documentos",
+          "title": "PDF publicado presente",
+          "detail": "El archivo existe. Esto no acredita que esté correctamente anonimizado.",
+          "source": "pdfs/202609Expensas.pdf"
+        },
+        {
+          "id": "privacy",
+          "state": "pending",
+          "group": "privacidad",
+          "title": "Privacidad del PDF",
+          "detail": "La existencia del archivo no verifica ausencia de nombres o datos personales. Revisar antes de publicar.",
+          "source": "pdfs/202609Expensas.pdf"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "pdfs/202609Expensas.pdf"
+        }
+      ]
+    },
+    {
+      "building": "alem-1274",
+      "buildingName": "Consorcio Alem 1274",
+      "id": "2026-10",
+      "label": "Octubre 2026",
+      "source": "data/expensas-2026.json",
+      "sourcePath": "data/expensas-2026.json → months[9]",
+      "pdf": "pdfs/202610Expensas.pdf",
+      "report": "informes/202610-informe.pdf",
+      "total": "6219505.40",
+      "debt": "2574656.88",
+      "counts": {
+        "rubros": 10,
+        "movimientos": 18,
+        "unidades": 8
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $6,219,505.40 · obtenido $6,219,505.40 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[9]",
+          "expected": "6219505.40",
+          "found": "6219505.40",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $6,219,505.40 · obtenido $6,219,505.40 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[9] → composition",
+          "expected": "6219505.40",
+          "found": "6219505.40",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $6,219,505.40 · obtenido $6,219,505.40 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[9] → providers",
+          "expected": "6219505.40",
+          "found": "6219505.40",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $2,574,656.88 · obtenido $2,574,656.88 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[9] → debtors",
+          "expected": "2574656.88",
+          "found": "2574656.88",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "8 unidades sin duplicados.",
+          "source": "data/expensas-2026.json → months[9] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "18 movimientos con proveedor y monto.",
+          "source": "data/expensas-2026.json → months[9] → providers"
+        },
+        {
+          "id": "net-cash",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Caja neta = caja final − cuentas por pagar",
+          "detail": "Esperado $6,536,605.43 · obtenido $6,536,605.43 · diferencia $0.00.",
+          "source": "data/expensas-2026.json → months[9]",
+          "expected": "6536605.43",
+          "found": "6536605.43",
+          "difference": "0.00"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "informes/202610-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "ok",
+          "group": "documentos",
+          "title": "PDF publicado presente",
+          "detail": "El archivo existe. Esto no acredita que esté correctamente anonimizado.",
+          "source": "pdfs/202610Expensas.pdf"
+        },
+        {
+          "id": "privacy",
+          "state": "pending",
+          "group": "privacidad",
+          "title": "Privacidad del PDF",
+          "detail": "La existencia del archivo no verifica ausencia de nombres o datos personales. Revisar antes de publicar.",
+          "source": "pdfs/202610Expensas.pdf"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "pdfs/202610Expensas.pdf"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2025-04",
+      "label": "Abril 2025",
+      "source": "consorcios/lagos-2797/data/2025.json",
+      "sourcePath": "consorcios/lagos-2797/data/2025.json → months[0]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202504-informe.pdf",
+      "total": "2962268.05",
+      "debt": "10189993.21",
+      "counts": {
+        "rubros": 4,
+        "movimientos": 11,
+        "unidades": 28
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $2,962,268.05 · obtenido $2,962,268.05 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[0]",
+          "expected": "2962268.05",
+          "found": "2962268.05",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $2,962,268.05 · obtenido $2,962,268.05 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[0] → composition",
+          "expected": "2962268.05",
+          "found": "2962268.05",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $2,962,268.05 · obtenido $2,962,268.05 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[0] → providers",
+          "expected": "2962268.05",
+          "found": "2962268.05",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $10,189,993.21 · obtenido $10,189,993.21 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[0] → debtors",
+          "expected": "10189993.21",
+          "found": "10189993.21",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "28 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[0] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "11 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[0] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[0]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202504-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[0]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[0]"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2025-05",
+      "label": "Mayo 2025",
+      "source": "consorcios/lagos-2797/data/2025.json",
+      "sourcePath": "consorcios/lagos-2797/data/2025.json → months[1]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202505-informe.pdf",
+      "total": "3327901.72",
+      "debt": "10811272.53",
+      "counts": {
+        "rubros": 5,
+        "movimientos": 13,
+        "unidades": 24
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $3,327,901.72 · obtenido $3,327,901.72 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[1]",
+          "expected": "3327901.72",
+          "found": "3327901.72",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $3,327,901.72 · obtenido $3,327,901.72 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[1] → composition",
+          "expected": "3327901.72",
+          "found": "3327901.72",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $3,327,901.72 · obtenido $3,327,901.72 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[1] → providers",
+          "expected": "3327901.72",
+          "found": "3327901.72",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $10,811,272.53 · obtenido $10,811,272.53 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[1] → debtors",
+          "expected": "10811272.53",
+          "found": "10811272.53",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "24 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[1] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "13 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[1] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[1]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202505-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[1]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[1]"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2025-07",
+      "label": "Julio 2025",
+      "source": "consorcios/lagos-2797/data/2025.json",
+      "sourcePath": "consorcios/lagos-2797/data/2025.json → months[2]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202507-informe.pdf",
+      "total": "3402163.73",
+      "debt": "12744564.65",
+      "counts": {
+        "rubros": 4,
+        "movimientos": 15,
+        "unidades": 23
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $3,402,163.73 · obtenido $3,402,163.73 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[2]",
+          "expected": "3402163.73",
+          "found": "3402163.73",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $3,402,163.73 · obtenido $3,402,163.73 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[2] → composition",
+          "expected": "3402163.73",
+          "found": "3402163.73",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $3,402,163.73 · obtenido $3,402,163.73 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[2] → providers",
+          "expected": "3402163.73",
+          "found": "3402163.73",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $12,744,564.65 · obtenido $12,744,564.65 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[2] → debtors",
+          "expected": "12744564.65",
+          "found": "12744564.65",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "23 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[2] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "15 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[2] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[2]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202507-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[2]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[2]"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2025-08",
+      "label": "Agosto 2025",
+      "source": "consorcios/lagos-2797/data/2025.json",
+      "sourcePath": "consorcios/lagos-2797/data/2025.json → months[3]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202508-informe.pdf",
+      "total": "3155508.57",
+      "debt": "13517744.11",
+      "counts": {
+        "rubros": 4,
+        "movimientos": 17,
+        "unidades": 17
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $3,155,508.57 · obtenido $3,155,508.57 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[3]",
+          "expected": "3155508.57",
+          "found": "3155508.57",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $3,155,508.57 · obtenido $3,155,508.57 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[3] → composition",
+          "expected": "3155508.57",
+          "found": "3155508.57",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $3,155,508.57 · obtenido $3,155,508.57 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[3] → providers",
+          "expected": "3155508.57",
+          "found": "3155508.57",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $13,517,744.11 · obtenido $13,517,744.11 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[3] → debtors",
+          "expected": "13517744.11",
+          "found": "13517744.11",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "17 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[3] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "17 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[3] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[3]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202508-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[3]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[3]"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2025-10",
+      "label": "Octubre 2025",
+      "source": "consorcios/lagos-2797/data/2025.json",
+      "sourcePath": "consorcios/lagos-2797/data/2025.json → months[4]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202510-informe.pdf",
+      "total": "2877603.79",
+      "debt": "16408706.33",
+      "counts": {
+        "rubros": 4,
+        "movimientos": 16,
+        "unidades": 18
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $2,877,603.79 · obtenido $2,877,603.79 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[4]",
+          "expected": "2877603.79",
+          "found": "2877603.79",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $2,877,603.79 · obtenido $2,877,603.79 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[4] → composition",
+          "expected": "2877603.79",
+          "found": "2877603.79",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $2,877,603.79 · obtenido $2,877,603.79 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[4] → providers",
+          "expected": "2877603.79",
+          "found": "2877603.79",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $16,408,706.33 · obtenido $16,408,706.33 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[4] → debtors",
+          "expected": "16408706.33",
+          "found": "16408706.33",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "18 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[4] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "16 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[4] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[4]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202510-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[4]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[4]"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2025-12",
+      "label": "Diciembre 2025",
+      "source": "consorcios/lagos-2797/data/2025.json",
+      "sourcePath": "consorcios/lagos-2797/data/2025.json → months[5]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202512-informe.pdf",
+      "total": "3201040.47",
+      "debt": "19077904.54",
+      "counts": {
+        "rubros": 5,
+        "movimientos": 11,
+        "unidades": 18
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $3,201,040.47 · obtenido $3,201,040.47 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[5]",
+          "expected": "3201040.47",
+          "found": "3201040.47",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $3,201,040.47 · obtenido $3,201,040.47 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[5] → composition",
+          "expected": "3201040.47",
+          "found": "3201040.47",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $3,201,040.47 · obtenido $3,201,040.47 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[5] → providers",
+          "expected": "3201040.47",
+          "found": "3201040.47",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $19,077,904.54 · obtenido $19,077,904.54 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[5] → debtors",
+          "expected": "19077904.54",
+          "found": "19077904.54",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "18 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[5] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "11 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[5] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[5]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202512-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[5]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2025.json → months[5]"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2026-01",
+      "label": "Enero 2026",
+      "source": "consorcios/lagos-2797/data/2026.json",
+      "sourcePath": "consorcios/lagos-2797/data/2026.json → months[0]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202601-informe.pdf",
+      "total": "3624140.39",
+      "debt": "20757582.44",
+      "counts": {
+        "rubros": 4,
+        "movimientos": 13,
+        "unidades": 22
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $3,624,140.39 · obtenido $3,624,140.39 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[0]",
+          "expected": "3624140.39",
+          "found": "3624140.39",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $3,624,140.39 · obtenido $3,624,140.39 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[0] → composition",
+          "expected": "3624140.39",
+          "found": "3624140.39",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $3,624,140.39 · obtenido $3,624,140.39 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[0] → providers",
+          "expected": "3624140.39",
+          "found": "3624140.39",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $20,757,582.44 · obtenido $20,757,582.44 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[0] → debtors",
+          "expected": "20757582.44",
+          "found": "20757582.44",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "22 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[0] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "13 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[0] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[0]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202601-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[0]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[0]"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2026-02",
+      "label": "Febrero 2026",
+      "source": "consorcios/lagos-2797/data/2026.json",
+      "sourcePath": "consorcios/lagos-2797/data/2026.json → months[1]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202602-informe.pdf",
+      "total": "5644866.29",
+      "debt": "22215845.06",
+      "counts": {
+        "rubros": 5,
+        "movimientos": 17,
+        "unidades": 18
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $5,644,866.29 · obtenido $5,644,866.29 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[1]",
+          "expected": "5644866.29",
+          "found": "5644866.29",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $5,644,866.29 · obtenido $5,644,866.29 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[1] → composition",
+          "expected": "5644866.29",
+          "found": "5644866.29",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $5,644,866.29 · obtenido $5,644,866.29 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[1] → providers",
+          "expected": "5644866.29",
+          "found": "5644866.29",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $22,215,845.06 · obtenido $22,215,845.06 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[1] → debtors",
+          "expected": "22215845.06",
+          "found": "22215845.06",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "18 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[1] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "17 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[1] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[1]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202602-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[1]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[1]"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2026-03",
+      "label": "Marzo 2026",
+      "source": "consorcios/lagos-2797/data/2026.json",
+      "sourcePath": "consorcios/lagos-2797/data/2026.json → months[2]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202603-informe.pdf",
+      "total": "4557815.00",
+      "debt": "24530724.90",
+      "counts": {
+        "rubros": 4,
+        "movimientos": 16,
+        "unidades": 22
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $4,557,815.00 · obtenido $4,557,815.00 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[2]",
+          "expected": "4557815.00",
+          "found": "4557815.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $4,557,815.00 · obtenido $4,557,815.00 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[2] → composition",
+          "expected": "4557815.00",
+          "found": "4557815.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $4,557,815.00 · obtenido $4,557,815.00 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[2] → providers",
+          "expected": "4557815.00",
+          "found": "4557815.00",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $24,530,724.90 · obtenido $24,530,724.90 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[2] → debtors",
+          "expected": "24530724.90",
+          "found": "24530724.90",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "22 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[2] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "16 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[2] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[2]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202603-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[2]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[2]"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2026-04",
+      "label": "Abril 2026",
+      "source": "consorcios/lagos-2797/data/2026.json",
+      "sourcePath": "consorcios/lagos-2797/data/2026.json → months[3]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202604-informe.pdf",
+      "total": "5034342.34",
+      "debt": "25651031.90",
+      "counts": {
+        "rubros": 4,
+        "movimientos": 17,
+        "unidades": 21
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $5,034,342.34 · obtenido $5,034,342.34 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[3]",
+          "expected": "5034342.34",
+          "found": "5034342.34",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $5,034,342.34 · obtenido $5,034,342.34 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[3] → composition",
+          "expected": "5034342.34",
+          "found": "5034342.34",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $5,034,342.34 · obtenido $5,034,342.34 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[3] → providers",
+          "expected": "5034342.34",
+          "found": "5034342.34",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $25,651,031.90 · obtenido $25,651,031.90 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[3] → debtors",
+          "expected": "25651031.90",
+          "found": "25651031.90",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "21 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[3] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "17 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[3] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[3]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202604-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[3]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[3]"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2026-05",
+      "label": "Mayo 2026",
+      "source": "consorcios/lagos-2797/data/2026.json",
+      "sourcePath": "consorcios/lagos-2797/data/2026.json → months[4]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202605-informe.pdf",
+      "total": "5326850.25",
+      "debt": "25264410.29",
+      "counts": {
+        "rubros": 5,
+        "movimientos": 13,
+        "unidades": 20
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $5,326,850.25 · obtenido $5,326,850.25 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[4]",
+          "expected": "5326850.25",
+          "found": "5326850.25",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $5,326,850.25 · obtenido $5,326,850.25 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[4] → composition",
+          "expected": "5326850.25",
+          "found": "5326850.25",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $5,326,850.25 · obtenido $5,326,850.25 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[4] → providers",
+          "expected": "5326850.25",
+          "found": "5326850.25",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $25,264,410.29 · obtenido $25,264,410.29 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[4] → debtors",
+          "expected": "25264410.29",
+          "found": "25264410.29",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "20 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[4] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "13 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[4] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[4]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202605-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[4]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[4]"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2026-06",
+      "label": "Junio 2026",
+      "source": "consorcios/lagos-2797/data/2026.json",
+      "sourcePath": "consorcios/lagos-2797/data/2026.json → months[5]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202606-informe.pdf",
+      "total": "5360116.56",
+      "debt": "23954550.35",
+      "counts": {
+        "rubros": 5,
+        "movimientos": 15,
+        "unidades": 22
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $5,360,116.56 · obtenido $5,360,116.56 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[5]",
+          "expected": "5360116.56",
+          "found": "5360116.56",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $5,360,116.56 · obtenido $5,360,116.56 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[5] → composition",
+          "expected": "5360116.56",
+          "found": "5360116.56",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $5,360,116.56 · obtenido $5,360,116.56 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[5] → providers",
+          "expected": "5360116.56",
+          "found": "5360116.56",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $23,954,550.35 · obtenido $23,954,550.35 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[5] → debtors",
+          "expected": "23954550.35",
+          "found": "23954550.35",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "22 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[5] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "15 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[5] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[5]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202606-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[5]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[5]"
+        }
+      ]
+    },
+    {
+      "building": "lagos-2797",
+      "buildingName": "Torre VI · Ovidio Lagos 2797",
+      "id": "2026-07",
+      "label": "Julio 2026",
+      "source": "consorcios/lagos-2797/data/2026.json",
+      "sourcePath": "consorcios/lagos-2797/data/2026.json → months[6]",
+      "pdf": null,
+      "report": "consorcios/lagos-2797/informes/202607-informe.pdf",
+      "total": "5218191.96",
+      "debt": "26630241.82",
+      "counts": {
+        "rubros": 5,
+        "movimientos": 11,
+        "unidades": 25
+      },
+      "checks": [
+        {
+          "id": "total-parts",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Gasto total = suma de tipos",
+          "detail": "Esperado $5,218,191.96 · obtenido $5,218,191.96 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[6]",
+          "expected": "5218191.96",
+          "found": "5218191.96",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-composition",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Rubros = total",
+          "detail": "Esperado $5,218,191.96 · obtenido $5,218,191.96 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[6] → composition",
+          "expected": "5218191.96",
+          "found": "5218191.96",
+          "difference": "0.00"
+        },
+        {
+          "id": "sum-providers",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos por proveedor = total",
+          "detail": "Esperado $5,218,191.96 · obtenido $5,218,191.96 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[6] → providers",
+          "expected": "5218191.96",
+          "found": "5218191.96",
+          "difference": "0.00"
+        },
+        {
+          "id": "debt",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Deuda declarada = suma de unidades",
+          "detail": "Esperado $26,630,241.82 · obtenido $26,630,241.82 · diferencia $0.00.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[6] → debtors",
+          "expected": "26630241.82",
+          "found": "26630241.82",
+          "difference": "0.00"
+        },
+        {
+          "id": "units",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Unidades únicas y definidas",
+          "detail": "25 unidades sin duplicados.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[6] → debtors"
+        },
+        {
+          "id": "providers-form",
+          "state": "ok",
+          "group": "integridad",
+          "title": "Movimientos identificados",
+          "detail": "11 movimientos con proveedor y monto.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[6] → providers"
+        },
+        {
+          "id": "cash-unavailable",
+          "state": "info",
+          "group": "alcance",
+          "title": "Estado de caja no informado",
+          "detail": "La liquidación individual no permite auditar caja, pagos ni recuperos. No equivale a cero.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[6]"
+        },
+        {
+          "id": "report",
+          "state": "ok",
+          "group": "documentos",
+          "title": "Informe mensual disponible",
+          "detail": "Archivo PDF localizado en el proyecto.",
+          "source": "consorcios/lagos-2797/informes/202607-informe.pdf"
+        },
+        {
+          "id": "pdf",
+          "state": "info",
+          "group": "documentos",
+          "title": "Liquidación original privada",
+          "detail": "No se publica en GitHub Pages; contiene información personal. Revisión independiente pendiente.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[6]"
+        },
+        {
+          "id": "source-verified",
+          "state": "pending",
+          "group": "trazabilidad",
+          "title": "Contraste independiente con PDF original",
+          "detail": "Los controles aritméticos usan el JSON. Se requiere cotejar cifras y partidas con el PDF original para certificar transcripción.",
+          "source": "consorcios/lagos-2797/data/2026.json → months[6]"
+        }
+      ]
+    }
+  ]
+}

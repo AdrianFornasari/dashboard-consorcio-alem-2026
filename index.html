@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard de Consorcios · Expensas 2026</title>
-  <link rel="stylesheet" href="styles.css?v=20261125-funds-v12">
+  <link rel="stylesheet" href="styles.css?v=20261125-audit-v13">
 </head>
 <body>
   <header class="hero">
@@ -54,6 +54,39 @@
         <section class="funds-pane"><h3>Saldos de cuentas por pagar informados</h3><p class="muted small">Se presenta sólo la última foto disponible cuando la liquidación permite atribuir saldos a un concepto concreto.</p><div id="fundsPending"></div></section>
         <section class="funds-pane"><h3 id="fundsMovementsTitle">Detalle de movimientos y referencias</h3><p class="muted small" id="fundsMovementCount"></p><div class="funds-movements-filter"><label for="fundsQuery">Buscar concepto o proveedor<input id="fundsQuery" type="search" placeholder="Ej.: cámara, ascensores, cañerías"></label><div><p class="muted small">El origen se indica por nombre de liquidación y página. Los PDF originales de Lagos no se publican porque contienen datos personales.</p></div></div><div class="table-wrap tall"><table id="fundsMovements" class="funds-table"></table></div></section>
         <p id="fundsStatus" class="muted small"></p>
+      </div>
+    </details>
+
+    <!-- Auditoría documental v1.3: módulo independiente y sin datos personales -->
+    <details id="auditoriaPanel" class="audit-shell" aria-labelledby="auditSummaryTitle">
+      <summary id="auditSummaryTitle">Auditoría y trazabilidad de datos · v1.3</summary>
+      <div class="audit-body">
+        <p id="auditScope" class="muted">Cargando controles documentales...</p>
+        <p class="audit-caution" id="auditNotes">Conciliación de importes internos, no auditoría bancaria ni verificación independiente contra cada PDF.</p>
+        <div class="audit-controls">
+          <label for="auditMonth">Mes documentado<select id="auditMonth" aria-label="Seleccionar mes de auditoría"></select></label>
+          <label for="auditFilter">Estado del control<select id="auditFilter"><option value="all">Todos</option><option value="attention">Pendientes, advertencias y diferencias</option><option value="error">Solo diferencias</option><option value="warning">Solo advertencias</option><option value="pending">Solo pendientes</option><option value="source">Documentos y fuentes</option><option value="ok">Solo conciliados</option></select></label>
+          <button id="auditReset" type="button" class="small-action">Restablecer filtros</button>
+          <button id="auditPrint" type="button" class="small-action">Imprimir / guardar PDF</button>
+        </div>
+        <div id="auditTotals" class="audit-kpis" aria-live="polite"></div>
+        <section class="audit-panel">
+          <h3>Controles automáticos</h3>
+          <p id="auditCheckCount" class="muted small"></p>
+          <div class="table-wrap tall"><table id="auditChecks" class="audit-table"></table></div>
+        </section>
+        <section class="audit-panel">
+          <h3>Trazabilidad del origen</h3>
+          <p class="muted small">Los códigos de unidades no identifican propietarios. El origen por columna es un registro JSON; las páginas del PDF sólo se muestran cuando están consignadas.</p>
+          <div class="audit-controls audit-trace-controls">
+            <label for="auditTraceType">Tipo de dato<select id="auditTraceType"><option value="all">Todos</option><option value="rubro">Rubros</option><option value="proveedor">Proveedores</option><option value="unidad">Unidades</option><option value="fondo">Fondos y obras</option></select></label>
+            <label for="auditSearch">Buscar concepto, unidad o proveedor<input type="search" id="auditSearch" placeholder="Ej.: limpieza, 02-02, cámara" autocomplete="off"></label>
+          </div>
+          <p id="auditTraceSummary" class="muted small"></p>
+          <div class="table-wrap tall"><table id="auditTrace" class="audit-table"></table></div>
+        </section>
+        <section class="audit-panel"><h3>Fuentes y documentos del mes</h3><div id="auditDocuments"></div></section>
+        <p class="muted small" id="auditStatus" role="status"></p>
       </div>
     </details>
 
@@ -500,5 +533,6 @@
   <script src="app.js?v=20261018-multi-v1"></script>
   <script src="multibuilding.js?v=20261125-funds-v12"></script>
   <script src="fondos.js?v=20261125-funds-v12"></script>
+  <script src="auditoria.js?v=20261125-audit-v13"></script>
 </body>
 </html>

@@ -765,3 +765,30 @@ body[data-active-building="lagos-2797"] .lagos-dashboard { display: block; }
 @media print{.funds-shell>summary{list-style:none}.funds-controls,.funds-actions,.funds-movements-filter,.funds-project-list{display:none!important}.funds-grid{grid-template-columns:1fr}.funds-pane,.funds-kpi{box-shadow:none;break-inside:avoid}.funds-month-chart{max-height:none;overflow:visible}.funds-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.funds-month-row{break-inside:avoid}.funds-shell{border:0}}
 
 @media print{body.funds-print-only #lagosDashboard,body.funds-print-only .tabs,body.funds-print-only .tab-panel,body.funds-print-only #globalSearchPanel{display:none!important;}body.funds-print-only .funds-shell{display:block!important;}}
+
+/* v1.3 · Auditoría y trazabilidad: independiente de los gráficos existentes */
+.audit-shell{margin:24px 0;border:1px solid #cbd5e1;border-radius:14px;background:#fff;box-shadow:0 5px 18px #0f172a0a;overflow:hidden}
+.audit-shell>summary{cursor:pointer;list-style-position:inside;padding:17px 20px;font-weight:800;font-size:1.08rem;background:#f1f5f9;color:#123654}
+.audit-shell>summary:hover{background:#e8f0f8}
+.audit-body{padding:20px;display:grid;gap:17px}
+.audit-caution{margin:0;background:#fff7ed;color:#7c420b;border-left:4px solid #d97706;padding:12px 15px;border-radius:8px;font-size:.89rem;line-height:1.55}
+.audit-controls{display:grid;grid-template-columns:1fr 1fr auto auto;gap:10px;align-items:end}
+.audit-controls label{font-size:.8rem;font-weight:750;color:#334155;display:flex;flex-direction:column;gap:5px}
+.audit-controls select,.audit-controls input{min-width:0;padding:10px 11px;border:1px solid #aebdcb;border-radius:9px;background:white;color:#172b46;font:inherit;max-width:100%}
+.audit-controls button{min-height:42px}
+.audit-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.audit-kpi{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:5px;min-width:0}
+.audit-kpi small{color:#475569;font-size:.79rem}.audit-kpi strong{font-size:1.55rem;font-variant-numeric:tabular-nums;color:#0f2439}
+.audit-state{display:inline-block;border-radius:6px;padding:3px 7px;font-weight:750;font-size:.75rem;max-width:100%}
+.audit-state.audit-ok{background:#dcfce7;color:#166534}.audit-state.audit-warning{background:#fef3c7;color:#92400e}.audit-state.audit-error{background:#fee2e2;color:#991b1b}.audit-state.audit-pending{background:#e0e7ff;color:#3730a3}.audit-state.audit-info{background:#e2e8f0;color:#334155}
+.audit-panel{padding:15px;border:1px solid #e2e8f0;border-radius:10px;min-width:0}.audit-panel h3{margin:0 0 8px;color:#1e3a5f}
+.audit-panel p{overflow-wrap:anywhere}.audit-table{width:100%;border-collapse:collapse;min-width:730px}
+.audit-table th,.audit-table td{border-bottom:1px solid #e2e8f0;padding:9px;vertical-align:top;text-align:left;font-size:.81rem;line-height:1.4}
+.audit-table th{background:#f1f5f9;color:#334155}.audit-table td small{font-size:.73rem;color:#64748b}
+.audit-table code,.audit-panel code{font-size:.7rem;white-space:normal;overflow-wrap:anywhere;color:#334155}
+.audit-table .audit-number{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.audit-trace-controls{grid-template-columns:minmax(160px,1fr) minmax(170px,2fr);margin:10px 0}
+@media(max-width:760px){.audit-body{padding:12px}.audit-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.audit-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.audit-controls button{width:100%;font-size:.82rem}.audit-panel{padding:10px}.audit-trace-controls{grid-template-columns:1fr}}
+@media print{.audit-shell>summary{list-style:none}.audit-shell{border:0;box-shadow:none;break-before:page}.audit-controls{display:none!important}.audit-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.audit-panel{break-inside:avoid}.audit-table{min-width:0;font-size:.65rem}.audit-table th,.audit-table td{font-size:.69rem;padding:5px}.audit-body{gap:10px}}
+
+@media print{body.audit-print-only header,body.audit-print-only footer,body.audit-print-only #backToTop{display:none!important}body.audit-print-only main > :not(#auditoriaPanel){display:none!important}body.audit-print-only #auditoriaPanel{display:block!important;width:100%;margin:0}body.audit-print-only #auditStatus{display:none!important}}
